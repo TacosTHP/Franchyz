@@ -1,16 +1,14 @@
-import React from 'react';
-import Carousel from '../components/carousel';
-import Calendar from '../components/calendar'
+import React, {useEffect, useState} from "react";
+import Carousel from "../components/carousel";
+import Calendar from "../components/calendar";
 
 function Home() {
-
-
-  return(
-      <>
-        <Carousel />
-        <Calendar />
-      </>
-  )
+	return (
+		<>
+			<Carousel />
+			<Calendar />
+		</>
+	);
 }
 
 export default Home;
