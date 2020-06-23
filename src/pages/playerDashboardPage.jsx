@@ -4,6 +4,9 @@ import {useSelector } from 'react-redux'
 import * as EventsAPI from 'services/eventsAPI';
 import Calendar from 'components/calendar'
 import EventsList from 'components/eventsList'
+import DashboardPlayerTabs from "components/dashboardPlayerTabs.jsx";
+import { BackTop } from 'antd';
+
 
 function PlayerDashboardPage () {
   const [events, setEvents] = useState([])
@@ -28,24 +31,63 @@ function PlayerDashboardPage () {
     unconfirmed_events()
   }, [trigger])
 
-  if (events !== null) {
-    return(
-      <>
-        <div className='my-3 mx-3'>
-          <EventsList events={events} player={player} setTrigger={setTrigger} trigger={trigger}/>
-          <Calendar player={player}/>
-        </div>
-      </>
-    )
-  } else {
-    return (
-      <>
-      <div className='my-3 mx-3'>
+  const style = {
+    height: 40,
+    width: 40,
+    lineHeight: '40px',
+    borderRadius: 4,
+    backgroundColor: '#1088e9',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 14,
+    };
+
+  return(
+
+    <div>
+       <div>
+       <div className="text-center mt-5">
+            <h1>Welcome to FRANCHYZ</h1>
+            <h4>Your trainer invited you to FRANCHYZ.</h4>
+            <h4>
+              You can find your team events in the calendar. 
+            </h4>
+            <h4>Validate your participation for the events you are invited for.</h4>
+            </div>
+          </div>
+          { events !== null ? <h6 className="text-center text-primary">You have no upcoming events </h6>  :   
+    <h6 className="text-center text-primary">Let your team know whether you participate in the following events: </h6> }
+         
+    
+        <EventsList events={events} player={player} setTrigger={setTrigger} trigger={trigger}/> 
         <Calendar player={player}/>
-      </div>
-      </>
-    )
-  }
+              
+        <DashboardPlayerTabs/>
+          <BackTop>
+      <div style={style}>UP</div>
+    </BackTop>
+    </div>
+  )
+
+//   if (events !== null) {
+//     return(
+//       <>
+//         <div className='my-3 mx-3'>
+//         <DashboardPlayerTabs/>
+//           <EventsList events={events} player={player} setTrigger={setTrigger} trigger={trigger}/>
+//           <Calendar player={player}/>
+//         </div>
+//       </>
+//     )
+//   } else {
+//     return (
+//       <>
+//       <div className='my-3 mx-3'>
+//         <Calendar player={player}/>
+//       </div>
+//       </>
+//     )
+//   }
 }
 
 export default PlayerDashboardPage

@@ -44,18 +44,20 @@ function Calendar(props) {
 
   const getPractices =() => {
     EventsAPI.getAttendedPractices(user_id, club_id, team_id)
-    .then(response => {
+    .then(response => {if (response.length < 1) {
+        console.log("no Attended practices!");
+    } else {
       response.map(practice => setPractices([...practices, {
         title: `PRACTICE ${practice.title}`,
         start: practice.start,
         color: practice.color,
         allDay: false
       }]));
-    })
+    }})
   }
 
   useEffect(() => { getGames () }, [])
-  useEffect(() => { getPractices () }, [])
+   useEffect(() => { getPractices () }, [])
 
 
   return (
