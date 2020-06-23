@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react';
+import Carousel from '../components/carousel';
 
 function Home() {
   return(
-    <div className="bg-primary">
-      Hello World
-    </div>
+      <>
+        <Carousel />
+      </>
   )
 }
 
-export default Home
+export default Home;
