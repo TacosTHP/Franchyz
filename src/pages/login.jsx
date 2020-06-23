@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/form.scss';
 import { login } from '../redux/middlewares/authMiddlewares';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,8 +6,17 @@ import { Redirect } from 'react-router-dom'
 
 function Login() {
   const error = useSelector(state => state.authReducer.error);
+  const isAuth = useSelector(state => state.authReducer.isAuth);
   const [redirect, setRedirect] = useState('')
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuth) {
+      setRedirect(<Redirect to='/dashboardAdmin' />)
+    } else {
+      setRedirect(<Redirect to='/login' />)
+    }
+  } ,[isAuth])
 
   function setupAlert() {
     let ans;
@@ -32,11 +41,12 @@ function Login() {
     let type = document.getElementById('type').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
+      console.log(isAuth)
     dispatch(login(email, password, type))   
-    if (error !== undefined && error !== null) {
-      setRedirect(<Redirect to='/login' />)
-    } else {
+    if (isAuth) {
       setRedirect(<Redirect to='/dashboardAdmin' />)
+    } else {
+      setRedirect(<Redirect to='/login' />)
     }
       
   };

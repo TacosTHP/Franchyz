@@ -8,9 +8,10 @@ import * as API from "services/eventsAPI";
 import { ConfigProvider } from "antd";
 import frFR from "antd/es/locale/fr_FR";
 import { useSelector, useDispatch } from "react-redux";
-import { callAPI } from 'redux/middlewares/resourcesMiddlewares'
+import * as gameAPI from 'services/gameAPI'
+import * as eventAPI from 'services/eventAPI'
 
-const FormGame = ({ EventType, ClubId, TeamId }) => {
+const FormGame = ({ playersIds }) => {
 
   const [dateTime, setDateTime] = useState("");
   const [duration, setDuration] = useState("");
@@ -21,10 +22,9 @@ const FormGame = ({ EventType, ClubId, TeamId }) => {
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
 
-  const club_id = useSelector((state) => state.userReducer.coach_id);
+  const club_id = useSelector((state) => state.userReducer.club_id);
   const team_id = useSelector((state) => state.userReducer.team_id);
 
-  const dispatch = useDispatch();
 
   moment.updateLocale("fr", localization);
 
@@ -44,7 +44,7 @@ const FormGame = ({ EventType, ClubId, TeamId }) => {
     return current && current < moment().endOf("day");
   }
 
-  function onSubmit() {
+  async function onSubmit() {
     if (dateTime === "") {
       document.getElementById("notice_datetime").innerHTML =
         "Merci de choisir une date";
@@ -54,8 +54,10 @@ const FormGame = ({ EventType, ClubId, TeamId }) => {
         "Merci de saisir un titre";
     }
 
-    dispatch(callAPI('createGame', {eventTitle: eventTitle, eventDescription: eventDescription, address: address, city: city, country: country, zipCode: zipCode, dateTime: dateTime, duration: duration, club_id, team_id}))   
-    //API.createGame( eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration, club_id, team_id).then((response) => console.log(response)); 
+    let game = await gameAPI.createGame(club_id, team_id, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration)   
+    playersIds.forEach(async function (playerId) {
+      await eventAPI.createEvent(game.id, playerId, 'game')
+    })
   }
   return (
     <ConfigProvider locale={frFR}>
@@ -71,9 +73,9 @@ const FormGame = ({ EventType, ClubId, TeamId }) => {
             {dateTime !== "" && (
               <h6 style={{ marginTop: "25px" }}> Date choisie: {dateTime}</h6>
             )}
-            <label>Durée de la competition:</label>
+            <label>Durée de la competition en min:</label>
             <br />
-            <InputNumber style={{ marginBottom: "15px" }} defaultValue={0} step={5} min={0} max={100000} formatter={(valueMin) => `${valueMin} min`} parser={(valueMin) => valueMin.replace(" min", "")} onChange={onChangeDuration} />
+            <InputNumber style={{ marginBottom: "15px" }} defaultValue={0} step={5} min={0} max={100000} formatter={(valueMin) => `${valueMin}`} parser={(valueMin) => valueMin.replace(" min", "")} onChange={onChangeDuration} />
           </Col>
         </Row>
 

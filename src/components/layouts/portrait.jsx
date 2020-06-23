@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import portrait from 'assets/portrait.jpeg'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -18,13 +18,16 @@ function Portrait() {
   const [redirect, setRedirect] = useState('')
   const myfirstName = useSelector(state => state.userReducer.first_name)
   const myType = useSelector(state => state.authReducer.typeUser)
+  const isAuth = useSelector(state => state.authReducer.isAuth)
+
+  let history = useHistory();
 
   function logout(){
     UserAPI.sign_out(myType)
     dispatch(logoutSuccess())   
     dispatch(infoUserDown())
     Cookies.remove('token', {sameSite: 'lax'});
-    setRedirect(<Redirect to='/' />)
+    history.push("/");
   }
 
   return(
@@ -37,7 +40,6 @@ function Portrait() {
         <Link className="dropdown-item" to="/"> Profile </Link>
         <p className="m-0 dropdown-item" onClick={logout}> Logout </p>  
       </div>
-      {redirect}
     </div> 
 
   )

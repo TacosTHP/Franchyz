@@ -2,8 +2,11 @@ function getAllTeams(id) {
   const data = {
     id: id,
   };
+  let baseURL = process.env.REACT_APP_API_URL;
+  let endUrl = `/clubs/${id}/teams.json`
+  let url = baseURL + endUrl
 
-  return fetch(`http://localhost:3000/clubs/${data.id}/teams.json`, {
+  return fetch(url, {
     headers: {
       "Content-Type": "application/json",
     },

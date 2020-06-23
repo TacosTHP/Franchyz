@@ -13,6 +13,15 @@ const Register = () => {
   const [dataTeams, setDataTeams] = useState([]);
   const [redirect, setRedirect] = useState('')
   const dispatch = useDispatch();
+  const isAuth = useSelector(state => state.authReducer.isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      setRedirect(<Redirect to='/dashboardAdmin' />)
+    } else {
+      setRedirect(<Redirect to='/register' />)
+    }
+  } ,[isAuth])
 
   function setupAlert() {
     let ans;
@@ -69,7 +78,6 @@ const Register = () => {
     let password = document.getElementById('password').value;
     let team = document.getElementById('team').value;
     dispatch(logup(email, password, type, team));
-    setRedirect(<Redirect to='/' />)
   };
 
   return (

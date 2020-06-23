@@ -13,8 +13,9 @@ import Register from "./pages/register.jsx";
 import CreateTeam from "./pages/createTeam.jsx";
 import AdminCoachDashboardPage from "./pages/adminCoachDashboardPage.jsx";
 import ShowTeam from './pages/showTeam.jsx'
+import PlayerDashboardPage from './pages/playerDashboardPage.jsx'
 
-//Component 
+//Component
 import Navbar from "./components/layouts/navbar.jsx";
 import Footer from "./components/layouts/footer.jsx";
 
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/dashboardAdmin"> <AdminCoachDashboardPage /> </Route>
           <Route path="/create-team"> <CreateTeam /> </Route>
           <Route exact path="/"> <Home /> </Route>
+          <Route path="/dashboardPlayer"> <PlayerDashboardPage /> </Route>
         </Switch>
         <Footer />
       </Router>
