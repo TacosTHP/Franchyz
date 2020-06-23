@@ -17,9 +17,6 @@ function DashboardPlayerTabs({club}) {
 					<TabPane tab="Your team" key="2">
 						{/* <TeamList teams={club.teams} /> */}
 						<Link to="/newTeam">
-							<button type="button" className="btn btn-primary ml-4">
-								Add new Team
-							</button>
 						</Link>
 					</TabPane>
 				</Tabs>

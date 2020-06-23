@@ -8,6 +8,7 @@ import DashboardPlayerTabs from "components/dashboardPlayerTabs.jsx";
 import { BackTop } from 'antd';
 
 
+
 function PlayerDashboardPage () {
   const [events, setEvents] = useState([])
   const [data, setData] = useState()
@@ -42,6 +43,7 @@ function PlayerDashboardPage () {
     fontSize: 14,
     };
 
+    console.log("club_id" + club_id)
   return(
 
     <div>
@@ -58,11 +60,11 @@ function PlayerDashboardPage () {
           { events !== null ? <h6 className="text-center text-primary">You have no upcoming events </h6>  :   
     <h6 className="text-center text-primary">Let your team know whether you participate in the following events: </h6> }
          
-    
+    { club_id === null ?  <h6 className="text-center redtext">You have to ask your trainer to add your to a club/team.</h6>  :  <DashboardPlayerTabs/>}
         <EventsList events={events} player={player} setTrigger={setTrigger} trigger={trigger}/> 
         <Calendar player={player}/>
               
-        <DashboardPlayerTabs/>
+      
           <BackTop>
       <div style={style}>UP</div>
     </BackTop>
