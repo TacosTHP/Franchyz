@@ -21,6 +21,7 @@ function signUp(email, password, type, team) {
   let endUrl = `/${types}.json`;
   let url = baseURL + endUrl;
 
+  console.log(url)
   let ans = {
     headers: '',
     body: ''
@@ -38,6 +39,7 @@ function signUp(email, password, type, team) {
 
   return fetch(url, request)
     .then(response => {
+      console.log(response)
       ans.headers = response.headers
       return response.json()
     })

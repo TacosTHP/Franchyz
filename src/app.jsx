@@ -14,6 +14,7 @@ import CreateTeam from "./pages/createTeam.jsx";
 import AdminCoachDashboardPage from "./pages/adminCoachDashboardPage.jsx";
 import ShowTeam from './pages/showTeam.jsx'
 import PlayerDashboardPage from './pages/playerDashboardPage.jsx'
+import Profile from './pages/profile.jsx';
 
 //Component
 import Navbar from "./components/layouts/navbar.jsx";
@@ -32,6 +33,8 @@ const App = () => {
         <Switch>
           <Route path="/login"> <Login /> </Route>
           <Route path="/register"> <Register /> </Route>
+          <Route path="/profile"> <Profile /> </Route>
+          <Route exact path="/create-club"> <CreateClub /> </Route>
           <Route exact path="/newEvent"> <NewEvent /> </Route>
           <Route exact path="/newClub"> <CreateClub /> </Route>
           <Route path={`/clubs/:clubId/teams/:teamId`}><ShowTeam /></Route>

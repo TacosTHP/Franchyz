@@ -37,7 +37,7 @@ function Portrait() {
       </div>
       <div id="portrait-menu" className="dropdown-menu mt-2" aria-labelledby="navbarDropdownMenuLink">
         <p className="m-0 dropdown-item"> {myfirstName} </p>
-        <Link className="dropdown-item" to="/"> Profile </Link>
+        <Link className="dropdown-item" to="/profile"> Profile </Link>
         <p className="m-0 dropdown-item" onClick={logout}> Logout </p>  
       </div>
     </div> 
