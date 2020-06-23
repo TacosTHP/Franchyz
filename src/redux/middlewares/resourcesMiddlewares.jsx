@@ -13,11 +13,11 @@ function callAPI(callName, args) {
     if (response.body.errors !== undefined) {
       dispatch(loginFailure(response.body.errors))
     } else {
+      console.log(response)
       Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
       let decoded_token = jwt_decode(response.headers.get('Authorization'))
       dispatch(loginSuccess(decoded_token))
       dispatch(infoUserUp(decoded_token))
-      return 'ok'
     } 
   };
 };

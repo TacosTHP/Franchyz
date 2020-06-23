@@ -4,7 +4,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../
 
 let tempo
 let decoded_token 
-if (Cookies.get('token') === undefined){
+if (Cookies.get('token') === undefined || Cookies.get('token') === null){
   tempo = {
     loading: false,
     isAuth: false,
