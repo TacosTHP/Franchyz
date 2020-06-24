@@ -12,7 +12,7 @@ function CreateTeams() {
 				className="bg-dark pb-3 p-2 mx-auto rounded select"
 				style={{ width: "35%" }}
 			>
-				<h3 className="text-light text-center">Création team</h3>
+				<h3 className="text-light text-center">Add a new team</h3>
 			</div>
 			<hr className="my-4" style={{ width: "600px" }}></hr>
 

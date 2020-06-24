@@ -28,7 +28,7 @@ const FormClub = () => {
   function onSubmit() {
     if (clubName === "") {
       document.getElementById("notice_clubname").innerHTML =
-        "Merci de saisir un nom du club";
+        "Please fill in a club name";
     }
 
     let ok = dispatch(callAPI('createClub', {creationDate: creationDate, clubName: clubName, clubDescription: clubDescription, zipCode: zipCode, city: city, country: country, address: address, league: league, pool: pool, conference: conference, creatorId: creator_id}))   
@@ -45,12 +45,12 @@ const FormClub = () => {
       <div>
         <Row>
           <Col span={10} offset={8}>
-            <h3>Le club:</h3>
-            <label>Date de création du club:</label>
+            <h3>The club:</h3>
+            <label>Founding date:</label>
             <br />
             <DatePicker onChange={onChange2} />
             {creationDate !== "" && (
-              <h6 style={{ marginTop: "25px" }}>Date création club: {creationDate}</h6>
+              <h6 style={{ marginTop: "25px" }}>Selected founding date: {creationDate}</h6>
             )}
           </Col>
         </Row>
@@ -59,28 +59,28 @@ const FormClub = () => {
         <Row>
           <Col span={8} offset={8}>
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Nom du club:</label>
-              <input type="text" className="form-control" placeholder="Nom" id="title" onChange={(e) => setClubName(e.target.value)} value={clubName} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>Club name:</label>
+              <input type="text" className="form-control" placeholder="Name" id="title" onChange={(e) => setClubName(e.target.value)} value={clubName} />
               <p id="notice_clubname" className="redtext"></p>
             </div>
 
             <div className="form-group row col-12">
               <label style={{ marginLeft: "10px", color: "grey" }}>
-                Déscription du club
+                Club description
               </label>
-              <input type="text" className="form-control" placeholder="Déscription" id="description" onChange={(e) => setClubDescription(e.target.value)} value={clubDescription} />
+              <input type="text" className="form-control" placeholder="Description" id="description" onChange={(e) => setClubDescription(e.target.value)} value={clubDescription} />
             </div>
 
             <div className="form-group row col-12">
               <label style={{ marginLeft: "10px", color: "grey" }}>
-                League du club
+                Club league
               </label>
               <input type="text" className="form-control" placeholder="League" id="league" onChange={(e) => setLeague(e.target.value)} value={league} />
             </div>
 
             <div className="form-group row col-12">
               <label style={{ marginLeft: "10px", color: "grey" }}>
-                Conference du club
+                Conference
               </label>
               <input type="text" className="form-control" placeholder="Conference" id="conference" onChange={(e) => setConference(e.target.value)} value={conference} />
             </div>
@@ -89,26 +89,26 @@ const FormClub = () => {
               <label style={{ marginLeft: "10px", color: "grey" }}>Pool</label>
               <input type="text" className="form-control" placeholder="Pool" id="pool" onChange={(e) => setPool(e.target.value)} value={pool} />
             </div>
-            <h3>L'adresse du club:</h3>
+            <h3>Club address:</h3>
             <div className="form-group row col-12">
               <label style={{ marginLeft: "10px", color: "grey" }}>
-                L'adresse du club
+                Address of the club
               </label>
-              <input type="text" className="form-control" placeholder="L'adresse" id="adresse" onChange={(e) => setAddress(e.target.value)} value={address} />
+              <input type="text" className="form-control" placeholder="Address" id="adresse" onChange={(e) => setAddress(e.target.value)} value={address} />
             </div>
 
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Code postal</label>
-              <input type="text" className="form-control" placeholder="Code postal" id="zipcode" onChange={(e) => setZipCode(e.target.value)} value={zipCode} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>Zip code</label>
+              <input type="text" className="form-control" placeholder="Zip code" id="zipcode" onChange={(e) => setZipCode(e.target.value)} value={zipCode} />
             </div>
 
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Ville</label>
-              <input type="text" className="form-control" placeholder="Ville" id="city" onChange={(e) => setCity(e.target.value)} value={city} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>City</label>
+              <input type="text" className="form-control" placeholder="City" id="city" onChange={(e) => setCity(e.target.value)} value={city} />
             </div>
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Pays</label>
-              <input type="text" className="form-control" placeholder="Pays" id="country" onChange={(e) => setCountry(e.target.value)} value={country} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>Country</label>
+              <input type="text" className="form-control" placeholder="Country" id="country" onChange={(e) => setCountry(e.target.value)} value={country} />
             </div>
           </Col>
         </Row>
@@ -116,7 +116,7 @@ const FormClub = () => {
         <Row>
           <Col span={5} offset={11}>
             <button type="submit" className="btn btn-outline-danger" style={{ marginTop: "25px", marginBottom: "25px" }} onClick={onSubmit} >
-              sauvegarder
+              Save
             </button>
           </Col>
         </Row>

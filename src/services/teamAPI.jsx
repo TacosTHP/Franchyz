@@ -34,18 +34,16 @@ function getTeamsOfClub(id) {
     .then(response => { return response })
 }
 
-function createTeam(TeamName, Creator_id, Coach_id, Club_id) {
+function createTeam(teamName, creatorId, coachId, clubId) {
   const data = {
-    title: TeamName,
-    creator_id: Creator_id,
-    club_id: Club_id,
-    coach_id: Coach_id,
+    title: teamName,
+    creator_id: creatorId,
+    club_id: clubId,
+    coach_id: coachId,
   };
 
-  console.log(data);
-
   let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${Club_id}/teams.json`;
+  let endUrl = `/clubs/${clubId}/teams.json`;
   let url = baseURL + endUrl;
 
   return fetch(url, {

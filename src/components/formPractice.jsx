@@ -41,17 +41,19 @@ const FormPractice = ({ playersIds }) => {
   async function onSubmit() {
     if (dateTime === "") {
       document.getElementById("notice_datetime").innerHTML =
-        "Merci de choisir une date";
+        "Please select a start date";
     }
     if (eventTitle === "") {
       document.getElementById("notice_title").innerHTML =
-        "Merci de saisir un titre";
+        "Please fill in a title";
     }
 
     let practice = await practiceAPI.createPractice(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration)   
-    playersIds.forEach(async function (playerId) {
-      await eventAPI.createEvent(practice.id, playerId, 'practice')
-    })
+    if (playersIds !== undefined) {
+      playersIds.forEach(async function (playerId) {
+        await eventAPI.createEvent(practice.id, playerId, 'practice')
+      })
+    }
   }
 
   return (
@@ -59,16 +61,16 @@ const FormPractice = ({ playersIds }) => {
       <div>
         <Row>
           <Col span={10} offset={8}>
-            <h3>L'entrainement:</h3>
-            <label>Date et heure de l'entrainement:</label>
+            <h3>Training session:</h3>
+            <label>Date and time training session:</label>
             <br />
             <DatePicker id="datetime" format="DD-MM-YY HH:mm" disabledDate={disabledDate} onChange={onChange} showTime={{ defaultValue: moment("00:00:00", "HH:mm:ss") }} />
             <p id="notice_datetime" className="redtext"></p>
 
             {dateTime !== "" && (
-              <h6 style={{ marginTop: "25px" }}> Date choisie: {dateTime}</h6>
+              <h6 style={{ marginTop: "25px" }}> Selected start date: {dateTime}</h6>
             )}
-            <label>Durée de l'entrainement:</label>
+            <label>Duration in min:</label>
             <br />
             <InputNumber style={{ marginBottom: "15px" }} defaultValue={0} step={5} min={0} max={100000} formatter={(valueMin) => `${valueMin}`} parser={(valueMin) => valueMin.replace(" min", "")} onChange={onChangeDuration} />
           </Col>
@@ -77,35 +79,35 @@ const FormPractice = ({ playersIds }) => {
         <Row>
           <Col span={8} offset={8}>
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Titre:</label>
-              <input type="text" className="form-control" placeholder="Saisir un titre" id="title" onChange={(e) => setEventTitle(e.target.value)} value={eventTitle} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>Training title::</label>
+              <input type="text" className="form-control" placeholder="Title" id="title" onChange={(e) => setEventTitle(e.target.value)} value={eventTitle} />
               <p id="notice_title" className="redtext"></p>
             </div>
 
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Déscription:</label>
-              <input type="text" className="form-control" placeholder="Saisir une description" id="description" onChange={(e) => setEventDescription(e.target.value)} value={eventDescription} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>Training description:</label>
+              <input type="text" className="form-control" placeholder="Description" id="description" onChange={(e) => setEventDescription(e.target.value)} value={eventDescription} />
             </div>
-            <h3>L'adresse de l'entrainement:</h3>
+            <h3>Address of the location::</h3>
             <div className="form-group row col-12 ">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Adresse:</label>
-              <input type="text" className="form-control" placeholder="L'adresse" id="address" onChange={(e) => setAddress(e.target.value)} value={address}
+              <label style={{ marginLeft: "10px", color: "grey" }}>Address:</label>
+              <input type="text" className="form-control" placeholder="Address" id="address" onChange={(e) => setAddress(e.target.value)} value={address}
               />
             </div>
 
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Code Postal:</label>
-              <input type="text" className="form-control" placeholder="Code postal" id="zipcode" onChange={(e) => setZipCode(e.target.value)} value={zipCode} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>Zip code:</label>
+              <input type="text" className="form-control" placeholder="Zip code" id="zipcode" onChange={(e) => setZipCode(e.target.value)} value={zipCode} />
             </div>
 
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Ville:</label>
-              <input type="text" className="form-control" placeholder="Ville" id="city" onChange={(e) => setCity(e.target.value)} value={city} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>City:</label>
+              <input type="text" className="form-control" placeholder="City" id="city" onChange={(e) => setCity(e.target.value)} value={city} />
             </div>
 
             <div className="form-group row col-12">
-              <label style={{ marginLeft: "10px", color: "grey" }}>Pays:</label>
-              <input type="text" className="form-control" placeholder="Pays" id="country" onChange={(e) => setCountry(e.target.value)} value={country} />
+              <label style={{ marginLeft: "10px", color: "grey" }}>Country:</label>
+              <input type="text" className="form-control" placeholder="Country" id="country" onChange={(e) => setCountry(e.target.value)} value={country} />
             </div>
           </Col>
         </Row>
@@ -113,7 +115,7 @@ const FormPractice = ({ playersIds }) => {
         <Row>
           <Col span={5} offset={11}>
             <button type="submit" className="btn btn-outline-danger" style={{ marginTop: "25px", marginBottom: "25px" }} onClick={onSubmit} >
-              sauvegarder
+              Save
             </button>
           </Col>
         </Row>

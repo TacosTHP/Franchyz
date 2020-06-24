@@ -1,5 +1,25 @@
 import Cookies from 'js-cookie'
 
+	function getGame(gamesId) {
+		let baseURL = process.env.REACT_APP_API_URL;
+		let endUrl = `/games/${gamesId}.json`
+		let url = baseURL + endUrl
+	  
+		let headers = {
+		  'Content-Type': 'application/json'
+		}
+	  
+		let request = {
+		  headers: headers
+    }
+    
+		return fetch(url, request)
+		  .then(response => response.json())
+      .then(response => { return response })
+      .catch(err => console.log("Error: ", err))
+	  }
+
+
 function createPractice( EventTitleP, EventDescriptionP, AddressP, CityP, CountryP, ZipCodeP, DateTimeP, DurationP, Club_id, Team_id) {
 
 	const data = {
@@ -179,5 +199,5 @@ const confirmAttendance = (player_id, club_id, team_id, event_id) => {
     })
 }
 
-export { createPractice, getUnconfirmedEvents, getAttendedGames, getUnattendedGames, getAttendedPractices, getUnattendedPractices, confirmAttendance };
+export { getGame, createPractice, getUnconfirmedEvents, getAttendedGames, getUnattendedGames, getAttendedPractices, getUnattendedPractices, confirmAttendance };
 

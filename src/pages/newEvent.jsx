@@ -21,8 +21,9 @@ function CreateEvents() {
   async function setupTeams(){
     const ans = await teamAPI.getTeamsOfClub(clubId)
     setTeams(ans)
-    console.log(ans[1].players)
-    setPlayers(<TransfertList players={ans[1].players} setValidateKeys={setValidateKeys} />)
+    if (ans.length > 0) {
+      setPlayers(<TransfertList players={ans[1].players} setValidateKeys={setValidateKeys} />)
+    }
   }
 
   function onChange(value) {
@@ -36,11 +37,11 @@ function CreateEvents() {
       <hr className="my-4" style={{ width: "600px" }}></hr>
       <div className="bg-dark pb-3 p-2 mx-auto rounded select" style={{ width: "35%" }} >
 
-        <h3 className="text-light text-center">Choisir le type d'événement?</h3>
+        <h3 className="text-light text-center">Please choose the event type?</h3>
         <div className="text-center">
-          <Select className="text-center" showSearch style={{ width: 300 }} placeholder="Choisir le type d'evenement" optionFilterProp="children" onChange={onChange} filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 } >
+          <Select className="text-center" showSearch style={{ width: 300 }} placeholder="Choose event type" optionFilterProp="children" onChange={onChange} filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 } >
             <Option value="game">Competition</Option>
-            <Option value="practice">Entrainement</Option>
+            <Option value="practice">Training session</Option>
           </Select>
         </div>
       </div>
