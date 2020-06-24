@@ -12,10 +12,10 @@ function DashboardPlayerTabs({club}) {
 			<div className="card-container">
 				<Tabs type="card">
 					<TabPane tab="Your Club" key="1">
-						{/* <InformationsClub club={club} /> */}
+						<InformationsClub club={club} />
 					</TabPane>
 					<TabPane tab="Your team" key="2">
-						{/* <TeamList teams={club.teams} /> */}
+						<TeamList teams={club.teams} />
 						<Link to="/newTeam">
 						</Link>
 					</TabPane>

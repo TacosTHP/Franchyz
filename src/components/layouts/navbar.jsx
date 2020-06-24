@@ -8,7 +8,7 @@ function Navbar() {
   const isAuth = useSelector(state => state.authReducer.isAuth)
   const typeUser = useSelector(state => state.authReducer.typeUser)
   console.log(isAuth);
-  console.log(typeUser);
+  console.log("typeUser" + typeUser);
 
   function authNav() {
     if (!isAuth) {
