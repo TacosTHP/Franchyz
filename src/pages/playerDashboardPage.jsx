@@ -18,8 +18,13 @@ function PlayerDashboardPage () {
     .then((response) => {setEvents(response)})
   }
 
+  const all_events = () => {
+    EventsAPI.getAllPersonalEvents(player_id, club_id, team_id)
+    .then((response) => {setEvents(response)})
+  }
+
   useEffect(() => {
-    unconfirmed_events()
+    all_events()
   }, [])
 
 
@@ -28,7 +33,7 @@ function PlayerDashboardPage () {
       <>
         <div className='my-3 mx-3'>
           <EventsList events={events} player={player}/>
-          <Calendar player={player}/>
+          <Calendar player={player} events={events}/>
         </div>
       </>
     )

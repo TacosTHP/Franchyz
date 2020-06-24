@@ -61,6 +61,30 @@ function createPractice( EventTitleP, EventDescriptionP, AddressP, CityP, Countr
 	});
 }
 
+const getAllPersonalEvents = (player_id, club_id, team_id) => {
+
+  let headers = {
+    'Content-Type': 'application/json',
+    Authorization: Cookies.get('token')
+  }
+
+  let request = {
+    method: 'get',
+    headers: headers,
+  }
+
+  let baseURL = process.env.REACT_APP_API_URL
+  let endUrl = `/clubs/${club_id}/teams/${team_id}/players/${player_id}/events.json`
+  let url = baseURL + endUrl
+
+  return fetch(url, request)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      return response
+    })
+}
+
 const getUnconfirmedEvents = (player_id, club_id, team_id) => {
 
   let headers = {
@@ -209,4 +233,4 @@ const confirmAttendance = (player_id, club_id, team_id, event_id) => {
     })
 }
 
-export { createPractice, createGame, getUnconfirmedEvents, getAttendedGames, getUnattendedGames, getAttendedPractices, getUnattendedPractices, confirmAttendance };
+export { createPractice, createGame, getAllPersonalEvents, getUnconfirmedEvents, getAttendedGames, getUnattendedGames, getAttendedPractices, getUnattendedPractices, confirmAttendance };

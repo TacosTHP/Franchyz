@@ -13,12 +13,13 @@ import '../styles/calendar.scss'
 function Calendar(props) {
   const [games, setGames] = useState([])
   const [practices, setPractices] = useState([])
+  let events = props.events
   const user_id = props.player.player_id
   const club_id = props.player.club_id
   const team_id = props.player.team_id
   const history = useHistory();
 
-  const tmp_event = {title: "Event Now", start: new Date()}
+  console.log(events);
 
   const addEventManually = arg => {
     setGames([...games, {title: "Event Now", start: arg.date}])
@@ -54,8 +55,33 @@ function Calendar(props) {
     })
   }
 
-  useEffect(() => { getGames () }, [])
-  useEffect(() => { getPractices () }, [])
+  const manageEvents = (events) => {
+    events.forEach((event, i) => {
+      if (event.type === "Practice") {
+        console.log(event);
+        setPractices([...practices, {
+          title: `PRACTICE ${event.title}`,
+          start: event.start,
+          backgroundColor: event.backgroundColor,
+          borderColor: event.borderColor,
+          textColor: event.textColor,
+          allDay: false
+        }])
+      } else {
+        console.log(event);
+        return setGames([...games, {
+          title: `GAME ${event.title}`,
+          start: event.start,
+          backgroundColor: event.backgroundColor,
+          borderColor: event.borderColor,
+          textColor: event.textColor,
+          allDay: false
+        }])
+      }
+    });
+  }
+
+  useEffect(() => { manageEvents(events) }, [events])
 
 
   return (
