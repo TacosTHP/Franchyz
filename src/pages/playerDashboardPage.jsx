@@ -8,9 +8,6 @@ import DashboardPlayerTabs from "components/dashboardPlayerTabs.jsx";
 import { BackTop } from 'antd';
 import * as clubAPI from "services/clubAPI.jsx";
 
-
-
-
 function PlayerDashboardPage () {
   const [events, setEvents] = useState([])
   const [trigger, setTrigger] = useState(0)
