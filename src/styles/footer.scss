@@ -1,0 +1,36 @@
+@import "variables";
+
+#authNav {
+	margin-left: auto;
+}
+
+#portrait {
+	width: 3vw;
+	height: auto;
+}
+
+#portrait-menu {
+	left: -6rem;
+}
+
+.logo {
+	font-family: "Roboto Slab", sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+	color: white;
+
+	&:hover {
+		color: $primary;
+		text-decoration: none;
+	}
+}
+
+.footer {
+	left: 0;
+	position:absolute;
+	bottom: 0;
+	width: 100%;
+	color: white;
+	text-align: center;
+}

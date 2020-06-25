@@ -5,7 +5,7 @@ import * as API from "services/clubAPI";
 import { ConfigProvider } from "antd";
 import frFR from "antd/es/locale/fr_FR";
 import { useSelector, useDispatch } from "react-redux";
-import { callAPI } from 'redux/middlewares/resourcesMiddlewares'
+import { createClub } from 'redux/middlewares/resourcesMiddlewares'
 import { Redirect } from 'react-router-dom'
  
 const FormClub = () => {
@@ -25,15 +25,19 @@ const FormClub = () => {
   const [redirect, setRedirect] = useState('')
   const dispatch = useDispatch();
 
-  function onSubmit() {
+  const onSubmit = async () => {
     if (clubName === "") {
       document.getElementById("notice_clubname").innerHTML =
         "Please fill in a club name";
     }
 
-    let ok = dispatch(callAPI('createClub', {creationDate: creationDate, clubName: clubName, clubDescription: clubDescription, zipCode: zipCode, city: city, country: country, address: address, league: league, pool: pool, conference: conference, creatorId: creator_id}))   
-    //API.createClub(creationDate, clubName, clubDescription, zipCode, city, country, address, league, pool, conference, creator_id)
-    setRedirect(<Redirect to='/' />)
+    let code = await dispatch(createClub({creationDate: creationDate, clubName: clubName, clubDescription: clubDescription, zipCode: zipCode, city: city, country: country, address: address, league: league, pool: pool, conference: conference, creatorId: creator_id}))   
+    if (code === 201) {
+      setRedirect(<Redirect to='/dashboardAdmin' />)
+    } else {
+      setRedirect(<Redirect to='/' />)
+
+    }
   }
 
   function onChange2(date, dateString) {

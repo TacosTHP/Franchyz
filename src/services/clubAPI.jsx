@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-const getAllClubs = () => {
+const getClubs = () => {
 
   let baseURL = process.env.REACT_APP_API_URL;
   let endUrl = '/clubs.json'
@@ -71,4 +71,4 @@ function createClub({ creationDate, clubName, clubDescription, zipCode, city, co
 
 }
 
-export { getClub, getAllClubs, createClub }
+export { getClub, getClubs, createClub }

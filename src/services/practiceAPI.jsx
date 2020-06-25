@@ -29,5 +29,23 @@ function createPractice(clubId, teamId, eventTitle, eventDescription, address, c
       return response 
     });
 }
+function getPractice(practice_id) {
+  let baseURL = process.env.REACT_APP_API_URL;
+  let endUrl = `/practices/${practice_id}.json`
+  let url = baseURL + endUrl
+  
+  let headers = {
+    'Content-Type': 'application/json'
+  }
+  
+  let request = {
+    headers: headers
+  }
+  
+  return fetch(url, request)
+    .then(response => response.json())
+    .then(response => { return response })
+  
+  }
 
-export { createPractice }
+export { createPractice, getPractice }

@@ -4,23 +4,23 @@ import Cookies from "js-cookie";
 import {useSelector} from "react-redux";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const current_user = useSelector((state) => state.userReducer.id);
-console.log("current user" + current_user)
-	const history = useHistory();
+  const currentUser = useSelector((state) => state.userReducer.id);
+  console.log("current user" + currentUser)
+  const history = useHistory();
 
-		return (
-			<Route{...rest} render={(props) =>
-					
-                     Cookies.get('token') ? 
-                   
+  return (
+    <Route{...rest} render={(props) =>
 
-					(<Component {...props} />) 
+        Cookies.get('token') ? 
 
-					: 
 
-					(history.push("/login"))}
-			/>
-		);
+          (<Component {...props} />) 
+
+          : 
+
+          (history.push("/login"))}
+    />
+  );
 };
 
 export default PrivateRoute

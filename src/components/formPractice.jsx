@@ -20,8 +20,8 @@ const FormPractice = ({ playersIds }) => {
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
 
-  const clubId = useSelector((state) => state.userReducer.coach_id);
-  const teamId = useSelector((state) => state.userReducer.team_id);
+  const clubId = useSelector((state) => state.userReducer.coachId);
+  const teamId = useSelector((state) => state.userReducer.teamId);
 
   moment.updateLocale("fr", localization);
 

@@ -8,7 +8,7 @@ import TransfertList from 'components/transfertList.jsx'
 
 function CreateEvents() {
 
-  const clubId = useSelector(state => state.userReducer.club_id);
+  const clubId = useSelector(state => state.userReducer.clubId);
   const [eventType, setEventType] = useState("");
   const [teams, setTeams] = useState('')
   const [players, setPlayers] = useState('')

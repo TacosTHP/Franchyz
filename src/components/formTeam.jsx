@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 const FormTeam = () => {
   const creatorId = useSelector((state) => state.userReducer.id);
-  const clubId = useSelector((state) => state.userReducer.club_id);
+  const clubId = useSelector((state) => state.userReducer.clubId);
   const coachId = useSelector((state) => state.userReducer.id);
 
   const [teamName, setTeamName] = useState("");

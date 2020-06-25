@@ -11,15 +11,17 @@ import * as clubAPI from "services/clubAPI.jsx";
 function PlayerDashboardPage () {
   const [events, setEvents] = useState([])
   const [trigger, setTrigger] = useState(0)
-  // const club_id = useSelector(state => state.userReducer.club_id)
-  const myClubId = 1
-  const club_id = 1
-  const team_id = useSelector(state => state.userReducer.team_id)
-  const player_id = useSelector(state => state.userReducer.id)
-  const player = {club_id, team_id, player_id}
+  // const myClubId = 1
+  // const club_id = 1
+
+
+  const clubId = useSelector(state => state.userReducer.clubId)
+  const teamId = useSelector(state => state.userReducer.teamId)
+  const playerId = useSelector(state => state.userReducer.id)
+  const player = {clubId, teamId, playerId}
 
   const unconfirmed_events = () => {
-    EventsAPI.getUnconfirmedEvents(player_id, club_id, team_id)
+    EventsAPI.getUnconfirmedEvents(playerId, clubId, teamId)
     .then((response) => {setEvents(response)})
   }
 
@@ -43,7 +45,7 @@ function PlayerDashboardPage () {
     fontSize: 14,
     };
 
-    console.log("club_id" + myClubId)
+    console.log("club_id" + clubId)
 
     const [club, setClub] = useState("");
 
@@ -52,7 +54,7 @@ function PlayerDashboardPage () {
     }, []);
   
     const loadClub = async () => {
-      const response = await clubAPI.getClub(myClubId);
+      const response = await clubAPI.getClub(clubId);
       setClub(response);
     }
   return(
@@ -71,7 +73,7 @@ function PlayerDashboardPage () {
           { events === null ? <h6 className="text-center text-primary">You have no upcoming events </h6>  :   
     <h6 className="text-center text-primary">Let your team know whether you participate in the following events: </h6> }
          
-    { club_id === null ?  <h6 className="text-center redtext">You have to ask your trainer to add you to a club/team.</h6>  :  <DashboardPlayerTabs club={club}/>}
+    { clubId === null ?  <h6 className="text-center redtext">You have to ask your trainer to add you to a club/team.</h6>  :  <DashboardPlayerTabs club={club}/>}
         
         <div className="container mb-5">  
         <EventsList events={events} player={player} setTrigger={setTrigger} trigger={trigger}/> 

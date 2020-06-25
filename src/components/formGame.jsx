@@ -21,8 +21,8 @@ const FormGame = ({ playersIds }) => {
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
 
-  const club_id = useSelector((state) => state.userReducer.club_id);
-  const team_id = useSelector((state) => state.userReducer.team_id);
+  const club_id = useSelector((state) => state.userReducer.clubId);
+  const team_id = useSelector((state) => state.userReducer.teamId);
 
 
   moment.updateLocale("fr", localization);

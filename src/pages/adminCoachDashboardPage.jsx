@@ -6,7 +6,7 @@ import * as clubAPI from "services/clubAPI.jsx";
 import DashboardAdminTabs from "components/dashboardAdminTabs.jsx";
 
 function AdminCoachDashboardPage() {
-  const myClubId = useSelector((state) => state.userReducer.club_id);
+  const myClubId = useSelector((state) => state.userReducer.clubId);
 
   const [club, setClub] = useState("");
 
