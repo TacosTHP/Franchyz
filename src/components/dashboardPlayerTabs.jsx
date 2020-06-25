@@ -2,7 +2,7 @@ import React from "react";
 import TeamList from "./teamList.jsx";
 import {Link} from "react-router-dom";
 import {Tabs} from "antd";
-import InformationsClub from "./informationsClub.jsx";
+import InformationsClub from "./clubInformations.jsx";
 
 function DashboardPlayerTabs({club}) {
 
