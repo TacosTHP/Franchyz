@@ -6,7 +6,7 @@ import * as clubAPI from "services/clubAPI.jsx";
 import DashboardAdminTabs from "components/dashboardAdminTabs.jsx";
 
 function AdminCoachDashboardPage() {
-  const myClubId = useSelector((state) => state.userReducer.clubId);
+  const clubId = useSelector((state) => state.userReducer.clubId);
 
   const [club, setClub] = useState("");
 
@@ -15,14 +15,14 @@ function AdminCoachDashboardPage() {
   }, []);
 
   const loadClub = async () => {
-    const response = await clubAPI.getClub(myClubId);
+    const response = await clubAPI.getClub(clubId);
     setClub(response);
   }
 
   return (
     <>
       <div className="text-center mt-5">
-        {myClubId === null ? (
+        {clubId === null ? (
           <div>
             <h1>Welcome to FRANCHYZ</h1>
             <h4>You just created an acccount for your sport club.</h4>
@@ -39,7 +39,7 @@ function AdminCoachDashboardPage() {
           </div>
         )}
 
-        {myClubId === null ? (
+        {clubId === null ? (
           <Link to="/newClub">
             <button type="button" className="btn btn-primary mt-4 ml-3">
               Create club

@@ -42,8 +42,6 @@ function PlayerDashboardPage () {
     fontSize: 14,
     };
 
-    console.log("club_id" + clubId)
-
     const [club, setClub] = useState("");
 
     useEffect(() => {
