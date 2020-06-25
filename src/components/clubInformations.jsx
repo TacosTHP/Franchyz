@@ -33,7 +33,6 @@ const ClubInformations = ({club}) => {
             <Row>
               <h6 className="mr-2">Conference:</h6><p>{club.conference}</p>
             </Row>
-
             <Row>
               <h5 className="mr-2 mt-5">Club address:</h5>
             </Row>
