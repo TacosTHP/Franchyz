@@ -11,16 +11,14 @@ import * as EventsAPI from 'services/eventsAPI';
 
 import '../styles/calendar.scss'
 
-function Calendar(props) {
+function Calendar() {
   const [games, setGames] = useState([])
   const [practices, setPractices] = useState([])
-  // const userId = props.player.player_id
-  // const clubId = props.player.club_id
+
   const userId = useSelector(state => state.userReducer.id)
   const clubId = useSelector(state => state.userReducer.clubId)
   const teamId = useSelector(state => state.userReducer.teamId)
 
-  // const teamId = props.player.team_id
   const history = useHistory();
 
   const tmp_event = {title: "Event Now", start: new Date()}

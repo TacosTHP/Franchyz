@@ -56,31 +56,27 @@ function PlayerDashboardPage () {
     }
   return(
 
-    <div>
-       <div>
-       <div className="text-center mt-5">
-            <h1>Welcome to FRANCHYZ</h1>
-            <h4>Your trainer invited you to FRANCHYZ.</h4>
-            <h4>
-              You can find your team events in the calendar. 
-            </h4>
-            <h4>Validate your participation for the events you are invited for.</h4>
-            </div>
-          </div>
-          { events === null ? <h6 className="text-center text-primary">You have no upcoming events </h6>  :   
-    <h6 className="text-center text-primary">Let your team know whether you participate in the following events: </h6> }
+ <div>
+  <div>
+   <div className="text-center mt-5">
+     <h1>Welcome to FRANCHYZ</h1>
+     <h4>Your trainer invited you to FRANCHYZ.</h4>
+      <h4>You can find your team events in the calendar.</h4>
+      <h5 className="text-primary">Let your trainer know, whether you participate in the events you are invited for </h5>
+      <h5 className="text-primary">by validating your participation.</h5>
+   </div>
+  </div> 
          
-    { clubId === null ?  <h6 className="text-center redtext">You have to ask your trainer to add you to a club/team.</h6>  :  <DashboardPlayerTabs club={club}/>}
-        
-        <div className="container mb-5">  
+    { clubId === null ? <h6 className="text-center redtext">You have to ask your trainer to add you to a club/team.</h6>  
+    : <DashboardPlayerTabs club={club}/>}
+    <div className="container mb-5">  
         <EventsList events={events} player={player} setTrigger={setTrigger} trigger={trigger}/> 
-        <Calendar player={player}/>
-        </div>
-      
-          <BackTop>
+        <Calendar/>
+    </div>
+    <BackTop>
       <div style={style}>UP</div>
     </BackTop>
-    </div>
+</div>
   )
 }
 

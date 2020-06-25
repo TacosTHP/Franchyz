@@ -5,7 +5,9 @@ import {Tabs} from "antd";
 import InformationsClub from "./informationsClub.jsx";
 
 function DashboardPlayerTabs({club}) {
+
 	const {TabPane} = Tabs;
+
 	return (
 		<div className="container rounded mt-5 mb-5" style={{backgroundColor: "#E8E7E7"}}>
 			<br />

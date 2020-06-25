@@ -3,6 +3,7 @@ import Team from 'components/team.jsx'
 
 const TeamList = ({teams}) => {
 
+
   const setList = () => {
     if (teams !== undefined){
       return teams.map(team => <Team key={team.id} team={team} />)
