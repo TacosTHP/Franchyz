@@ -5,7 +5,6 @@ import ClubInformations from './clubInformations.jsx';
 import ClubEdit from './clubEdit.jsx';
 import TeamList from './teamList.jsx';
 
-
 const DashboardAdminTabs = ({club}) => {
   const {TabPane} = Tabs;
   return(
@@ -13,15 +12,12 @@ const DashboardAdminTabs = ({club}) => {
       <br></br>
       <div className='card-container'>
         <Tabs type='card'>
-
           <TabPane tab='Your Club' key='1'>
             <ClubInformations club={club} />
           </TabPane>
-
           <TabPane tab='Edit Club' key='2'>
             <ClubEdit club={club} />
           </TabPane>
-
           <TabPane tab='Your teams' key='3'>
             <TeamList teams={club.teams} />
             <Link to='/newTeam'>
@@ -30,13 +26,11 @@ const DashboardAdminTabs = ({club}) => {
               </button>
             </Link>
           </TabPane>
-
         </Tabs>
       </div>
       <br></br>
     </div>
   );
 };
-
 
 export default DashboardAdminTabs;
