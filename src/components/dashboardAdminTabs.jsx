@@ -10,8 +10,7 @@ const DashboardAdminTabs = ({club}) => {
   const {TabPane} = Tabs;
   return(
     <div className='container rounded mt-5' style={{backgroundColor: '#E8E7E7'}}>
-      <br></br>
-      <div className='card-container'>
+      <div className='card-container pt-3'>
         <Tabs type='card'>
 
           <TabPane tab='Your Club' key='1'>
@@ -30,10 +29,8 @@ const DashboardAdminTabs = ({club}) => {
               </button>
             </Link>
           </TabPane>
-
         </Tabs>
       </div>
-      <br></br>
     </div>
   );
 };
