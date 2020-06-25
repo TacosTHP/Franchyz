@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
-import * as eventsAPI from 'services/eventsAPI.jsx'
+import * as gameAPI from 'services/gameAPI.jsx'
 import moment from 'moment'
 import "../styles/app.scss";
 import localization from 'moment/locale/fr';
@@ -10,7 +10,7 @@ function GameShow() {
 	console.log("game_id" + gamesId);
 	 const [game, setGame] = useState("");
 
-	 useEffect(() => {  eventsAPI.getGame(gamesId).then((response) => setGame(response));
+	 useEffect(() => {  gameAPI.getGame(gamesId).then((response) => setGame(response));
 	
 	}, [])
 

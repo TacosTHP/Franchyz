@@ -18,10 +18,10 @@ const getClubs = () => {
     .then(response => { return response })
 };
 
-function getClub(id) {
+function getClub(clubId) {
 
   let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${id}.json`
+  let endUrl = `/clubs/${clubId}.json`
   let url = baseURL + endUrl
 
   let headers = {

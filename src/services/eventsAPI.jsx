@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-const getUnconfirmedEvents = (player_id, club_id, team_id) => {
+const getUnconfirmedEvents = (playerId, clubId, teamId) => {
 
   let headers = {
     'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ const getUnconfirmedEvents = (player_id, club_id, team_id) => {
   }
 
   let baseURL = process.env.REACT_APP_API_URL
-  let endUrl = `/clubs/${club_id}/teams/${team_id}/players/${player_id}/unconfirmed_events.json`
+  let endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}/unconfirmed_events.json`
   let url = baseURL + endUrl
 
   return fetch(url, request)
@@ -24,7 +24,7 @@ const getUnconfirmedEvents = (player_id, club_id, team_id) => {
     })
 }
 
-const getAttendedGames = (player_id, club_id, team_id) => {
+const getAttendedGames = (playerId, clubId, teamId) => {
 
   let headers = {
     'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const getAttendedGames = (player_id, club_id, team_id) => {
   }
 
   let baseURL = process.env.REACT_APP_API_URL
-  let endUrl = `/clubs/${club_id}/teams/${team_id}/players/${player_id}/my_attended_games.json`
+  let endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}/my_attended_games.json`
   let url = baseURL + endUrl
 
   return fetch(url, request)
@@ -48,7 +48,7 @@ const getAttendedGames = (player_id, club_id, team_id) => {
     })
 }
 
-const getUnattendedGames = (player_id, club_id, team_id) => {
+const getUnattendedGames = (playerId, clubId, teamId) => {
 
   let headers = {
     'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const getUnattendedGames = (player_id, club_id, team_id) => {
   }
 
   let baseURL = process.env.REACT_APP_API_URL
-  let endUrl = `/clubs/${club_id}/teams/${team_id}/players/${player_id}/my_unattended_games.json`
+  let endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}/my_unattended_games.json`
   let url = baseURL + endUrl
 
   return fetch(url, request)
@@ -72,7 +72,7 @@ const getUnattendedGames = (player_id, club_id, team_id) => {
     })
 }
 
-const getAttendedPractices = (player_id, club_id, team_id) => {
+const getAttendedPractices = (playerId, clubId, teamId) => {
 
   let headers = {
     'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const getAttendedPractices = (player_id, club_id, team_id) => {
   }
 
   let baseURL = process.env.REACT_APP_API_URL
-  let endUrl = `/clubs/${club_id}/teams/${team_id}/players/${player_id}/my_attended_practices.json`
+  let endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}/my_attended_practices.json`
   let url = baseURL + endUrl
 
   return fetch(url, request)
@@ -96,7 +96,7 @@ const getAttendedPractices = (player_id, club_id, team_id) => {
     })
 }
 
-const getUnattendedPractices = (player_id, club_id, team_id) => {
+const getUnattendedPractices = (playerId, clubId, teamId) => {
 
   let headers = {
     'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ const getUnattendedPractices = (player_id, club_id, team_id) => {
   }
 
   let baseURL = process.env.REACT_APP_API_URL
-  let endUrl = `/clubs/${club_id}/teams/${team_id}/players/${player_id}/my_unattended_practices.json`
+  let endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}/my_unattended_practices.json`
   let url = baseURL + endUrl
 
   return fetch(url, request)
@@ -120,7 +120,7 @@ const getUnattendedPractices = (player_id, club_id, team_id) => {
     })
 }
 
-const confirmAttendance = (player_id, club_id, team_id, event_id) => {
+const confirmAttendance = (playerId, clubId, teamId, eventId) => {
 	const data = {
     "confirmed?": "true"
   }
@@ -137,7 +137,7 @@ const confirmAttendance = (player_id, club_id, team_id, event_id) => {
   }
 
   let baseURL = process.env.REACT_APP_API_URL
-  let endUrl = `/clubs/${club_id}/teams/${team_id}/players/${player_id}/events/${event_id}.json`
+  let endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}/events/${eventId}.json`
   let url = baseURL + endUrl
 
   return fetch(url, request)
@@ -148,5 +148,5 @@ const confirmAttendance = (player_id, club_id, team_id, event_id) => {
     })
 }
 
-export { getGame, createPractice, getUnconfirmedEvents, getAttendedGames, getUnattendedGames, getAttendedPractices, getUnattendedPractices, confirmAttendance };
+export {getUnconfirmedEvents, getAttendedGames, getUnattendedGames, getAttendedPractices, getUnattendedPractices, confirmAttendance };
 

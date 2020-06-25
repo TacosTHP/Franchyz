@@ -11,9 +11,6 @@ import * as clubAPI from "services/clubAPI.jsx";
 function PlayerDashboardPage () {
   const [events, setEvents] = useState([])
   const [trigger, setTrigger] = useState(0)
-  // const myClubId = 1
-  // const club_id = 1
-
 
   const clubId = useSelector(state => state.userReducer.clubId)
   const teamId = useSelector(state => state.userReducer.teamId)
