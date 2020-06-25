@@ -25,10 +25,6 @@ function TeamShow() {
       </div>
       <PlayerList players={team.players} />
       <Link to="/create-team">
-        <button type="button" className="btn btn-primary">
-          {" "}
-          Invite Players{" "}
-        </button>{" "}
       </Link>
       <br />
     </>
