@@ -17,7 +17,7 @@ function Login() {
     console.log(isAuth)
     if (isAuth) {
       if (userType === 'coach') {
-        message.success('You successfully rconnected to your account as a coach.', 2.5)
+        message.success('You successfully connected to your account as a coach.', 2.5)
         setRedirect(<Redirect to='/dashboardAdmin' />)
       } 
       else if (userType === 'player') {

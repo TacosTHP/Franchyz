@@ -9,6 +9,8 @@ import * as authAPI from 'services/authAPI'
 import { logoutSuccess } from 'redux/actions/authActions.jsx'
 import { infoUserDown } from 'redux/actions/userActions.jsx'
 import { useSelector, useDispatch } from 'react-redux';
+import { message} from 'antd';
+
 
 
 function Portrait() {
@@ -21,12 +23,15 @@ function Portrait() {
 
   function logout(){
     authAPI.signOut(myType)
-    dispatch(logoutSuccess())   
+   dispatch(logoutSuccess())   
     dispatch(infoUserDown())
     Cookies.remove('token', {sameSite: 'lax'});
     Cookies.remove('userInfo', {sameSite: 'lax'});
     history.push("/");
+    message.success('You successfully logged out', 2.5)
   }
+
+ 
 
   return(
     <div className="dropdown">
