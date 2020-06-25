@@ -15,9 +15,10 @@ function Calendar() {
   const [games, setGames] = useState([])
   const [practices, setPractices] = useState([])
 
-  const userId = useSelector(state => state.userReducer.id)
   const clubId = useSelector(state => state.userReducer.clubId)
   const teamId = useSelector(state => state.userReducer.teamId)
+  const userId = useSelector(state => state.userReducer.id)
+
 
   const history = useHistory();
 

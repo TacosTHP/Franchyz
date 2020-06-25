@@ -6,33 +6,29 @@ import PlayerList from "components/playerList.jsx";
 import {Link} from "react-router-dom";
 
 function TeamShow() {
-	let {clubId, teamId} = useParams();
-	useEffect(() => {
-		setupTeam();
-	}, []);
-	const [team, setTeam] = useState("");
+  let {clubId, teamId} = useParams();
+  useEffect(() => {
+    setupTeam();
+  }, []);
+  const [team, setTeam] = useState("");
 
-	async function setupTeam() {
-		const ans = await teamAPI.getTeam(clubId, teamId);
-		setTeam(ans);
-	}
+  async function setupTeam() {
+    const ans = await teamAPI.getTeam(clubId, teamId);
+    setTeam(ans);
+  }
 
-	return (
-		<>
-			<br />
-			<div className="text-center">
-				<h1> {team.title} </h1>
-			</div>
-			<PlayerList players={team.players} />
-			<Link to="/create-team">
-				<button type="button" className="btn btn-primary">
-					{" "}
-					Invite Players{" "}
-				</button>{" "}
-			</Link>
-			<br />
-		</>
-	);
+  return (
+    <>
+      <br />
+      <div className="text-center">
+        <h1> {team.title} </h1>
+      </div>
+      <PlayerList players={team.players} />
+      <Link to="/create-team">
+      </Link>
+      <br />
+    </>
+  );
 }
 
 export default TeamShow;

@@ -12,6 +12,7 @@ function Login() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(isAuth)
     if (isAuth) {
       if (userType === 'coach')
         setRedirect(<Redirect to='/dashboardAdmin' />)

@@ -2,7 +2,7 @@ import React from "react";
 import TeamList from "./teamList.jsx";
 import {Link} from "react-router-dom";
 import {Tabs} from "antd";
-import InformationsClub from "./clubInformations.jsx";
+import ClubInformations from "./clubInformations.jsx";
 
 function DashboardPlayerTabs({club}) {
 
@@ -14,7 +14,7 @@ function DashboardPlayerTabs({club}) {
 			<div className="card-container">
 				<Tabs type="card">
 					<TabPane tab="Your Club" key="1">
-						<InformationsClub club={club} />
+						<ClubInformations club={club} />
 					</TabPane>
 					<TabPane tab="Your team" key="2">
 						<TeamList teams={club.teams} />

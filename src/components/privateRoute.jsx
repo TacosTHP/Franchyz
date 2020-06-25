@@ -5,7 +5,6 @@ import {useSelector} from "react-redux";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const currentUser = useSelector((state) => state.userReducer.id);
-  console.log("current user" + currentUser)
   const history = useHistory();
 
   return (

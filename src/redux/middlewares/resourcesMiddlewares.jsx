@@ -4,7 +4,7 @@ import { updateClubId } from 'redux/actions/userActions';
 import { updateUserInfo } from 'helpers/reducersHelpers'
 import { message} from 'antd';
 
-  const createClub = (args) => {
+const createClub = (args) => {
   return async (dispatch) => {
 
     dispatch(loginRequest())

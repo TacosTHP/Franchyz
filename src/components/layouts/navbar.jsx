@@ -6,7 +6,7 @@ import '../../styles/nav.scss';
 
 const Navbar = () => {
   const isAuth = useSelector(state => state.authReducer.isAuth);
-  const typeUser = useSelector(state => state.authReducer.typeUser);
+  const userType = useSelector(state => state.authReducer.userType);
 
   const authNav = () => {
     if (!isAuth) {
@@ -24,9 +24,9 @@ const Navbar = () => {
   };
 
   const myDashboardLink = () => {
-    if (isAuth && typeUser === 'coach') {
+    if (isAuth && userType === 'coach') {
       return <Link to='/dashboardAdmin' className='nav-link'>My Dashboard</Link>
-    } else if (isAuth && typeUser === 'player') {
+    } else if (isAuth && userType === 'player') {
       return <Link to='/dashboardPlayer' className='nav-link'>My Dashboard</Link>
     };
   };

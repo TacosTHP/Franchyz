@@ -15,7 +15,7 @@ function Portrait() {
 
   const dispatch = useDispatch();
   const myfirstName = useSelector(state => state.userReducer.first_name)
-  const myType = useSelector(state => state.authReducer.typeUser)
+  const myType = useSelector(state => state.authReducer.userType)
 
   let history = useHistory();
 

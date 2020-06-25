@@ -8,7 +8,7 @@ import '../styles/form.scss';
 
 const Register = () => {
   const isAuth = useSelector(state => state.authReducer.isAuth);
-  const typeUser = useSelector(state => state.authReducer.typeUser);
+  const userType = useSelector(state => state.authReducer.userType);
   const errors = useSelector(state => state.authReducer.error);
 
   const [clubs, setClubs] = useState([]);
@@ -25,17 +25,16 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuth) {
-      if (typeUser === 'coach')
+      if (userType === 'coach')
         setRedirect(<Redirect to='/dashboardAdmin' />)
-      if (typeUser === 'player')
+      if (userType === 'player')
         setRedirect(<Redirect to='/dashboardPlayer' />)
     } else {
       setRedirect(<Redirect to='/register' />)
     }
   } ,[isAuth])
 
-  
-  console.log("usertype" +typeUser)
+
   const setupAlert = () => {
     let ans;
     let messageErrors = '';

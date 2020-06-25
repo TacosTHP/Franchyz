@@ -9,16 +9,16 @@ const logup = (email, password, type, team) => {
   return async (dispatch) => {
     dispatch(loginRequest());
     let response = await authAPI.signUp(email, password, type, team);
+    let body = await response.json()
 
     if (response.status !== 201) {
-      dispatch(loginFailure(response.body.errors))
+      dispatch(loginFailure(body.errors))
     } else {
       Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
       let decodedToken = jwt_decode(response.headers.get('Authorization'))
       setUserInfo(decodedToken)
       dispatch(loginSuccess(decodedToken))
       dispatch(infoUserUp(decodedToken))
-      return response.status
     };
   };
 };
@@ -27,16 +27,16 @@ const login = (email, password, type) => {
   return async (dispatch) => {
     dispatch(loginRequest());
     let response = await authAPI.signIn(email, password, type);
+    let body = await response.json()
 
       if (response.status !== 201) {
-        dispatch(loginFailure(response.body.error))
+        dispatch(loginFailure(body.error))
       } else {
         Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
         let decodedToken = jwt_decode(response.headers.get('Authorization'))
         setUserInfo(decodedToken)
         dispatch(loginSuccess(decodedToken))
         dispatch(infoUserUp(decodedToken))
-        return response.status
       };
   };
 };

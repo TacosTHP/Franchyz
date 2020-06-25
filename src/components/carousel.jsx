@@ -6,7 +6,7 @@ function Carousel() {
 
 
   return(
-      <>
+    <>
       <div id="carouselExampleSlidesOnly" className="carousel slide h-50" data-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active">
@@ -44,7 +44,7 @@ function Carousel() {
           </div>
         </div>
       </div>
-      </>
+    </>
   )
 }
 
