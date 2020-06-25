@@ -10,7 +10,7 @@ function GameShow() {
 	console.log("game_id" + gamesId);
 	 const [game, setGame] = useState("");
 
-	 useEffect(() => {  gameAPI.getGame(gamesId).then((response) => setGame(response));
+	 useEffect(() => { gameAPI.getGame(gamesId).then((response) => setGame(response));
 	
 	}, [])
 

@@ -37,7 +37,7 @@ const App = () => {
         <Switch>
           <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
           <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
-          <PrivateRoute exact path="/newTeam" component={CreateTeam } />
+          <PrivateRoute exact path="/newTeam" component={CreateTeam} />
           <PrivateRoute exact path="/newEvent" component={NewEvent} />
           <PrivateRoute exact path="/newClub" component={CreateClub} />
           <PrivateRoute exact path="/profile" component={Profile} />

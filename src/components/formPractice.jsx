@@ -9,6 +9,13 @@ import frFR from "antd/es/locale/fr_FR";
 import { useSelector } from "react-redux";
 import * as practiceAPI from 'services/practiceAPI'
 import * as eventAPI from 'services/eventAPI'
+import { useHistory } from "react-router-dom";
+import { message} from 'antd';
+
+
+
+
+
 
 const FormPractice = ({ playersIds }) => {
   const [dateTime, setDateTime] = useState("");
@@ -20,10 +27,13 @@ const FormPractice = ({ playersIds }) => {
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
 
+
+
   const clubId = useSelector((state) => state.userReducer.coachId);
   const teamId = useSelector((state) => state.userReducer.teamId);
 
   moment.updateLocale("fr", localization);
+  let history = useHistory();
 
   function onChange(value, dateString) {
     setDateTime(dateString);
@@ -46,14 +56,24 @@ const FormPractice = ({ playersIds }) => {
     if (eventTitle === "") {
       document.getElementById("notice_title").innerHTML =
         "Please fill in a title";
+    } else  {
+      let practice = await practiceAPI.createPractice(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration)  
+      if (playersIds !== undefined) {
+        playersIds.forEach(async function (playerId) {
+         await eventAPI.createEvent(practice.id, playerId, 'practice')
+        })
+      }
+      if (practice.errors === undefined ) {
+        message.success('You added a new training session', 2.5);  
+        history.push("/dashboardAdmin");
+      }
+
     }
 
-    let practice = await practiceAPI.createPractice(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration)   
-    if (playersIds !== undefined) {
-      playersIds.forEach(async function (playerId) {
-        await eventAPI.createEvent(practice.id, playerId, 'practice')
-      })
-    }
+   
+    
+
+  
   }
 
   return (
@@ -62,16 +82,14 @@ const FormPractice = ({ playersIds }) => {
         <Row>
           <Col span={10} offset={8}>
             <h3>Training session:</h3>
-            <label>Date and time training session:</label>
-            <br />
+            <p className="mb-1 ml-2 text-muted">Date and time training session:</p>
             <DatePicker id="datetime" format="DD-MM-YY HH:mm" disabledDate={disabledDate} onChange={onChange} showTime={{ defaultValue: moment("00:00:00", "HH:mm:ss") }} />
             <p id="notice_datetime" className="redtext"></p>
 
             {dateTime !== "" && (
               <h6 style={{ marginTop: "25px" }}> Selected start date: {dateTime}</h6>
             )}
-            <label>Duration in min:</label>
-            <br />
+            <p className="mb-1 ml-2 text-muted">Duration in min:</p>
             <InputNumber style={{ marginBottom: "15px" }} defaultValue={0} step={5} min={0} max={100000} formatter={(valueMin) => `${valueMin}`} parser={(valueMin) => valueMin.replace(" min", "")} onChange={onChangeDuration} />
           </Col>
         </Row>

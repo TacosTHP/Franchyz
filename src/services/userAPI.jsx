@@ -20,21 +20,38 @@ function profile(id, type) {
 	let url = baseURL + endUrl;
 
 	return fetch(url, request)
-		.then(response => response.json())
-		.then(response => {return response})
-	};
+	.then(response => response.json())
+	.then(response => {return response})
+};
 
-function profileUpdate({ id, type, first_name }) {
+function profileUpdate({ id, type, fields }) {
 	let data;
-	if (type === 'player') {
+	if (type === 'coach') {
 		data = {
-      first_name: first_name,
-    };
-  } else {
-  	data = {
-  		first_name: first_name,
-  	};
-  };
+			first_name: fields.data.first_name,
+			last_name: fields.data.last_name,
+			phone: fields.data.phone,
+			birthdate: fields.data.birthdate,
+			arrival: fields.data.arrival,
+			'admin?': fields.data['admin?'],
+			club_id: fields.data.club_id
+		};
+	} else if (type === 'player') {
+		data = {
+			first_name: fields.data.first_name,
+			last_name: fields.data.last_name,
+			phone: fields.data.phone,
+			birthdate: fields.data.birthdate,
+			arrival: fields.data.arrival,
+			'availability?': fields.data['availability?'],
+			height: fields.data.height,
+			weight: fields.data.weight,
+			gender: fields.data.gender,
+			jersey_number: fields.data.jersey_number,
+			position: fields.data.position,
+			team_id: fields.data.team_id,
+		};
+	};
 
 	type = pluralyzeType(type);
 
@@ -54,12 +71,10 @@ function profileUpdate({ id, type, first_name }) {
 	let endUrl = `/${type}/${id}.json`;
 	let url = baseURL + endUrl;
 
-	console.log(url)
-	console.log(request)
-
 	return fetch(url, request)
-		.then(response => response.json())
-		.then(response => {return response})
-	};
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.then(response => {return response})
+};
 
 export { profile, profileUpdate };

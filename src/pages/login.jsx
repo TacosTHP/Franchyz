@@ -46,12 +46,6 @@ function Login() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     dispatch(login(email, password, type))   
-    if (isAuth) {
-      setRedirect(<Redirect to='/dashboardAdmin' />)
-    } else {
-      setRedirect(<Redirect to='/login' />)
-    }
-
   };
 
   return (

@@ -42,7 +42,7 @@ const authRefresher = () => {
     return {
       loading: false,
       isAuth: false,
-      typeUser: '',
+      userType: '',
       error: '',
     }
   }
@@ -51,7 +51,7 @@ const authRefresher = () => {
     return {
       loading: false,
       isAuth: true,
-      typeUser: decodedToken['scp'],
+      userType: decodedToken['scp'],
       error: '',
     } 
   }

@@ -1,7 +1,4 @@
 function getAllTeams(id) {
-  const data = {
-    id: id,
-  };
   let baseURL = process.env.REACT_APP_API_URL;
   let endUrl = `/clubs/${id}/teams.json`
   let url = baseURL + endUrl
@@ -34,9 +31,9 @@ function getTeamsOfClub(id) {
     .then(response => { return response })
 }
 
-function createTeam(teamName, creatorId, coachId, clubId) {
+function createTeam(team, creatorId, coachId, clubId) {
   const data = {
-    title: teamName,
+    title: team,
     creator_id: creatorId,
     club_id: clubId,
     coach_id: coachId,

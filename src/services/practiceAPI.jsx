@@ -27,7 +27,7 @@ function createPractice(clubId, teamId, eventTitle, eventDescription, address, c
     .then((response) => { 
       console.log(response)
       return response 
-    });
+    })
 }
 function getPractice(practice_id) {
   let baseURL = process.env.REACT_APP_API_URL;

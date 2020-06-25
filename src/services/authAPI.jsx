@@ -34,17 +34,8 @@ function signUp(email, password, type, teamId) {
     body: JSON.stringify(data)
   };
 
-
-
   return fetch(url, request)
-    .then(response => {
-      ans.headers = response.headers
-      return response.json()
-    })
-    .then(response => {
-      ans.body = response
-      return ans
-    });
+    .then(response => { return response })
 };
 
 function signIn(email, password, type) {
@@ -72,14 +63,7 @@ function signIn(email, password, type) {
   };
 
   return fetch(url, request)
-    .then(response => {
-      ans.headers = response.headers
-      return response.json()
-    })
-    .then(response => {
-      ans.body = response
-      return ans
-    });
+    .then(response => { return response })
 };
 
 function signOut(type) {

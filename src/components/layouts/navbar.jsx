@@ -4,15 +4,13 @@ import { useSelector } from 'react-redux';
 import Portrait from './portrait.jsx';
 import '../../styles/nav.scss';
 
-function Navbar() {
-  const isAuth = useSelector(state => state.authReducer.isAuth)
-  const typeUser = useSelector(state => state.authReducer.typeUser)
-  console.log(isAuth);
-  console.log("typeUser" + typeUser);
+const Navbar = () => {
+  const isAuth = useSelector(state => state.authReducer.isAuth);
+  const typeUser = useSelector(state => state.authReducer.typeUser);
 
-  function authNav() {
+  const authNav = () => {
     if (!isAuth) {
-      return(
+      return (
         <div>
           <Link to='/register'><button type='button' className='btn btn-sm btn-primary mr-2'>Register</button></Link>
           <Link to='/login'><button type='button' className='btn btn-sm btn-primary'>Login</button></Link>
@@ -25,39 +23,15 @@ function Navbar() {
     };
   };
 
-  function myDashboardLink() {
+  const myDashboardLink = () => {
     if (isAuth && typeUser === 'coach') {
-      return (
-        <>
-          <li className='nav-item active'>
-            <Link to='/dashboardAdmin' className='nav-link'>My Dashboard</Link>
-          </li>
-          <li className='nav-item active'>
-            <Link to='/' className='nav-link'>My Club</Link>
-          </li>
-          <li className='nav-item dropdown active'>
-            <Link className='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-              My Teams
-            </Link>
-            <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
-              <Link to='/teams' className='dropdown-item'>All Teams</Link>
-              <Link to='/create-team' className='dropdown-item'>New Team</Link>
-            </div>
-          </li>
-        </>
-      );
+      return <Link to='/dashboardAdmin' className='nav-link'>My Dashboard</Link>
     } else if (isAuth && typeUser === 'player') {
-      return (
-        <>
-          <li className='nav-item active'>
-            <Link to='/dashboardPlayer' className='nav-link'>Dashboard </Link>
-          </li>
-        </>
-      );
+      return <Link to='/dashboardPlayer' className='nav-link'>My Dashboard</Link>
     };
   };
 
-  return(
+  return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
       <Link to='/' className='logo'>FRANCHYZ</Link>
       <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
@@ -68,7 +42,9 @@ function Navbar() {
           <li className='nav-item active'>
             <Link to='/' className='nav-link'>Home</Link>
           </li>
-          { myDashboardLink() }
+          <li className='nav-item'>
+            { myDashboardLink() }
+          </li>
         </ul>
         <div id='authNav'>
           { authNav() }

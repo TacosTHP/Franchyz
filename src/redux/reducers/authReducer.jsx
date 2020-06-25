@@ -15,7 +15,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuth: true,
         loading: false,
-        typeUser: action.typeUser,
+        userType: action.userType,
       }
     case LOGIN_FAILURE:
       return {

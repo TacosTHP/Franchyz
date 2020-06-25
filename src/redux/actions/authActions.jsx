@@ -9,7 +9,7 @@ const loginRequest = () => {
 const loginSuccess = (decodedToken) => {
   return {
     type: LOGIN_SUCCESS,
-    typeUser: decodedToken['scp'],
+    userType: decodedToken['scp'],
   }
 }
 

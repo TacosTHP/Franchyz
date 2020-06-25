@@ -3,7 +3,7 @@ import "../styles/app.scss";
 import * as teamAPI from "services/teamAPI";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-
+import { message} from 'antd';
 
 const FormTeam = () => {
   const creatorId = useSelector((state) => state.userReducer.id);
@@ -24,6 +24,7 @@ const FormTeam = () => {
 
     if (response.errors === undefined) {
       history.push("/dashboardAdmin");
+      message.success('You added a new team', 2.5)
     }
 
   }

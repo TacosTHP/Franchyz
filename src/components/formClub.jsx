@@ -47,18 +47,18 @@ const FormClub = () => {
   return (
     <ConfigProvider locale={frFR}>
       <div>
-        <Row>
+        <Row style={{ marginBottom: "20px" }}>
           <Col span={10} offset={8}>
             <h3>The club:</h3>
-            <label>Founding date:</label>
-            <br />
+            <p className="mb-1 ml-2 text-muted">Founding date:</p>
             <DatePicker onChange={onChange2} />
             {creationDate !== "" && (
               <h6 style={{ marginTop: "25px" }}>Selected founding date: {creationDate}</h6>
             )}
           </Col>
         </Row>
-        <br />
+     
+
 
         <Row>
           <Col span={8} offset={8}>

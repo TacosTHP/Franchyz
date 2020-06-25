@@ -10,7 +10,7 @@ const logup = (email, password, type, team) => {
     dispatch(loginRequest());
     let response = await authAPI.signUp(email, password, type, team);
 
-    if (response.body.errors !== undefined) {
+    if (response.status !== 201) {
       dispatch(loginFailure(response.body.errors))
     } else {
       Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
@@ -18,6 +18,7 @@ const logup = (email, password, type, team) => {
       setUserInfo(decodedToken)
       dispatch(loginSuccess(decodedToken))
       dispatch(infoUserUp(decodedToken))
+      return response.status
     };
   };
 };
@@ -27,7 +28,7 @@ const login = (email, password, type) => {
     dispatch(loginRequest());
     let response = await authAPI.signIn(email, password, type);
 
-      if (response.body.error !== undefined) {
+      if (response.status !== 201) {
         dispatch(loginFailure(response.body.error))
       } else {
         Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
@@ -35,6 +36,7 @@ const login = (email, password, type) => {
         setUserInfo(decodedToken)
         dispatch(loginSuccess(decodedToken))
         dispatch(infoUserUp(decodedToken))
+        return response.status
       };
   };
 };

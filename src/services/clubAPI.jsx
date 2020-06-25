@@ -1,74 +1,106 @@
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 const getClubs = () => {
+	let baseURL = process.env.REACT_APP_API_URL;
+	let endUrl = '/clubs.json';
+	let url = baseURL + endUrl;
 
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = '/clubs.json'
-  let url = baseURL + endUrl
-  let headers = {
-    'Content-Type': 'application/json'
-  }
+	let headers = {
+		'Content-Type': 'application/json'
+	};
 
-  let request = {
-    headers: headers
-  }
+	let request = {
+		headers: headers
+	};
 
-  return fetch(url, request)
-    .then(response => response.json())
-    .then(response => { return response })
+	return fetch(url, request)
+	.then(response => response.json())
+	.then(response => { return response });
+};
+	
+const getClub = (clubId) => {
+	let baseURL = process.env.REACT_APP_API_URL;
+	let endUrl = `/clubs/${clubId}.json`;
+	let url = baseURL + endUrl;
+
+	let headers = {
+		'Content-Type': 'application/json'
+	};
+
+	let request = {
+		headers: headers
+	};
+
+	return fetch(url, request)
+	.then(response => response.json())
+	.then(response => { return response });
 };
 
-function getClub(clubId) {
+const createClub = ({ creationDate, clubName, clubDescription, zipCode, city, country, address, league, pool, conference, creatorId}) => {
+	let baseUrl = process.env.REACT_APP_API_URL;
+	let endUrl = `/clubs.json`;
+	let url = baseUrl + endUrl;
 
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${clubId}.json`
-  let url = baseURL + endUrl
+	let headers = {
+		'Content-Type': 'application/json',
+		Authorization: Cookies.get('token')
+	};
 
-  let headers = {
-    'Content-Type': 'application/json'
-  }
+	let data = {
+		date_of_creation: creationDate,
+		name: clubName,
+		description: clubDescription,
+		zip_code: zipCode,
+		city: city,
+		country: country,
+		address: address,
+		league: league,
+		pool: pool,
+		conference: conference,
+		creator_id: creatorId,
+	};
 
-  let request = {
-    headers: headers
-  }
+	let request = {
+		method: 'post',
+		headers: headers,
+		body: JSON.stringify(data),
+	};
 
-  return fetch(url, request)
-    .then(response => response.json())
-    .then(response => { return response })
+	return fetch(url, request)
+	.then((response) => { return response });
+};
 
-}
+const editClub = ({id, fields}) => {
+	let baseUrl = process.env.REACT_APP_API_URL;
+	let endUrl = `/clubs/${id}.json`;
+	let url = baseUrl + endUrl;
 
+	let headers = {
+		'Content-Type': 'application/json',
+		Authorization: Cookies.get('token')
+	};
 
-function createClub({ creationDate, clubName, clubDescription, zipCode, city, country, address, league, pool, conference, creatorId}) {
-  let baseUrl = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs.json`;
-  let url = baseUrl + endUrl;
+	let data = {
+		name: fields.data.name,
+		date_of_creation: fields.data.date_of_creation,
+		description: fields.data.description,
+		league: fields.data.league,
+		pool: fields.data.pool,
+		conference: fields.data.conference,
+		address: fields.data.address,
+		zip_code: fields.data.zip_code,
+		city: fields.data.city,
+		country: fields.data.country,
+	};
 
-  let headers = {
-    "Content-Type": "application/json",
-    Authorization: Cookies.get('token')
-  }
+	let request = {
+		method: 'put',
+		headers: headers,
+		body: JSON.stringify(data),
+	};
 
-  let data = {
-    date_of_creation: creationDate,
-    name: clubName,
-    description: clubDescription,
-    zip_code: zipCode,
-    city: city,
-    country: country,
-    address: address,
-    league: league,
-    pool: pool,
-    conference: conference,
-    creator_id: creatorId,
-  };
+	return fetch(url, request)
+	.then((response) => { return response });
+};
 
-  let request = { method: "post", headers: headers, body: JSON.stringify(data), }
-
-  console.log(data, request)
-  return fetch(url, request)
-    .then((response) => { return response })
-
-}
-
-export { getClub, getClubs, createClub }
+export { getClubs, getClub, createClub, editClub };
