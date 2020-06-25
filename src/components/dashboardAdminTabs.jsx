@@ -18,9 +18,9 @@ const DashboardAdminTabs = ({club}) => {
 						<ClubInformations club={club} />
 					</TabPane>
 
-					<TabPane tab='Edit Club' key='2'>
+					{/* <TabPane tab='Edit Club' key='2'>
 						<ClubEdit club={club} />
-					</TabPane>
+					</TabPane> */}
 
 					<TabPane tab='Your teams' key='3'>
 						<TeamList teams={club.teams} />

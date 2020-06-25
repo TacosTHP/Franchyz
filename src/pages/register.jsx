@@ -34,6 +34,8 @@ const Register = () => {
     }
   } ,[isAuth])
 
+  
+  console.log("usertype" +typeUser)
   const setupAlert = () => {
     let ans;
     let messageErrors = '';

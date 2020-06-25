@@ -2,9 +2,8 @@ import React from 'react';
 import { Avatar, Col, Row } from 'antd';
 
 const ClubInformations = ({club}) => {
-	// console.log('url image' + club.logo_url);
 	return (
-		<div className='container'>
+		<div className='container scrolly '>
 			<Row>
 				<Col>
 					{club.logo_url === null || 'undefined' ? (
