@@ -40,8 +40,9 @@ const App = () => {
           <PrivateRoute exact path="/newEvent" component={NewEvent} />
           <PrivateRoute exact path="/newClub" component={CreateClub} />
           <PrivateRoute exact path="/profile" component={Profile} />
-          <PrivateRoute exact path={`/clubs/:clubId/teams/:teamId`} component={ShowTeam} />
+          {/* <PrivateRoute exact path={`/clubs/:clubId/teams/:teamId`} component={ShowTeam} /> */}
           <PrivateRoute exact path={`/games/:gamesId`} component={ShowGame} />
+          <PrivateRoute exact path={`/teams/:teamId`} component={TeamShow} />
           <Route path={`/clubs/:clubId/teams/:teamId/players/:playerId`} component={Profile} />
           <Route exact path="/login"> <Login /> </Route>
           <Route exact path="/register"> <Register /> </Route>
