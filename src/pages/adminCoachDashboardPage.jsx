@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import * as clubAPI from "services/clubAPI.jsx";
 import DashboardAdminTabs from "components/dashboardAdminTabs.jsx";
+import Calendar from 'components/calendar'
 
 function AdminCoachDashboardPage() {
   const myClubId = useSelector((state) => state.userReducer.clubId);
@@ -55,6 +56,7 @@ function AdminCoachDashboardPage() {
       </div>
 
       <DashboardAdminTabs club={club} />
+        <Calendar/>
 
       <br />
     </>

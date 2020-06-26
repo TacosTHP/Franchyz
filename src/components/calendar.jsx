@@ -9,6 +9,7 @@ import {useSelector } from 'react-redux'
 
 
 import * as EventsAPI from 'services/eventsAPI';
+import * as clubAPI from "services/clubAPI.jsx";
 
 import '../styles/calendar.scss'
 
@@ -20,7 +21,6 @@ function Calendar() {
   const club_id = useSelector(state => state.userReducer.clubId)
   const team_id = useSelector(state => state.userReducer.teamId)
   const user_id = useSelector(state => state.userReducer.id)
-console.log("usertype" + userType)
 
   const history = useHistory();
 
@@ -58,19 +58,54 @@ console.log("usertype" + userType)
         allDay: false
       }]));
     })
+
   }
-
-  useEffect(() => {
-
+  
+  
+  const retrieveGames = () => {
   if (userType === "player") {
     getGames ()
+  } else {
+     clubAPI.getClub(club_id)
+     .then(response => {if (response.games.length < 1) {
+      console.log("no games!");
+    } else {
+      response.games.map(game => setGames([...games, {
+        title: `GAME ${game.title}`,
+        start: game.starting_date_time,
+        color: game.color,
+        allDay: false
+      }]))
+    }})
+  }
+ }
+
+ const retrievePractices = () => {
+  if (userType === "player") {
     getPractices ()
   } else {
-// EventsAPI.getCoachEvents(club_id)
-//fetch get all games of current club
-//events/club_id
+      clubAPI.getClub(club_id)
+     .then(response => {if (response.practices.length < 1) {
+      console.log("no practices!");
+    } else {
+      console.log(response.practices);
+      response.practices.map(practice => setPractices([...practices, {
+        title: `Practice ${practice.title}`,
+        start: practice.starting_date_time,
+        color: practice.color,
+        allDay: false
+      }]))
+    }})
   }
- }, [])
+ }
+
+  useEffect(() => {retrievePractices() }, [])
+
+  useEffect(() => {retrieveGames() }, [])
+
+
+
+
 
 
   // useEffect(() => { getGames () }, [])
