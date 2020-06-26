@@ -154,7 +154,15 @@ const ProfileEdit = () => {
         type: userType,
         fields: { data },
       })
-      .then((response) => console.log(response));
+      .then((response) => {
+        if (response.id != undefined) {
+          if (userType == "player") {
+            window.location.href = "/dashboardPlayer";
+          } else {
+            window.location.href = "/dashboardAdmin";
+          }
+        }
+      });
   };
 
   let test = "";
