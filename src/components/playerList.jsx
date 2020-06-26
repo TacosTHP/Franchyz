@@ -5,7 +5,7 @@ const PlayerList = ({players, handleCheckboxChange, checkbox}) => {
 
     const setList = () => {
     if (players !== undefined){
-      return players.map(player => <Player key={player.id} player={player} handleCheckboxChange={handleCheckboxChange} checkbox={checkbox} />)
+      return players.map(player => <Player key={player.id} player={player} />)
     }
   }
 
@@ -17,11 +17,22 @@ const PlayerList = ({players, handleCheckboxChange, checkbox}) => {
     );
   } else {
     return (
-      <div className="container">
-        <ul className='list-group list-group-flush'>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Jersey</th>
+            <th scope="col">Position</th>
+            <th scope="col">Height</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+          </tr>
+        </thead>
+        <tbody>
           {setList()}
-        </ul>
-      </div>
+        </tbody>
+      </table>
     );
   }
 };
