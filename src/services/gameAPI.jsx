@@ -1,5 +1,3 @@
-
-
 function getGame(game_id) {
         let baseURL = process.env.REACT_APP_API_URL;
         let endUrl = `/practices/${game_id}.json`
@@ -20,8 +18,8 @@ function getGame(game_id) {
   }
 
 
-
 function createGame(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration) {
+  
   const data = {
     title: eventTitle,
     long_description: eventDescription,
@@ -33,6 +31,8 @@ function createGame(clubId, teamId, eventTitle, eventDescription, address, city,
     duration: duration,
     canceled: false,
   };
+
+
 
   let baseURL = process.env.REACT_APP_API_URL;
   let endUrl = `/clubs/${clubId}/teams/${teamId}/games.json`;

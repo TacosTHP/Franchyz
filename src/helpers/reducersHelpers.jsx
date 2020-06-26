@@ -3,11 +3,6 @@ import * as userAPI from 'services/userAPI';
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode'
 
-const resourcesCalls = {
-  createClub: clubAPI.createClub,
-  profileUpdate: userAPI.profileUpdate
-}
-
 const setUserInfo = (decodedToken) => {
   let userInfo = {
     id: decodedToken['sub'],
@@ -74,4 +69,4 @@ const userInfoRefresher = () => {
   }
 }
 
-export { resourcesCalls, setUserInfo, updateUserInfo, authRefresher, userInfoRefresher }
+export { setUserInfo, updateUserInfo, authRefresher, userInfoRefresher }

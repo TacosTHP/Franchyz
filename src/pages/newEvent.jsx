@@ -5,6 +5,8 @@ import FormPractice from "components/formPractice";
 import { useSelector } from 'react-redux';
 import * as teamAPI from 'services/teamAPI'
 import TransfertList from 'components/transfertList.jsx'
+import {Col, Row } from "antd";
+
 
 function CreateEvents() {
 
@@ -22,7 +24,14 @@ function CreateEvents() {
     const ans = await teamAPI.getTeamsOfClub(clubId)
     setTeams(ans)
     if (ans.length > 0) {
-      setPlayers(<TransfertList players={ans[1].players} setValidateKeys={setValidateKeys} />)
+      setPlayers( <div mb-5>   <Row>
+        <Col span={10} offset={8}>
+      <TransfertList players={ans[1].players} setValidateKeys={setValidateKeys} />
+      </Col>
+        </Row>
+      </div>
+      
+      )
     }
   }
 

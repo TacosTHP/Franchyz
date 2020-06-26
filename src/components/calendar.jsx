@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
+import moment from "moment";
+
 
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -9,28 +11,27 @@ import {useSelector } from 'react-redux'
 
 
 import * as EventsAPI from 'services/eventsAPI';
+import * as clubAPI from "services/clubAPI.jsx";
 
 import '../styles/calendar.scss'
 
 function Calendar() {
   const [games, setGames] = useState([])
   const [practices, setPractices] = useState([])
-
+  const userType = useSelector(state => state.authReducer.userType);
   const club_id = useSelector(state => state.userReducer.clubId)
   const team_id = useSelector(state => state.userReducer.teamId)
   const user_id = useSelector(state => state.userReducer.id)
-
-
   const history = useHistory();
-
-  const tmp_event = {title: "Event Now", start: new Date()}
 
   const addEventManually = arg => {
     setGames([...games, {title: "Event Now", start: arg.date}])
   }
 
   const goToEventNew = () => {
-    history.push('/register')
+    if (userType === "coach"){
+      history.push('/newEvent')
+    }
   }
 
   const getGames =() => {
@@ -57,10 +58,39 @@ function Calendar() {
         allDay: false
       }]));
     })
-  }
 
-  useEffect(() => { getGames () }, [])
-  useEffect(() => { getPractices () }, [])
+  }
+  
+  
+  const retrieveGames = () => {
+  if (userType === "player") {
+    getGames ()
+  } else {
+     clubAPI.getClub(club_id)
+     .then(response => {if (response.games.length < 1) {
+      console.log("no games!");
+    } else {
+      console.log(response.games);
+      setGames(response.games)
+    }})
+  }
+ }
+
+ const retrievePractices = () => {
+  if (userType === "player") {
+    getPractices ()
+  } else {
+      clubAPI.getClub(club_id)
+     .then(response => {if (response.practices.length < 1) {
+      console.log("no practices!");
+     } else {
+      setPractices(response.practices)
+    }})
+  }
+ }
+
+  useEffect(() => {retrievePractices() }, [])
+   useEffect(() => {retrieveGames()} , [])
 
 
   return (
@@ -84,8 +114,8 @@ function Calendar() {
         month: 'Mois',
         week: 'Semaine',
       }}
-      eventSources={[games, practices]}
-      dateClick={addEventManually}
+      eventSources={[practices, games]}
+      dateClick={goToEventNew}
     />
   )
 }
