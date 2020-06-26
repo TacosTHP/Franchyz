@@ -18,22 +18,20 @@ import '../styles/calendar.scss'
 function Calendar() {
   const [games, setGames] = useState([])
   const [practices, setPractices] = useState([])
-
   const userType = useSelector(state => state.authReducer.userType);
   const club_id = useSelector(state => state.userReducer.clubId)
   const team_id = useSelector(state => state.userReducer.teamId)
   const user_id = useSelector(state => state.userReducer.id)
-
   const history = useHistory();
-
-  const tmp_event = {title: "Event Now", start: new Date()}
 
   const addEventManually = arg => {
     setGames([...games, {title: "Event Now", start: arg.date}])
   }
 
   const goToEventNew = () => {
-    history.push('/register')
+    if (userType === "coach"){
+      history.push('/newEvent')
+    }
   }
 
   const getGames =() => {
@@ -74,14 +72,6 @@ function Calendar() {
     } else {
       console.log(response.games);
       setGames(response.games)
-    //  return response.games.map(game => setGames([...games, {
-    //     title: `GAME ${game.title}`,
-    //     start: game.starting_date_time,
-    //     allDay: false
-        
-    //   }]))
-      // console.log("games state" + games);
-
     }})
   }
  }
@@ -94,15 +84,7 @@ function Calendar() {
      .then(response => {if (response.practices.length < 1) {
       console.log("no practices!");
      } else {
-      console.log(response.practices);
       setPractices(response.practices)
-      // response.practices.map(practice => setPractices([...practices, {
-      //   title: `Practice ${practice.title}`,
-      //   start: practice.starting_date_time,
-      //   color: practice.color,
-      //   allDay: false
-      // }]))
-      console.log(practices)
     }})
   }
  }
@@ -110,20 +92,6 @@ function Calendar() {
   useEffect(() => {retrievePractices() }, [])
    useEffect(() => {retrieveGames()} , [])
 
-
-  // useEffect(() => { getGames () }, [])
-  // useEffect(() => { getPractices () }, [])
-
-
-  // var test = new Calendar(calendarEl, {
-  //   events: [
-  //     { // this object will be "parsed" into an Event Object
-  //       title: 'The Title', // a property!
-  //       start: '2018-09-01', // a property!
-  //       end: '2018-09-02' // a property! ** see important note below about 'end' **
-  //     }
-  //   ]
-  // })
 
   return (
     <FullCalendar
@@ -146,18 +114,10 @@ function Calendar() {
         month: 'Mois',
         week: 'Semaine',
       }}
-      eventSources={[
-        practices, games]}
-      dateClick={addEventManually}
+      eventSources={[practices, games]}
+      dateClick={goToEventNew}
     />
   )
 }
 
 export default Calendar
-
-// [ { 
-//   title: "Ligue 1",
-//   start: "2020-06-29T19:30:18.000Z",
-//   allDay: false
-// }]
-// ,

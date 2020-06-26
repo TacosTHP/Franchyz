@@ -20,21 +20,11 @@ function getGame(game_id) {
   }
 
 
-
 function createGame(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration) {
   
   let dateTime2 = dateTime.slice(0, -5)
   let dateTime3 =  new Date(dateTime2)
   let dateTime4 = moment.utc(dateTime3)
-
-  console.log("datetime2 " + dateTime2)
-  console.log("datetime3 " + dateTime3)
-  console.log("datetime4 " + dateTime4)
-
-
-  console.log("type of datetime2 "+ typeof dateTime2)
-  console.log("type of datetime3  "+ typeof dateTime3)
-  console.log("type of datetime4  "+ typeof dateTime4)
 
   
   const data = {
