@@ -7,6 +7,8 @@ import TeamList from './teamList.jsx';
 
 const DashboardAdminTabs = ({club}) => {
   const {TabPane} = Tabs;
+
+  console.log("clubtest" + club.id)
   return(
     <div className='container rounded mt-5' style={{backgroundColor: '#E8E7E7'}}>
       <br></br>
@@ -15,9 +17,11 @@ const DashboardAdminTabs = ({club}) => {
           <TabPane tab='Your Club' key='1'>
             <ClubInformations club={club} />
           </TabPane>
+          { club.id === undefined ? "" : 
           <TabPane tab='Edit Club' key='2'>
-            <ClubEdit club={club} />
+          <ClubEdit club={club} />
           </TabPane>
+          }
           <TabPane tab='Your teams' key='3'>
             <TeamList teams={club.teams} />
             <Link to='/newTeam'>

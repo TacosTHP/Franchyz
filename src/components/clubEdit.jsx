@@ -45,7 +45,7 @@ const ClubEdit = ({club}) => {
     <form onSubmit={submit}>
       <small>{test}</small>
       <Row>
-        <Col style={{marginLeft: '20px'}}>
+        <Col style={{marginLeft: '2em'}}>
           <h6 className='font-weight-bold'>Club details:</h6>
           <div>
           <div>
@@ -74,7 +74,7 @@ const ClubEdit = ({club}) => {
             </div>
           </div>
         </Col>
-        <Col style={{marginLeft: '50px'}}>
+        <Col style={{marginLeft: '2em'}}>
           <div>
             <h6 className='font-weight-bold'>Club address:</h6>
             <div>
