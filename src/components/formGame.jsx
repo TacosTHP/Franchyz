@@ -51,6 +51,10 @@ const FormGame = ({ playersIds }) => {
   }
 
   async function onSubmit() {
+    console.log('datetime formGame' + dateTime)
+
+
+
     if (dateTime === "") {
       document.getElementById("notice_datetime").innerHTML =
         "Please fill in a start date";
@@ -71,8 +75,8 @@ const FormGame = ({ playersIds }) => {
         history.push("/dashboardAdmin");
       }
     }
-  
-  
+ 
+
   }
   return (
     <ConfigProvider locale={frFR}>
@@ -81,7 +85,7 @@ const FormGame = ({ playersIds }) => {
           <Col span={10} offset={8}>
             <h3>Competition:</h3>
             <p className="mb-1 ml-2 text-muted">Date and time of competition:</p>
-            <DatePicker id="datetime" format="DD-MM-YY HH:mm" disabledDate={disabledDate} onChange={onChange} onOk={onOk} showTime={{ defaultValue: moment("00:00:00", "HH:mm:ss") }} />
+            <DatePicker id="datetime" format="YYYY-MM-DD HH:mm:ss" disabledDate={disabledDate} onChange={onChange} onOk={onOk} showTime={{ defaultValue: moment("00:00:00", "HH:mm:ss") }} />
             <p id="notice_datetime" className="redtext"></p>
 
             {dateTime !== "" && (

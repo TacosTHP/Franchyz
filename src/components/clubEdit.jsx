@@ -8,7 +8,11 @@ const ClubEdit = ({club}) => {
   const clubId = club.id;
   let history = useHistory();
   const [data, setData] = useState([]);
-  useEffect(getData, []);
+
+
+
+
+  useEffect(() => {getData()}, []);
 
   async function getData() {
     await setData({
