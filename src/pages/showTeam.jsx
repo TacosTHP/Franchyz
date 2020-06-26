@@ -5,7 +5,7 @@ import * as teamAPI from 'services/teamAPI';
 import PlayerList from 'components/playerList';
 
 function TeamShow() {
-  const { clubId, teamId } = useParams();
+  let {clubId, teamId} = useParams();
   const [team, setTeam] = useState('');
 
   async function setupTeam() {
@@ -19,19 +19,12 @@ function TeamShow() {
 
   return (
     <>
-      <br />
       <div className="text-center">
         <h1>
           {team.title}
         </h1>
       </div>
       <PlayerList players={team.players} />
-      <Link to="/create-team">
-        <button type="button" className="btn btn-primary">
-          Invite Players
-        </button>
-      </Link>
-      <br />
     </>
   );
 }

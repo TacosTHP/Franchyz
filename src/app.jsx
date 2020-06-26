@@ -13,7 +13,7 @@ import Register from "./pages/register.jsx";
 import CreateTeam from "./pages/createTeam.jsx";
 import AdminCoachDashboardPage from "./pages/adminCoachDashboardPage.jsx";
 import ShowGame from "./pages/showGame.jsx";
-import TeamShow from "./pages/showTeam.jsx";
+import ShowTeam from "./pages/showTeam.jsx";
 import ShowPractice from "./pages/showPractice.jsx";
 import PlayerDashboardPage from "./pages/playerDashboardPage.jsx";
 import Profile from "./pages/profile.jsx";
@@ -40,14 +40,14 @@ const App = () => {
           <PrivateRoute exact path="/newEvent" component={NewEvent} />
           <PrivateRoute exact path="/newClub" component={CreateClub} />
           <PrivateRoute exact path="/profile" component={Profile} />
-          <PrivateRoute exact path={`/clubs/:clubId/teams/:teamId`} component={ShowTeam} />
+           <PrivateRoute exact path={`/clubs/:clubId/teams/:teamId`} component={ShowTeam} /> 
           <PrivateRoute exact path={`/games/:gamesId`} component={ShowGame} />
           <Route path={`/clubs/:clubId/teams/:teamId/players/:playerId`} component={Profile} />
           <Route exact path="/login"> <Login /> </Route>
           <Route exact path="/register"> <Register /> </Route>
           <Route exact path="/"> <Home /> </Route>
         </Switch>
-        <Footer />
+        {/* <Footer />  */}
       </Router>
     </Provider>
   );

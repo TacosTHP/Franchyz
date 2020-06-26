@@ -5,17 +5,22 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import {useSelector } from 'react-redux'
+
 
 import * as EventsAPI from 'services/eventsAPI';
 
 import '../styles/calendar.scss'
 
-function Calendar(props) {
+function Calendar() {
   const [games, setGames] = useState([])
   const [practices, setPractices] = useState([])
-  const user_id = props.player.player_id
-  const club_id = props.player.club_id
-  const team_id = props.player.team_id
+
+  const club_id = useSelector(state => state.userReducer.clubId)
+  const team_id = useSelector(state => state.userReducer.teamId)
+  const user_id = useSelector(state => state.userReducer.id)
+
+
   const history = useHistory();
 
   const tmp_event = {title: "Event Now", start: new Date()}

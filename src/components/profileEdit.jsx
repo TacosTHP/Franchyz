@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import * as userAPI from '../services/userAPI.jsx';
 import { useParams } from 'react-router-dom'
+import { message} from 'antd';
+import { useHistory } from "react-router-dom";
+
 
 const ProfileEdit = ({player}) => {
 
@@ -16,6 +19,7 @@ const ProfileEdit = ({player}) => {
     })
 
   let { clubId, teamId, playerId } = useParams();
+  let history = useHistory();
 
   const renderForm = () => {
     return (
@@ -81,7 +85,8 @@ const ProfileEdit = ({player}) => {
 
   const submit = async (event) => {
     event.preventDefault();
-    let response = userAPI.playerUpdate({ clubId: clubId, teamId: teamId, playerId: playerId, data: data, });
+    let response = userAPI.playerUpdate({ clubId: clubId, teamId: teamId, playerId: playerId, data: data, })
+    .then(() => message.success('You successfully edited your profile', 2.5),  history.push("/dashboardPlayer"))
     setData(response)
   };
 

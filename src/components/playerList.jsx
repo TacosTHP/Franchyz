@@ -6,13 +6,13 @@ const PlayerList = ({players, handleCheckboxChange, checkbox}) => {
     const setList = () => {
     if (players !== undefined){
       return players.map(player => <Player key={player.id} player={player} />)
-    }
+    } 
   }
 
   if (players === null) {
     return (
       <div className="container">
-        <p>This club don't have team yet !</p>
+        <p>This team doesn't have players yet !</p>
       </div>
     );
   } else {
