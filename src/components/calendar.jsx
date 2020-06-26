@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
+import moment from "moment";
+
 
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -70,12 +72,15 @@ function Calendar() {
      .then(response => {if (response.games.length < 1) {
       console.log("no games!");
     } else {
-      response.games.map(game => setGames([...games, {
+      console.log(response.games);
+     return response.games.map(game => setGames([...games, {
         title: `GAME ${game.title}`,
         start: game.starting_date_time,
-        color: game.color,
         allDay: false
+        
       }]))
+      // console.log("games state" + games);
+
     }})
   }
  }
@@ -87,7 +92,7 @@ function Calendar() {
       clubAPI.getClub(club_id)
      .then(response => {if (response.practices.length < 1) {
       console.log("no practices!");
-    } else {
+     } else {
       console.log(response.practices);
       response.practices.map(practice => setPractices([...practices, {
         title: `Practice ${practice.title}`,
@@ -95,22 +100,28 @@ function Calendar() {
         color: practice.color,
         allDay: false
       }]))
+      console.log(practices)
     }})
   }
  }
 
   useEffect(() => {retrievePractices() }, [])
-
-  useEffect(() => {retrieveGames() }, [])
-
-
-
-
+   useEffect(() => {retrieveGames()} , [])
 
 
   // useEffect(() => { getGames () }, [])
   // useEffect(() => { getPractices () }, [])
 
+
+  // var test = new Calendar(calendarEl, {
+  //   events: [
+  //     { // this object will be "parsed" into an Event Object
+  //       title: 'The Title', // a property!
+  //       start: '2018-09-01', // a property!
+  //       end: '2018-09-02' // a property! ** see important note below about 'end' **
+  //     }
+  //   ]
+  // })
 
   return (
     <FullCalendar
@@ -133,10 +144,18 @@ function Calendar() {
         month: 'Mois',
         week: 'Semaine',
       }}
-      eventSources={[games, practices]}
+      eventSources={[
+        practices, games]}
       dateClick={addEventManually}
     />
   )
 }
 
 export default Calendar
+
+// [ { 
+//   title: "Ligue 1",
+//   start: "2020-06-29T19:30:18.000Z",
+//   allDay: false
+// }]
+// ,
