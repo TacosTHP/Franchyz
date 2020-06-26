@@ -1,7 +1,7 @@
 function getAllTeams(id) {
   let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${id}/teams.json`
-  let url = baseURL + endUrl
+  let endUrl = `/clubs/${id}/teams.json`;
+  let url = baseURL + endUrl;
 
   return fetch(url, {
     headers: {
@@ -9,26 +9,29 @@ function getAllTeams(id) {
     },
   })
     .then((response) => response.json())
-    .then((response) => { return response });
+    .then((response) => {
+      return response;
+    });
 }
 
 function getTeamsOfClub(id) {
-  
   let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${id}/teams.json`
-  let url = baseURL + endUrl
+  let endUrl = `/clubs/${id}/teams.json`;
+  let url = baseURL + endUrl;
 
   let headers = {
-    'Content-Type': 'application/json'
-  }
+    "Content-Type": "application/json",
+  };
 
   let request = {
-    headers: headers
-  }
+    headers: headers,
+  };
 
   return fetch(url, request)
-    .then(response => response.json())
-    .then(response => { return response })
+    .then((response) => response.json())
+    .then((response) => {
+      return response;
+    });
 }
 
 function createTeam(team, creatorId, coachId, clubId) {
@@ -49,25 +52,29 @@ function createTeam(team, creatorId, coachId, clubId) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((response) => { return response });
+  }).then((response) => {
+    return response;
+  });
 }
 
-
 const getTeam = (clubId, teamId) => {
-
   let baseUrl = process.env.REACT_APP_API_URL;
   let endUrl = `/clubs/${clubId}/teams/${teamId}.json`;
   let url = baseUrl + endUrl;
 
   let request = {
     headers: {
-      'Content-Type': 'application/json'
-    }
-  }
+      "Content-Type": "application/json",
+    },
+  };
+
+  console.log(url);
 
   return fetch(url, request)
-    .then(response => response.json())
-    .then(response => { return response })
+    .then((response) => response.json())
+    .then((response) => {
+      return response;
+    });
 };
 
 export { createTeam, getAllTeams, getTeamsOfClub, getTeam };
