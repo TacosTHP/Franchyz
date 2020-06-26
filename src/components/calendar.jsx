@@ -36,7 +36,7 @@ function Calendar() {
 
   const getGames =() => {
     EventsAPI.getAttendedGames(user_id, club_id, team_id)
-    .then(response => {if (response.length < 1) {
+    .then(response => {if (response.length === undefined) {
       console.log("no Attended games!");
     } else {
       response.map(game => setGames([...games, {
@@ -67,7 +67,7 @@ function Calendar() {
     getGames ()
   } else {
      clubAPI.getClub(club_id)
-     .then(response => {if (response.games.length < 1) {
+     .then(response => {if (response.games === undefined) {
       console.log("no games!");
     } else {
       console.log(response.games);
@@ -75,14 +75,14 @@ function Calendar() {
     }})
   }
  }
-
  const retrievePractices = () => {
   if (userType === "player") {
     getPractices ()
   } else {
       clubAPI.getClub(club_id)
-     .then(response => {if (response.practices.length < 1) {
+     .then(response => {if (response.practices === undefined) {
       console.log("no practices!");
+      console.log("response" + response);
      } else {
       setPractices(response.practices)
     }})
@@ -91,7 +91,9 @@ function Calendar() {
 
   useEffect(() => {retrievePractices() }, [])
    useEffect(() => {retrieveGames()} , [])
-
+const handleEvent = () => {
+  console.log("event")
+}
 
   return (
     <FullCalendar

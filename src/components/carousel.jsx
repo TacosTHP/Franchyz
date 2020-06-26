@@ -13,7 +13,7 @@ function Carousel() {
             <div className="hero-image-1">
               <div className="hero-text-1">
                 <h1 style={{color: "white"}}>FRANCHYZ</h1>
-                <p>TEAM MANEGEMENT THE EASY WAY</p>
+                <p>TEAM MANAGEMENT THE EASY WAY</p>
                 <Link to="/register">
                   <button type="button" className="btn btn-primary"> Register now</button>
                 </Link>
@@ -24,7 +24,7 @@ function Carousel() {
             <div className="hero-image-2">
               <div className="hero-text-2">
                 <h1 style={{color: "white"}}>FRANCHYZ</h1>
-                <p>TEAM MANEGEMENT THE EASY WAY</p>
+                <p>TEAM MANAGEMENT THE EASY WAY</p>
                 <Link to="/register">
                   <button type="button" className="btn btn-primary"> Register now</button>
                 </Link>
@@ -35,7 +35,7 @@ function Carousel() {
             <div className="hero-image-3">
               <div className="hero-text-3">
                 <h1 style={{color: "white"}}>FRANCHYZ</h1>
-                <p>TEAM MANEGEMENT THE EASY WAY</p>
+                <p>TEAM MANAGEMENT THE EASY WAY</p>
                 <Link to="/register">
                   <button type="button" className="btn btn-primary"> Register now</button>
                 </Link>

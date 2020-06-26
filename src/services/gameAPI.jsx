@@ -1,6 +1,6 @@
 function getGame(game_id) {
         let baseURL = process.env.REACT_APP_API_URL;
-        let endUrl = `/practices/${game_id}.json`
+        let endUrl = `/games/${game_id}.json`
         let url = baseURL + endUrl
   
         let headers = {

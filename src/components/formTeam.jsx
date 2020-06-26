@@ -36,7 +36,7 @@ const FormTeam = () => {
         <div className="container">
           <div className="row d-flex align-items-center">
             <div className=" form-group col-4 text-center pb-3 p-2 mx-auto">
-              <label style={{ marginLeft: "10px", color: "grey" }}>
+              <label style={{ marginLeft: "1em", color: "grey" }}>
                 Team name:
               </label>
               <input type="text" className="form-control" placeholder="Name" id="title" onChange={(e) => setTeamName(e.target.value)} value={teamName} />
@@ -44,7 +44,7 @@ const FormTeam = () => {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-outline-danger" style={{ marginTop: "25px", marginBottom: "25px" }} onClick={onSubmit} >
+        <button type="submit" className="btn btn-outline-primary" style={{ marginTop: "2em", marginBottom: "2em" }} onClick={onSubmit} >
           Save
         </button>
       </div>
