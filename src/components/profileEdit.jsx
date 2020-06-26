@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as userAPI from '../services/userAPI.jsx';
 import { useParams } from 'react-router-dom'
 
@@ -39,7 +39,7 @@ const ProfileEdit = ({player}) => {
           <label>Current Gender :</label>
           <p>{data.gender}</p>
           <select className='form-control' onChange={e => setData({...data, gender: e.target.value })}>
-            <option value='' selected disabled hidden>Choose an option</option>
+            <option value="" selected disabled hidden> Choose an option </option>
             <option value='male'>Male</option>
             <option value='female'>Female</option>
           </select>
@@ -86,31 +86,33 @@ const ProfileEdit = ({player}) => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>My Profile</h1>
       <form className='form p-4 mt-3 mb-3 rounded' onSubmit={submit}>
         <div className='form-group'>
           <label>First Name :</label>
-          <input className='form-control' type='text' placeholder={(data.first_name === null) ? 'John' : null } value={(data.first_name === null) ? '' : data.first_name} onChange={e => setData({...data, first_name: e.target.value })} />
+          <input className="form-control" type="text" placeholder={data.first_name === null ? "John" : null} value={data.first_name === null ? "" : data.first_name} onChange={(e) => setData({ ...data, first_name: e.target.value })} />
         </div>
-        <div className='form-group'>
+        <div className="form-group">
           <label>Last Name :</label>
-          <input className='form-control' type='text' placeholder={(data.last_name === null) ? 'Doe' : null } value={(data.last_name === null) ? '' : data.last_name} onChange={e => setData({...data, last_name: e.target.value })} />
+          <input className="form-control" type="text" placeholder={data.last_name === null ? "Doe" : null} value={data.last_name === null ? "" : data.last_name} onChange={(e) => setData({ ...data, last_name: e.target.value })} />
         </div>
-        <div className='form-group'>
+        <div className="form-group">
           <label>Phone :</label>
           <input className='form-control' type='tel' placeholder={(data.phone === null) ? '0623451789' : null } value={(data.phone === null) ? '' : data.phone} onChange={e => setData({...data, phone: e.target.value })} />
         </div>
         <div className='form-group'>
           <label>Birthdate :</label>
-          <input className='form-control' type='date' placeholder={(data.birthdate === null) ? '2018-07-22' : null } value={(data.birthdate === null) ? '' : data.birthdate} onChange={e => setData({...data, birthdate: e.target.value })} />
+          <input className="form-control" type="date" placeholder={data.birthdate === null ? "2018-07-22" : null} value={data.birthdate === null ? "" : data.birthdate} onChange={(e) => setData({ ...data, birthdate: e.target.value })} />
         </div>
-        <div className='form-group'>
+        <div className="form-group">
           <label>Arrival :</label>
-          <input className='form-control' type='date' placeholder={(data.arrival === null) ? '2018-07-22' : null } value={(data.arrival === null) ? '' : data.arrival} onChange={e => setData({...data, arrival: e.target.value })} />
+          <input className="form-control" type="date" placeholder={data.arrival === null ? "2018-07-22" : null} value={data.arrival === null ? "" : data.arrival} onChange={(e) => setData({ ...data, arrival: e.target.value })} />
         </div>
         {renderForm()}
-        <button type='submit' className='btn btn-primary'>Submit</button>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   );
