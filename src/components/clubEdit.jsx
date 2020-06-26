@@ -31,7 +31,7 @@ const ClubEdit = ({club}) => {
       id: clubId,
       fields: {data},
     })
-    .then(() => { message.success('You edited successfully your club', 2.5); history.push("/")})
+    .then(() =>  message.success('You edited successfully your club', 2.5))
   
   };
 

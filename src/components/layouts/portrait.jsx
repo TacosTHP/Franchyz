@@ -36,11 +36,18 @@ function Portrait() {
       <div id="navbarDropdownMenuLink" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         <img src={portrait} className="rounded-circle" alt="portrait" id='portrait'/>
       </div>
+      {userType === "player" ?  
       <div id="portrait-menu" className="dropdown-menu mt-2" aria-labelledby="navbarDropdownMenuLink">
         <p className="m-0 dropdown-item"> {myfirstName} </p>
         <Link className="dropdown-item" to={`/clubs/${clubId}/teams/${teamId}/${userType}s/${userId}`}> Profile </Link>
         <p className="m-0 dropdown-item" onClick={logout}> Logout </p>  
-      </div>
+      </div> 
+      : 
+
+       <div id="portrait-menu" className="dropdown-menu mt-2" aria-labelledby="navbarDropdownMenuLink">
+        <p className="m-0 dropdown-item"> {myfirstName} </p> 
+        <p className="m-0 dropdown-item" onClick={logout}> Logout </p>  
+      </div> }
     </div> 
 
   )
