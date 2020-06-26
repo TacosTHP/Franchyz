@@ -47,7 +47,7 @@ const App = () => {
           <Route path="/register"> <Register /> </Route>
           <Route exact path="/"> <Home /> </Route>
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </Provider>
   );

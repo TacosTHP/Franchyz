@@ -10,8 +10,7 @@ function DashboardPlayerTabs({club}) {
 
 	return (
 		<div className="container rounded mt-5 mb-5" style={{backgroundColor: "#E8E7E7"}}>
-			<br />
-			<div className="card-container">
+			<div className="card-container pt-3">
 				<Tabs type="card">
 					<TabPane tab="Your Club" key="1">
 						<ClubInformations club={club} />
@@ -23,7 +22,6 @@ function DashboardPlayerTabs({club}) {
 					</TabPane>
 				</Tabs>
 			</div>
-			<br></br>
 		</div>
 	);
 }

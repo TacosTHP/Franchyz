@@ -19,14 +19,12 @@ function TeamShow() {
 
   return (
     <>
-      <br />
-      <div className="text-center">
+      <div className="text-center mt-5">
         <h1> {team.title} </h1>
       </div>
       <PlayerList players={team.players} />
       <Link to="/create-team">
       </Link>
-      <br />
     </>
   );
 }
