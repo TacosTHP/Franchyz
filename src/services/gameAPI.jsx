@@ -1,5 +1,3 @@
-import moment from "moment";
-
 function getGame(game_id) {
         let baseURL = process.env.REACT_APP_API_URL;
         let endUrl = `/practices/${game_id}.json`
@@ -22,11 +20,6 @@ function getGame(game_id) {
 
 function createGame(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration) {
   
-  let dateTime2 = dateTime.slice(0, -5)
-  let dateTime3 =  new Date(dateTime2)
-  let dateTime4 = moment.utc(dateTime3)
-
-  
   const data = {
     title: eventTitle,
     long_description: eventDescription,
@@ -34,7 +27,7 @@ function createGame(clubId, teamId, eventTitle, eventDescription, address, city,
     city: city,
     country: country,
     zip_code: zipCode,
-    starting_date_time: dateTime4,
+    starting_date_time: dateTime,
     duration: duration,
     canceled: false,
   };
@@ -54,9 +47,7 @@ function createGame(clubId, teamId, eventTitle, eventDescription, address, city,
   })
     .then( response => response.json())
     .then((response) => { 
-      console.log("starting date time " +  response.starting_date_time)
       return response 
-      
     })
 
 }
