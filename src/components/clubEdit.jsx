@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import * as clubAPI from 'services/clubAPI';
 import { Col, Row } from 'antd';
+import { message} from 'antd';
+import { useHistory } from "react-router-dom";
 
 const ClubEdit = ({club}) => {
   const clubId = club.id;
+  let history = useHistory();
   const [data, setData] = useState([]);
   useEffect(getData, []);
 
@@ -27,11 +30,12 @@ const ClubEdit = ({club}) => {
     clubAPI.editClub({
       id: clubId,
       fields: {data},
-    });
+    })
+    .then(() => { message.success('You edited successfully your club', 2.5); history.push("/")})
+  
   };
 
   let test = '';
-  // test = JSON.stringify(data);
 
   return (
     <form onSubmit={submit}>

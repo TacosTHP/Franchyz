@@ -7,6 +7,7 @@ import frFR from "antd/es/locale/fr_FR";
 import { useSelector, useDispatch } from "react-redux";
 import { createClub } from 'redux/middlewares/resourcesMiddlewares'
 import { Redirect } from 'react-router-dom'
+
  
 const FormClub = () => {
   const creator_id = useSelector((state) => state.userReducer.id);
@@ -20,6 +21,7 @@ const FormClub = () => {
   const [league, setLeague] = useState("");
   const [pool, setPool] = useState("");
   const [conference, setConference] = useState("");
+
 
 
   const [redirect, setRedirect] = useState('')
