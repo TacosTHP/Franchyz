@@ -5,7 +5,7 @@ import * as teamAPI from 'services/teamAPI';
 import PlayerList from 'components/playerList';
 
 function TeamShow() {
-  const { teamId } = useParams();
+  let {clubId, teamId} = useParams();
   const [team, setTeam] = useState('');
 
   async function setupTeam() {
