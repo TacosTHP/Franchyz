@@ -16,10 +16,11 @@ function Calendar() {
   const [games, setGames] = useState([])
   const [practices, setPractices] = useState([])
 
+  const userType = useSelector(state => state.authReducer.userType);
   const club_id = useSelector(state => state.userReducer.clubId)
   const team_id = useSelector(state => state.userReducer.teamId)
   const user_id = useSelector(state => state.userReducer.id)
-
+console.log("usertype" + userType)
 
   const history = useHistory();
 
@@ -59,8 +60,21 @@ function Calendar() {
     })
   }
 
-  useEffect(() => { getGames () }, [])
-  useEffect(() => { getPractices () }, [])
+  useEffect(() => {
+
+  if (userType === "player") {
+    getGames ()
+    getPractices ()
+  } else {
+// EventsAPI.getCoachEvents(club_id)
+//fetch get all games of current club
+//events/club_id
+  }
+ }, [])
+
+
+  // useEffect(() => { getGames () }, [])
+  // useEffect(() => { getPractices () }, [])
 
 
   return (
