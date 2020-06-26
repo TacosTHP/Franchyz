@@ -73,12 +73,13 @@ function Calendar() {
       console.log("no games!");
     } else {
       console.log(response.games);
-     return response.games.map(game => setGames([...games, {
-        title: `GAME ${game.title}`,
-        start: game.starting_date_time,
-        allDay: false
+      setGames(response.games)
+    //  return response.games.map(game => setGames([...games, {
+    //     title: `GAME ${game.title}`,
+    //     start: game.starting_date_time,
+    //     allDay: false
         
-      }]))
+    //   }]))
       // console.log("games state" + games);
 
     }})
@@ -94,12 +95,13 @@ function Calendar() {
       console.log("no practices!");
      } else {
       console.log(response.practices);
-      response.practices.map(practice => setPractices([...practices, {
-        title: `Practice ${practice.title}`,
-        start: practice.starting_date_time,
-        color: practice.color,
-        allDay: false
-      }]))
+      setPractices(response.practices)
+      // response.practices.map(practice => setPractices([...practices, {
+      //   title: `Practice ${practice.title}`,
+      //   start: practice.starting_date_time,
+      //   color: practice.color,
+      //   allDay: false
+      // }]))
       console.log(practices)
     }})
   }
