@@ -20,7 +20,7 @@ function GameShow() {
   return <>
 
     { game.status === 404 ? ( <h5 className="text-center mt-5 redtext">The event does not exist.</h5>  ) :
-    <div className="card" style={{height:"350px", width:"400px", marginLeft:"100px", marginTop:"100px"}}>
+    <div className="card cardgame auto-mx">
       <div className="card-header">
         <div className="text-uppercase">{game.title}</div> 
       </div>
