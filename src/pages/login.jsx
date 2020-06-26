@@ -3,6 +3,8 @@ import '../styles/form.scss';
 import { login } from '../redux/middlewares/authMiddlewares';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom'
+import { message} from 'antd';
+
 
 function Login() {
   const error = useSelector(state => state.authReducer.error);
@@ -14,10 +16,15 @@ function Login() {
   useEffect(() => {
     console.log(isAuth)
     if (isAuth) {
-      if (userType === 'coach')
+      if (userType === 'coach') {
+        message.success('You successfully connected to your account as a coach.', 2.5)
         setRedirect(<Redirect to='/dashboardAdmin' />)
-      else if (userType === 'player')
+      } 
+      else if (userType === 'player') {
+        message.success('You successfully connected to your account as a player.', 2.5)
         setRedirect(<Redirect to='/dashboardPlayer' />)
+      }
+        
     } else {
       setRedirect(<Redirect to='/login' />)
     }

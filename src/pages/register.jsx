@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom'
 import * as clubAPI from '../services/clubAPI.jsx';
 import * as teamAPI from '../services/teamAPI.jsx';
 import '../styles/form.scss';
+import { message} from 'antd';
+
 
 const Register = () => {
   const isAuth = useSelector(state => state.authReducer.isAuth);
@@ -25,10 +27,17 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuth) {
-      if (userType === 'coach')
+
+      if (userType === 'coach') {
+        message.success('You successfully registered as a coach.', 2.5)
         setRedirect(<Redirect to='/dashboardAdmin' />)
-      if (userType === 'player')
+      }
+       
+      if (userType === 'player') {
+        message.success('You successfully registered as a player.', 2.5)
         setRedirect(<Redirect to='/dashboardPlayer' />)
+      }
+       
     } else {
       setRedirect(<Redirect to='/register' />)
     }
