@@ -4,24 +4,22 @@ import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import * as clubAPI from "services/clubAPI.jsx";
 import DashboardAdminTabs from "components/dashboardAdminTabs.jsx";
+import Calendar from 'components/calendar'
 
 function AdminCoachDashboardPage() {
-  const myClubId = useSelector((state) => state.userReducer.club_id);
-  const myTeamId = useSelector((state) => state.userReducer.team_id);
+  const myClubId = useSelector((state) => state.userReducer.clubId);
 
-  console.log(myClubId);
   const [club, setClub] = useState("");
 
   useEffect(() => {
     loadClub();
   }, []);
 
-  async function loadClub() {
+  const loadClub = async () => {
     const response = await clubAPI.getClub(myClubId);
     setClub(response);
   }
-  console.log("teamid" + myTeamId);
-  console.log("clubid" + myClubId);
+
   return (
     <>
       <div className="text-center mt-5">
@@ -58,6 +56,7 @@ function AdminCoachDashboardPage() {
       </div>
 
       <DashboardAdminTabs club={club} />
+        <Calendar/>
 
       <br />
     </>

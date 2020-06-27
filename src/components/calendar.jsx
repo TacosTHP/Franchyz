@@ -1,36 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
+import moment from "moment";
+
 
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import {useSelector } from 'react-redux'
+
 
 import * as EventsAPI from 'services/eventsAPI';
+import * as clubAPI from "services/clubAPI.jsx";
 
 import '../styles/calendar.scss'
 
-function Calendar(props) {
+function Calendar() {
   const [games, setGames] = useState([])
   const [practices, setPractices] = useState([])
-  const user_id = props.player.player_id
-  const club_id = props.player.club_id
-  const team_id = props.player.team_id
+  const userType = useSelector(state => state.authReducer.userType);
+  const club_id = useSelector(state => state.userReducer.clubId)
+  const team_id = useSelector(state => state.userReducer.teamId)
+  const user_id = useSelector(state => state.userReducer.id)
   const history = useHistory();
-
-  const tmp_event = {title: "Event Now", start: new Date()}
 
   const addEventManually = arg => {
     setGames([...games, {title: "Event Now", start: arg.date}])
   }
 
   const goToEventNew = () => {
-    history.push('/register')
+    if (userType === "coach"){
+      history.push('/newEvent')
+    }
   }
 
   const getGames =() => {
     EventsAPI.getAttendedGames(user_id, club_id, team_id)
-    .then(response => {if (response.length < 1) {
+    .then(response => {if (response.length === undefined) {
       console.log("no Attended games!");
     } else {
       response.map(game => setGames([...games, {
@@ -52,11 +58,42 @@ function Calendar(props) {
         allDay: false
       }]));
     })
+
   }
+  
+  
+  const retrieveGames = () => {
+  if (userType === "player") {
+    getGames ()
+  } else {
+     clubAPI.getClub(club_id)
+     .then(response => {if (response.games === undefined) {
+      console.log("no games!");
+    } else {
+      console.log(response.games);
+      setGames(response.games)
+    }})
+  }
+ }
+ const retrievePractices = () => {
+  if (userType === "player") {
+    getPractices ()
+  } else {
+      clubAPI.getClub(club_id)
+     .then(response => {if (response.practices === undefined) {
+      console.log("no practices!");
+      console.log("response" + response);
+     } else {
+      setPractices(response.practices)
+    }})
+  }
+ }
 
-  useEffect(() => { getGames () }, [])
-  useEffect(() => { getPractices () }, [])
-
+  useEffect(() => {retrievePractices() }, [])
+   useEffect(() => {retrieveGames()} , [])
+const handleEvent = () => {
+  console.log("event")
+}
 
   return (
     <FullCalendar
@@ -79,8 +116,8 @@ function Calendar(props) {
         month: 'Mois',
         week: 'Semaine',
       }}
-      eventSources={[games, practices]}
-      dateClick={addEventManually}
+      eventSources={[practices, games]}
+      dateClick={goToEventNew}
     />
   )
 }

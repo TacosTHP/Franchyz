@@ -1,13 +1,13 @@
 import Cookies from 'js-cookie';
 import {pluralyzeType} from 'helpers/misc.jsx'
 
-function signUp(email, password, type, team) {
+function signUp(email, password, type, teamId) {
   let data;
   if (type === 'player') {
     data = {[type]: {
       email: email,
       password: password,
-      team_id: team,
+      team_id: teamId,
     }};
   } else {
     data = {[type]: {
@@ -21,7 +21,6 @@ function signUp(email, password, type, team) {
   let endUrl = `/${types}.json`;
   let url = baseURL + endUrl;
 
-  console.log(url)
   let ans = {
     headers: '',
     body: ''
@@ -35,18 +34,8 @@ function signUp(email, password, type, team) {
     body: JSON.stringify(data)
   };
 
-
-
   return fetch(url, request)
-    .then(response => {
-      console.log(response)
-      ans.headers = response.headers
-      return response.json()
-    })
-    .then(response => {
-      ans.body = response
-      return ans
-    });
+    .then(response => { return response })
 };
 
 function signIn(email, password, type) {
@@ -74,17 +63,10 @@ function signIn(email, password, type) {
   };
 
   return fetch(url, request)
-    .then(response => {
-      ans.headers = response.headers
-      return response.json()
-    })
-    .then(response => {
-      ans.body = response
-      return ans
-    });
+    .then(response => { return response })
 };
 
-function sign_out(type) {
+function signOut(type) {
   let types = pluralyzeType(type);
   let baseURL = process.env.REACT_APP_API_URL;
   let endUrl = `/${types}/sign_out.json`;
@@ -124,4 +106,4 @@ function profile(id, type) {
     .then(response => {return response})
 }
 
-export {signIn, signUp, sign_out, profile}
+export {signIn, signUp, signOut, profile}

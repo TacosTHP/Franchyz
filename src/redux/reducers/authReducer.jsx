@@ -1,31 +1,7 @@
-import Cookies from 'js-cookie'
-import jwt_decode from 'jwt-decode'
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../types/authTypes'
+import { authRefresher } from 'helpers/reducersHelpers'
 
-let tempo
-let decoded_token 
-if (Cookies.get('token') === undefined || Cookies.get('token') === null){
-  tempo = {
-    loading: false,
-    isAuth: false,
-    id: null,
-    typeUser: '',
-    error: null,
-  }
-}
-else{
-  decoded_token =jwt_decode(Cookies.get('token'))
-  tempo = {
-    loading: false,
-    isAuth: true,
-    error: null,
-    typeUser: decoded_token['scp'],
-  } 
-}
-
-
-
-const initialState = tempo
+const initialState = authRefresher()
 
 const authReducer = (state = initialState, action) => {
   switch(action.type){
@@ -39,8 +15,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuth: true,
         loading: false,
-        typeUser: action.typeUser,
-        error: null,
+        userType: action.userType,
       }
     case LOGIN_FAILURE:
       return {
@@ -53,8 +28,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         isAuth: false,
-        id: null,
-        username: null
+        userType: ''
       }
     default:
       return {

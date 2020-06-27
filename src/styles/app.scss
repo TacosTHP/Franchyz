@@ -1,11 +1,7 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto Slab", sans-serif;
 }
+
 h1 {
 	font-size: 3em !important;
 }
@@ -17,3 +13,17 @@ h1 {
 ul {
 	list-style-type: none;
 }
+
+.scrolly {
+  height: 80% ;
+  overflow-y: scroll;
+}
+
+.cardgame {
+	height: 5em;
+	width: 6em;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+

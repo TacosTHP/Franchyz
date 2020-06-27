@@ -1,5 +1,25 @@
-function createGame(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration) {
+function getGame(game_id) {
+        let baseURL = process.env.REACT_APP_API_URL;
+        let endUrl = `/games/${game_id}.json`
+        let url = baseURL + endUrl
+  
+        let headers = {
+          'Content-Type': 'application/json'
+        }
+  
+        let request = {
+          headers: headers
+        }
+        
+        return fetch(url, request)
+          .then(response => response.json())
+          .then(response => { return response })
+  
+  }
 
+
+function createGame(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration) {
+  
   const data = {
     title: eventTitle,
     long_description: eventDescription,
@@ -11,6 +31,8 @@ function createGame(clubId, teamId, eventTitle, eventDescription, address, city,
     duration: duration,
     canceled: false,
   };
+
+
 
   let baseURL = process.env.REACT_APP_API_URL;
   let endUrl = `/clubs/${clubId}/teams/${teamId}/games.json`;
@@ -26,7 +48,8 @@ function createGame(clubId, teamId, eventTitle, eventDescription, address, city,
     .then( response => response.json())
     .then((response) => { 
       return response 
-    });
+    })
+
 }
 
-export { createGame }
+export { createGame, getGame }

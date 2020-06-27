@@ -1,17 +1,13 @@
 import React from "react";
-import '../../styles/nav.scss'
+import "../../styles/footer.scss";
 
-
-
-function Footer(){
-  return(
-    <>
-    <footer className="bg-dark py-5">
-      <div className="container">
-        <div className="small text-center text-muted">Copyright &copy; 2020 - FRANCHYZ</div>
-      </div>
-      </footer>
-    </>
-  )
+function Footer() {
+	return (
+		<div class="footer bg-dark py-5">
+			<p className="small text-center text-muted">
+				Copyright &copy; 2020 - FRANCHYZ
+			</p>
+		</div>
+	);
 }
-export default Footer
+export default Footer;
