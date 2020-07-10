@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Player from 'components/player';
 
-const PlayerList = ({ players }) => {
+const PlayersList = ({ players }) => {
   const setList = () => {
     let playersList;
     if (players !== undefined) {
@@ -48,4 +48,4 @@ const PlayerList = ({ players }) => {
   );
 };
 
-export default PlayerList;
+export default PlayersList;
