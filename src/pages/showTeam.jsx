@@ -24,7 +24,7 @@ function TeamShow() {
           {team.title}
         </h1>
       </div>
-      <PlayerList players={team.players} />
+      <PlayersList players={team.players} />
     </>
   );
 }
