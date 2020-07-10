@@ -1,7 +1,7 @@
 import React from 'react';
 import Player from 'components/player.jsx'
 
-const PlayerList = ({players, handleCheckboxChange, checkbox}) => {
+const PlayerList = ({ players }) => {
 
     const setList = () => {
     if (players !== undefined){
