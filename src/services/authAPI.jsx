@@ -38,7 +38,7 @@ function signUp(email, password, type, teamId) {
     .then(response => { return response })
 };
 
-function signIn(email, password, type) {
+function signIn({email, password, type}) {
   const data = {[type]: {
     email: email,
     password: password,
