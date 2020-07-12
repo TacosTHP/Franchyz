@@ -20,6 +20,7 @@ const logup = (email, password, type, team) => {
       dispatch(loginSuccess(decodedToken))
       dispatch(infoUserUp(decodedToken))
     };
+    return response.status;
   };
 };
 
@@ -38,6 +39,7 @@ const login = (email, password, type) => {
         dispatch(loginSuccess(decodedToken))
         dispatch(infoUserUp(decodedToken))
       };
+    return response.status;
   };
 };
 
