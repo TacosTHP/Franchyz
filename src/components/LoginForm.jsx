@@ -30,7 +30,9 @@ const LoginForm = () => {
   }, [isAuth]);
 
   useEffect(() => {
-    message.error(error, 2.5);
+    if (error !== '') {
+      message.error(error, 2.5);
+    }
   }, [error]);
 
   return (
