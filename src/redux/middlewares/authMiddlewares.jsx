@@ -24,10 +24,11 @@ const logup = (email, password, type, team) => {
   };
 };
 
-const login = (email, password, type) => {
+const login = (input) => {
+  console.log(input)
   return async (dispatch) => {
     dispatch(loginRequest());
-    let response = await authAPI.signIn(email, password, type);
+    let response = await authAPI.signIn(input);
     let body = await response.json()
 
       if (response.status !== 201) {
