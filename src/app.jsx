@@ -28,6 +28,8 @@ import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap/dist/css/bootstrap.css";
 import "antd/dist/antd.css";
 
+import 'styles/form.scss';
+
 const App = () => {
   return (
     <Provider store={store}>
