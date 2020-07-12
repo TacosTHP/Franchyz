@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/form.scss';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as clubAPI from 'services/clubAPI';
+import { useSelector } from 'react-redux';
+
 import DashboardAdminTabs from 'components/dashboardAdminTabs';
 import Calendar from 'components/calendar';
+import * as clubAPI from 'services/clubAPI';
+import '../styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
   const myClubId = useSelector((state) => state.userReducer.clubId);
-  const [club, setClub] = useState();
+  const [club, setClub] = useState(null);
 
   const loadClub = async () => {
     const response = await clubAPI.getClub(myClubId);
-    console.log(response)
     setClub(response);
+  };
+
+  const setupElements = () => {
+    let content;
+    if (club !== null) {
+      content = (
+        <>
+          <DashboardAdminTabs club={club} />
+          <Calendar attendances={club.attendances} />
+        </>
+      );
+    } else {
+      content = (
+        <p> loading... </p>
+      );
+    }
+    return content;
   };
 
   const setupPageOrInvitation = () => {
     let content;
-    console.log(myClubId, 'dwe')
     if (myClubId === undefined) {
       content = (
         <>
@@ -34,11 +50,11 @@ const AdminCoachDashboardPage = () => {
       );
     } else {
       content = (
-        <div>
+        <>
           <h1>Dashboard FRANCHYZ</h1>
           <h4> Your clublllll  </h4>
-          <DashboardAdminTabs club={club} />
-        </div>
+          { setupElements() }
+        </>
       );
     }
     return content;
@@ -47,10 +63,9 @@ const AdminCoachDashboardPage = () => {
   useEffect(() => { loadClub(); }, []);
 
   return (
-    <>
+    <div className="container mb-3 mt-3">
       {setupPageOrInvitation()}
-      <br />
-    </>
+    </div>
   );
 };
 
