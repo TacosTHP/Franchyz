@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/form.scss';
 import { Link, useParams } from 'react-router-dom';
 import * as teamAPI from 'services/teamAPI';
-import PlayerList from 'components/playerList';
+import PlayersList from 'components/playersList';
 
 function TeamShow() {
   let {clubId, teamId} = useParams();
@@ -24,7 +24,7 @@ function TeamShow() {
           {team.title}
         </h1>
       </div>
-      <PlayerList players={team.players} />
+      <PlayersList players={team.players} />
     </>
   );
 }
