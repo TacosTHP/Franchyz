@@ -20,13 +20,14 @@ const logup = (email, password, type, team) => {
       dispatch(loginSuccess(decodedToken))
       dispatch(infoUserUp(decodedToken))
     };
+    return response.status;
   };
 };
 
-const login = (email, password, type) => {
+const login = (input) => {
   return async (dispatch) => {
     dispatch(loginRequest());
-    let response = await authAPI.signIn(email, password, type);
+    let response = await authAPI.signIn(input);
     let body = await response.json()
 
       if (response.status !== 201) {
@@ -38,6 +39,7 @@ const login = (email, password, type) => {
         dispatch(loginSuccess(decodedToken))
         dispatch(infoUserUp(decodedToken))
       };
+    return response.status;
   };
 };
 

@@ -8,7 +8,7 @@ import store from "./redux/store.js";
 import NewEvent from "./pages/newEvent.jsx";
 import CreateClub from "./pages/createClub.jsx";
 import Home from "./pages/home.jsx";
-import Login from "./pages/login.jsx";
+import LoginPage from './pages/LoginPage';
 import Register from "./pages/register.jsx";
 import CreateTeam from "./pages/createTeam.jsx";
 import AdminCoachDashboardPage from "./pages/adminCoachDashboardPage.jsx";
@@ -28,6 +28,8 @@ import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap/dist/css/bootstrap.css";
 import "antd/dist/antd.css";
 
+import 'styles/form.scss';
+
 const App = () => {
   return (
     <Provider store={store}>
@@ -43,7 +45,7 @@ const App = () => {
            <PrivateRoute exact path={`/clubs/:clubId/teams/:teamId`} component={ShowTeam} /> 
           <PrivateRoute exact path={`/games/:gamesId`} component={ShowGame} />
           <Route path={`/clubs/:clubId/teams/:teamId/players/:playerId`} component={Profile} />
-          <Route exact path="/login"> <Login /> </Route>
+          <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register"> <Register /> </Route>
           <Route exact path="/"> <Home /> </Route>
         </Switch>
