@@ -52,7 +52,7 @@ const AdminCoachDashboardPage = () => {
       content = (
         <>
           <h1>Dashboard FRANCHYZ</h1>
-          <h4> Your clublllll  </h4>
+          <h4> Your club </h4>
           { setupElements() }
         </>
       );
