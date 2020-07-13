@@ -25,7 +25,6 @@ const logup = (email, password, type, team) => {
 };
 
 const login = (input) => {
-  console.log(input)
   return async (dispatch) => {
     dispatch(loginRequest());
     let response = await authAPI.signIn(input);
