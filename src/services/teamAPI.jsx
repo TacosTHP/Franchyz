@@ -14,6 +14,23 @@ function getAllTeams(id) {
     });
 }
 
+const getTeams = ({ clubId }) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/clubs/${clubId}/teams.json`;
+  const url = baseURL + endUrl;
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const request = {
+    headers,
+  };
+
+  return fetch(url, request)
+    .then((response) => response.json());
+};
+
 function getTeamsOfClub(id) {
   let baseURL = process.env.REACT_APP_API_URL;
   let endUrl = `/clubs/${id}/teams.json`;
@@ -77,4 +94,4 @@ const getTeam = (clubId, teamId) => {
     });
 };
 
-export { createTeam, getAllTeams, getTeamsOfClub, getTeam };
+export { createTeam, getAllTeams, getTeamsOfClub, getTeam, getTeams };
