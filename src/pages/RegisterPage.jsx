@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as clubAPI from 'services/clubAPI';
 import RegisterForm from 'components/RegisterForm';
 
-const Register = () => {
+const RegisterPage = () => {
   const [clubs, setClubs] = useState(null);
 
   const setupLoadingClubs = () => {
@@ -31,4 +31,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;
