@@ -1,150 +1,124 @@
 import React, { useEffect, useState } from 'react';
-import { logup } from 'redux/middlewares/authMiddlewares';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { message } from 'antd';
+
 import useInputChange from 'customHooks/useInputChange';
-import * as clubAPI from '../services/clubAPI';
-import * as teamAPI from '../services/teamAPI';
-import '../styles/form.scss';
+import { logup } from 'redux/middlewares/authMiddlewares';
+import * as teamAPI from 'services/teamAPI';
+import { setupErrorsMessage } from 'helpers/misc';
 
-
-const Register = ({ clubs }) => {
-  const isAuth = useSelector(state => state.authReducer.isAuth);
-  const userType = useSelector(state => state.authReducer.userType);
-  const errors = useSelector(state => state.authReducer.error);
-
-  const [input, handleInputChange] = useInputChange();
-  const [dataClubs, setDataClubs] = useState([]);
-  const [clubId, setClubId] = useState(null);
-  const [teamId, setTeamId] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [type, setType] = useState('coach');
-  const [dataTeams, setDataTeams] = useState([]);
-  const [redirect, setRedirect] = useState('')
+const RegisterForm = ({ clubs }) => {
+  const [teams, setTeams] = useState(null);
+  const history = useHistory();
+  const isAuth = useSelector((state) => state.authReducer.isAuth);
+  const userType = useSelector((state) => state.authReducer.userType);
+  const errors = useSelector((state) => state.authReducer.error);
   const dispatch = useDispatch();
-  
+  const [input, handleInputChange] = useInputChange();
 
-
-  const setupAlert = () => {
-    let ans;
-    let messageErrors = '';
-
-    if (errors !== '') {
-      for (const error in errors) {
-        messageErrors = messageErrors + `${error} ${errors[error]} \n`
-      };
-      ans = (
-        <div className='alert alert-danger alert-dismissible' role='alert'>
-          <button type='button' className='close' data-dismiss='alert'>&times;</button>
-          {messageErrors}
-        </div>
-      );
-    } else {
-      ans = null;
-    };
-
-    return ans
+  const setupLoadingTeams = () => {
+    let content;
+    if (teams !== null) {
+      content = teams.map((team) => (<option key={`${team.name} ${team.id}`} value={team.id}>{team.title}</option>));
+    }
+    return content;
   };
-
-  const handleClubId = (e) => {
-    setClubId(e.currentTarget.value);
-    let teams = clubs.find(club => { if (club.id == e.currentTarget.value) return club }).teams
-    setTeamId(teams[0].id)
-
-    setDataTeams(teams.map((team, key) =>( <option key={key} value={team.id}>{team.title}</option>)))
-
-  };
-
-
-  const handleTeamId = (e) => {
-    setTeamId(e.currentTarget.value)
-  }
-
-  const handleEmail = (e) => {
-    setEmail(e.currentTarget.value)
-  }
-
-  const handlePassword = (e) => {
-    setPassword(e.currentTarget.value)
-  }
-
-  const handleType = (e) => {
-    setType(e.currentTarget.value)
-  }
-
 
   const submit = (event) => {
     event.preventDefault();
-    dispatch(logup(email, password, type, teamId));
+    dispatch(logup(input));
   };
 
   useEffect(() => {
-    if (isAuth) {
-
-      if (userType === 'coach') {
-        message.success('You successfully registered as a coach.', 2.5)
-        setRedirect(<Redirect to='/dashboardAdmin' />)
-      }
-       
-      if (userType === 'player') {
-        message.success('You successfully registered as a player.', 2.5)
-        setRedirect(<Redirect to='/dashboardPlayer' />)
-      }
-       
-    } else {
-      setRedirect(<Redirect to='/register' />)
+    if (input.clubId !== undefined) {
+      const loadTeams = async () => {
+        const response = await teamAPI.getTeams(input);
+        setTeams(response);
+      };
+      loadTeams();
     }
-  } ,[isAuth])
+  }, [input.clubId]);
+
+  useEffect(() => {
+    if (teams !== null) {
+      const e = { currentTarget: { name: 'teamId', value: teams[0].id.toString() } };
+      handleInputChange(e);
+    }
+  }, [teams]);
+
+  useEffect(() => {
+    if (userType === 'coach') {
+      message.success('You successfully connected to your account as a coach.', 2.5);
+      history.push('/dashboardAdmin');
+    } else if (userType === 'player') {
+      message.success('You successfully connected to your account as a player.', 2.5);
+      history.push('/dashboardPlayer');
+    }
+  }, [isAuth]);
+
+  useEffect(() => {
+    if (errors !== '') {
+      const errorsMessage = setupErrorsMessage(errors);
+      message.error(errorsMessage, 2.5);
+    }
+  }, [errors]);
 
   return (
-    <div>
-      {setupAlert()}
-
-      <form className="form-auth p-4 mt-3 mb-3 rounded" onSubmit={submit}>
-
-        <div className="form-group">
-          <label htmlFor="type">
-            You are:
-            <select id="type" name="type" className="form-control" defaultValue="" onChange={handleInputChange} required>
-              <option value="" disabled hidden>Choose an option</option>
-              <option value="coach">Coach</option>
-              <option value="player">Player</option>
-            </select>
-          </label>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">If player, choose your club:</label>
-          <select type="email" className="form-control" placeholder="Enter email" id="club" onChange={handleInputChange}>
-            {dataClubs}
+    <form className="form-auth p-4 mt-3 mb-3 rounded" onSubmit={submit}>
+      <div className="form-group">
+        <label htmlFor="type">
+          You are:
+          <select id="type" name="type" className="form-control" defaultValue="" onChange={handleInputChange} required>
+            <option value="" disabled hidden>Choose an option</option>
+            <option value="coach">Coach</option>
+            <option value="player">Player</option>
           </select>
-        </div>
+        </label>
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="email">Then, choose your team:</label>
-          <select type="email" className="form-control" placeholder="Enter email" id="team" onChange={handleInputChange}>
-            {dataTeams}
+      <div className="form-group">
+        <label htmlFor="club">
+          If player, choose your club:
+          <select id="clubId" name="clubId" className="form-control" defaultValue="" onChange={handleInputChange}>
+            <option value="" disabled hidden>Choose an option</option>
+            {clubs.map((club) => (<option key={`${club.name} ${club.id}`} value={club.id}>{club.name}</option>))}
           </select>
-        </div>
+        </label>
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="email">Email address:</label>
-          <input type="email" className="form-control" placeholder="Enter email" id="email" onChange={handleInputChange}/>
-        </div>
+      <div className="form-group">
+        <label htmlFor="team">
+          Then, choose your team:
+          <select id="teamId" name="teamId" className="form-control" defaultValue="" onChange={handleInputChange}>
+            <option value="" disabled hidden>Choose an option</option>
+            {setupLoadingTeams()}
+          </select>
+        </label>
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="pwd">Password:</label>
-          <input type="password" className="form-control" placeholder="Enter password" id="password" onChange={handleInputChange} />
-        </div>
+      <div className="form-group">
+        <label htmlFor="email">
+          Email address:
+          <input id="email" name="email" type="email" className="form-control" placeholder="Enter email" onChange={handleInputChange} />
+        </label>
+      </div>
 
-        <button type="submit" className="btn btn-primary">Submit</button>
+      <div className="form-group">
+        <label htmlFor="password">
+          Password:
+          <input id="password" name="password" type="password" className="form-control" placeholder="Enter password" onChange={handleInputChange} />
+        </label>
+      </div>
 
-      </form>
-      {redirect}
-    </div>
+      <button type="submit" className="btn btn-primary">Submit</button>
+    </form>
   );
 };
 
-export default Register;
+export default RegisterForm;
+
+RegisterForm.propTypes = {
+  clubs: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
