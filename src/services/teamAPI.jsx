@@ -1,19 +1,3 @@
-function getAllTeams(id) {
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${id}/teams.json`;
-  let url = baseURL + endUrl;
-
-  return fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((response) => {
-      return response;
-    });
-}
-
 const getTeams = ({ clubId }) => {
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/clubs/${clubId}/teams.json`;
@@ -31,6 +15,38 @@ const getTeams = ({ clubId }) => {
     .then((response) => response.json());
 };
 
+const getTeam = ({ clubId, teamId }) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/clubs/${clubId}/teams/${teamId}.json`;
+  const url = baseURL + endUrl;
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const request = {
+    headers,
+  };
+
+  return fetch(url, request)
+    .then((response) => response.json());
+};
+
+function getAllTeams(id) {
+  let baseURL = process.env.REACT_APP_API_URL;
+  let endUrl = `/clubs/${id}/teams.json`;
+  let url = baseURL + endUrl;
+
+  return fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      return response;
+    });
+}
 function getTeamsOfClub(id) {
   let baseURL = process.env.REACT_APP_API_URL;
   let endUrl = `/clubs/${id}/teams.json`;
@@ -73,25 +89,5 @@ function createTeam(team, creatorId, coachId, clubId) {
     return response;
   });
 }
-
-const getTeam = (clubId, teamId) => {
-  let baseUrl = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${clubId}/teams/${teamId}.json`;
-  let url = baseUrl + endUrl;
-
-  let request = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  console.log(url);
-
-  return fetch(url, request)
-    .then((response) => response.json())
-    .then((response) => {
-      return response;
-    });
-};
 
 export { createTeam, getAllTeams, getTeamsOfClub, getTeam, getTeams };
