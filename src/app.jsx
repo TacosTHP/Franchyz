@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store.js";
 
 // Pages
-import NewEvent from "./pages/newEvent.jsx";
+import EventNewPage from 'pages/EventNewPage';
 import CreateClub from "./pages/createClub.jsx";
 import Home from "./pages/home.jsx";
 import LoginPage from './pages/LoginPage';
@@ -39,7 +39,7 @@ const App = () => {
           <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
           <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
           <PrivateRoute exact path="/newTeam" component={CreateTeam} />
-          <PrivateRoute exact path="/newEvent" component={NewEvent} />
+          <PrivateRoute exact path="/evemtNewPage" component={EventNewPage} />
           <PrivateRoute exact path="/newClub" component={CreateClub} />
           <PrivateRoute exact path="/profile" component={Profile} />
            <PrivateRoute exact path={`/clubs/:clubId/teams/:teamId`} component={ShowTeam} /> 
