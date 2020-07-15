@@ -16,7 +16,7 @@ const DashboardAdminTabs = ({ club }) => {
         <Tabs type="card">
           <TabPane tab="Your Club" key="1">
             <ClubInformations club={club} />
-            <Link to="/EventNew">
+            <Link to="/eventNewPage">
               <button type="button" className="btn btn-primary ml-4 mt-4">
                 Add Event
               </button>
