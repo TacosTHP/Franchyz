@@ -12,14 +12,14 @@ const EventNewPage = () => {
     if (teams === null) {
       content = <p> loading </p>;
     } else {
-      content = <EventNewForm />;
+      content = <EventNewForm teams={teams} />;
     }
     return content;
   };
 
   useEffect(() => {
     const loadTeams = async () => {
-      const response = await teamAPI.getTeams(clubId);
+      const response = await teamAPI.getTeams({ clubId });
       setTeams(response);
     };
     loadTeams();
