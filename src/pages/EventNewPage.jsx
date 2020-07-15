@@ -17,6 +17,7 @@ const EventNewPage = () => {
 
   return (
     <>
+      <h3> NewEvent !! </h3>
       <EventNewForm teams={teams} />
     </>
   );
