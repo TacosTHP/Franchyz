@@ -6,23 +6,14 @@ import TransfertList from 'components/transfertList';
 import * as teamAPI from 'services/teamAPI';
 
 const EventNewForm = ({ teams }) => {
-  const [players, setPlayers] = useState(null);
+  const [players, setPlayers] = useState();
+  const [validateKeys, setValidateKeys] = useState([]);
   const clubId = useSelector((state) => state.userReducer.clubId);
 
   const [input, handleInputChange] = useInputChange();
 
-  const setupLoadingOrTransfertList = () => {
-    let content;
-    if (players === null) {
-      content = <p> loading... </p>;
-    } else {
-      content = <TransfertList players={players} />;
-    }
-    return content;
-  };
-
   useEffect(() => {
-    if (input !== null) {
+    if (input.teamId !== undefined) {
       const loadingPlayers = async () => {
         const response = await teamAPI.getTeam({ clubId, teamId: input.teamId });
         setPlayers(response.players);
@@ -37,6 +28,7 @@ const EventNewForm = ({ teams }) => {
         <option value="" disabled hidden>Choose an option</option>
         {teams.map((team) => (<option key={`${team.name} ${team.id}`} value={team.id}>{team.title}</option>))}
       </select>
+      <TransfertList players={players} setValidateKeys={setValidateKeys} />
     </div>
   );
 };
