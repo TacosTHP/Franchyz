@@ -5,10 +5,10 @@ import {loginRequest, loginSuccess , loginFailure} from 'redux/actions/authActio
 import { infoUserUp } from 'redux/actions/userActions';
 import { setUserInfo } from 'helpers/reducersHelpers';
 
-const logup = (email, password, type, team) => {
+const logup = (input) => {
   return async (dispatch) => {
     dispatch(loginRequest());
-    let response = await authAPI.signUp(email, password, type, team);
+    let response = await authAPI.signUp(input);
     let body = await response.json()
 
     if (response.status !== 201) {
