@@ -8,6 +8,7 @@ const EventNewForm = ({ teams }) => {
   return (
     <div className="container">
       <select id="teamId" name="teamId" className="form-control" defaultValue="" onChange={handleInputChange}>
+        <option value="" disabled hidden>Choose an option</option>
         {teams.map((team) => (<option key={`${team.name} ${team.id}`} value={team.id}>{team.title}</option>))}
       </select>
     </div>
