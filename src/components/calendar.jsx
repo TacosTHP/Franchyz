@@ -35,18 +35,22 @@ const Calendar = ({ attendances }) => {
               center: 'title',
               right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
             }}
-            allDaySlot={false}
-            firstDay={1}
-            locale="en"
-            timeZone="UTC"
             buttonText={{
               today: 'Today',
               day: 'Daily',
               month: 'Monthly',
               week: 'Weekly',
             }}
+            navLinks
+            allDaySlot={false}
+            firstDay={1}
+            locale="en"
+            timeZone="UTC"
+            minTime="08:00"
+            maxTime="23:59"
             events={attendances}
             dateClick={goToEventNew}
+            eventClick
           />
         </>
       );
