@@ -16,6 +16,7 @@ const buildFullCalendarEvents = (array) => {
             backgroundColor: variables.primaryColor,
             borderColor: variables.white,
             textColor: variables.white,
+            url: 'https://www.youtube.com/?hl=fr&gl=FR',
           },
         );
       });
@@ -33,6 +34,7 @@ const buildFullCalendarEvents = (array) => {
             backgroundColor: variables.secondaryColor,
             borderColor: variables.white,
             textColor: variables.white,
+            url: 'https://www.youtube.com/?hl=fr&gl=FR',
           },
         );
       });
