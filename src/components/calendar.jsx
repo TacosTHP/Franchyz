@@ -20,6 +20,16 @@ const Calendar = ({ attendances }) => {
     }
   };
 
+  const goToEvent = ({ event }) => {
+    if (event !== undefined) {
+      if (event.extendedProps.type === 'practice') {
+        history.push(`/practices/${event.extendedProps.practice_id}`);
+      } else if (event.extendedProps.type === 'game') {
+        history.push(`/games/${event.extendedProps.game_id}`);
+      }
+    }
+  };
+
   const setupElements = () => {
     let content;
     if (attendances !== undefined) {
@@ -50,7 +60,7 @@ const Calendar = ({ attendances }) => {
             maxTime="23:59"
             events={attendances}
             dateClick={goToEventNew}
-            eventClick
+            eventClick={goToEvent}
           />
         </>
       );
