@@ -4,6 +4,8 @@ import useInputChange from 'customHooks/useInputChange';
 import PropTypes from 'prop-types';
 import TransfertList from 'components/transfertList';
 import * as teamAPI from 'services/teamAPI';
+import GameNewForm from 'components/GameNewForm';
+import PracticeNewForm from 'components/PracticeNewForm';
 
 const EventNewForm = ({ teams }) => {
   const [players, setPlayers] = useState();
@@ -11,6 +13,21 @@ const EventNewForm = ({ teams }) => {
   const clubId = useSelector((state) => state.userReducer.clubId);
 
   const [input, handleInputChange] = useInputChange();
+
+  const setupForm = () => {
+    let content;
+    switch (input.eventType) {
+      case 'game':
+        content = <GameNewForm />;
+        break;
+      case 'practice':
+        content = <PracticeNewForm />;
+        break;
+      default:
+        content = <GameNewForm />;
+    }
+    return content;
+  };
 
   useEffect(() => {
     if (input.teamId !== undefined) {
@@ -33,6 +50,7 @@ const EventNewForm = ({ teams }) => {
         <option value="game"> Game </option>
         <option value="practice"> Practice </option>
       </select>
+      {setupForm()}
     </div>
   );
 };
