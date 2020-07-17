@@ -18,13 +18,13 @@ const EventNewForm = ({ teams }) => {
     let content;
     switch (input.eventType) {
       case 'game':
-        content = <GameNewForm />;
+        content = <GameNewForm handleInputChange={handleInputChange} />;
         break;
       case 'practice':
         content = <PracticeNewForm />;
         break;
       default:
-        content = <GameNewForm />;
+        content = <GameNewForm handleInputChange={handleInputChange} />;
     }
     return content;
   };
@@ -38,6 +38,10 @@ const EventNewForm = ({ teams }) => {
       loadingPlayers();
     }
   }, [input.teamId]);
+
+  useEffect(() => {
+    console.log(input)
+  }, [input])
 
   return (
     <div className="container">
