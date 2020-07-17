@@ -21,7 +21,7 @@ const EventNewForm = ({ teams }) => {
         content = <GameNewForm handleInputChange={handleInputChange} />;
         break;
       case 'practice':
-        content = <PracticeNewForm />;
+        content = <PracticeNewForm handleInputChange={handleInputChange} />;
         break;
       default:
         content = <GameNewForm handleInputChange={handleInputChange} />;
