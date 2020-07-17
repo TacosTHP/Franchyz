@@ -16,8 +16,7 @@ const getPlayer = (clubId, teamId, playerId) => {
   };
 
   return fetch(url, request)
-    .then((response) => response.json())
-    .then((response) => response);
+    .then((response) => response.json());
 };
 
 const playerUpdate = ({clubId, teamId, playerId, data}) => {
