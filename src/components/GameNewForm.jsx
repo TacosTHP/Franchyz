@@ -19,7 +19,7 @@ const GameNewForm = ({ handleInputChange }) => {
   };
 
   return (
-    <Form labelCol={{ span: 2 }} wrapperCol={{ span: 20 }} name="gameForm">
+    <Form labelCol={{ span: 2 }} wrapperCol={{ span: 20 }} name="gameForm" className="mt-4">
       <Form.Item label="Game Title">
         <Input id="title" name="title" onChange={handleInputChange} />
       </Form.Item>
