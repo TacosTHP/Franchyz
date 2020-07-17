@@ -8,21 +8,34 @@ const TransfertList = ({ players, setValidateKeys }) => {
   const [targetKeys, setTargetKeys] = useState([]);
   const [data, setData] = useState([]);
 
-  const handleChange = (nextTargetKeys) => {
+  const updateData = (nextTargetKeys) => {
+    const playersData = data.filter(
+      (el) => nextTargetKeys.includes(el.key) || players.some((player) => player.id === el.key),
+    );
+    setData(playersData);
+  };
+
+  const handleChange = (nextTargetKeys, direction) => {
     setTargetKeys(nextTargetKeys);
     setValidateKeys(nextTargetKeys);
+    if (direction === 'left') {
+      updateData(nextTargetKeys);
+    }
   };
 
   const handleSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
     setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
   };
 
-  const handleDisable = (disabled) => {
-    setDisabled(disabled);
+  const handleDisable = (disable) => {
+    setDisabled(disable);
   };
 
   useEffect(() => {
-    setData(players.map((player) => ({ key: player.id, title: player.first_name })));
+    const selectedPlayersData = data.filter((player) => targetKeys.includes(player.key));
+    const playersData = players.map((player) => ({ key: player.id, title: player.first_name }))
+      .concat(selectedPlayersData);
+    setData(playersData);
   }, [players]);
 
   return (
@@ -45,4 +58,5 @@ TransfertList.defaultProps = {
 
 TransfertList.propTypes = {
   players: PropTypes.arrayOf(PropTypes.object),
+  setValidateKeys: PropTypes.func.isRequired,
 };
