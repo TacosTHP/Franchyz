@@ -1,83 +1,94 @@
-import React, {useEffect, useState} from 'react';
-import '../styles/form.scss'
-import {useSelector } from 'react-redux'
-import * as EventsAPI from 'services/eventsAPI';
-import Calendar from 'components/calendar'
-import EventsList from 'components/eventsList'
-import DashboardPlayerTabs from "components/dashboardPlayerTabs.jsx";
-import { BackTop } from 'antd';
-import * as clubAPI from "services/clubAPI.jsx";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-function PlayerDashboardPage () {
-  const [events, setEvents] = useState([])
-  const [trigger, setTrigger] = useState(0)
+import Calendar from 'components/calendar';
+import DashboardPlayerTabs from 'components/dashboardPlayerTabs';
 
-  const clubId = useSelector(state => state.userReducer.clubId)
-  const teamId = useSelector(state => state.userReducer.teamId)
-  const playerId = useSelector(state => state.userReducer.id)
-  const player = {clubId, teamId, playerId}
+import * as clubAPI from 'services/clubAPI';
+import * as userAPI from 'services/userAPI';
 
-  const unconfirmed_events = () => {
-    EventsAPI.getUnconfirmedEvents(playerId, clubId, teamId)
-    .then((response) => {setEvents(response)})
-  }
+import buildFullCalendarEvents from '../helpers/eventsHelpers';
 
-  useEffect(() => {
-    unconfirmed_events()
-  }, [])
+import '../styles/form.scss';
 
-  
-  useEffect(() => {
-    unconfirmed_events()
-  }, [trigger])
+const PlayerDashboardPage = () => {
+  const myClubId = useSelector((state) => state.userReducer.clubId);
+  const teamId = useSelector((state) => state.userReducer.teamId);
+  const playerId = useSelector((state) => state.userReducer.id);
+  const [club, setClub] = useState([]);
+  const [player, setPlayer] = useState('');
 
-  const style = {
-    height: 40,
-    width: 40,
-    lineHeight: '40px',
-    borderRadius: 4,
-    backgroundColor: '#1088e9',
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 14,
-    };
+  const loadClub = async () => {
+    const response = await clubAPI.getClub(myClubId);
+    setClub(response);
+  };
 
-    console.log("club_id" + clubId)
+  const loadPlayer = async () => {
+    const response = await userAPI.getPlayer(myClubId, teamId, playerId);
+    setPlayer(response);
+  };
 
-    const [club, setClub] = useState("");
-
-    useEffect(() => {
-      loadClub();
-    }, []);
-  
-    const loadClub = async () => {
-      const response = await clubAPI.getClub(clubId);
-      setClub(response);
+  const setupElements = () => {
+    let content;
+    if (player !== '') {
+      content = (
+        <>
+          <DashboardPlayerTabs club={club} />
+          <div className="container mb-5">
+            <Calendar attendances={buildFullCalendarEvents(player.attendances)} />
+          </div>
+        </>
+      );
+    } else {
+      content = (
+        <p> loading... </p>
+      );
     }
-  return(
+    return content;
+  };
 
- <div>
-  <div>
-   <div className="text-center mt-5">
-     <h1>Welcome to FRANCHYZ</h1>
-     <h4>Your trainer invited you to FRANCHYZ.</h4>
-      <h4>You can find your team events in the calendar.</h4>
-      <h5 className="text-primary">Let your trainer know, whether you participate in the events you are invited for </h5>
-      <h5 className="text-primary">by validating your participation.</h5>
-   </div>
-  </div> 
-         
-    { clubId === null ? <h6 className="text-center redtext">You have to ask your trainer to add you to a club/team.</h6>  
-    : <DashboardPlayerTabs club={club}/>}
-    <div className="container mb-5">  
-        <EventsList events={events} player={player} setTrigger={setTrigger} trigger={trigger}/> 
-        <Calendar/>
+  const setupPageOrInvitation = () => {
+    let content;
+    if (myClubId === undefined) {
+      content = (
+        <>
+          <h6 className="text-center redtext">
+            You have to ask your trainer to add you to a club/team.
+          </h6>
+        </>
+      );
+    } else {
+      content = (
+        <>
+          <div>
+            <div className="text-center mt-5">
+              <h1>Welcome to FRANCHYZ</h1>
+              <h4>Your trainer invited you to FRANCHYZ.</h4>
+              <h4>You can find your team events in the calendar.</h4>
+              <h5 className="text-primary">Let your trainer know, whether you participate in the events you are invited for </h5>
+              <h5 className="text-primary">by validating your participation.</h5>
+            </div>
+          </div>
+          { setupElements() }
+        </>
+      );
+    }
+    return content;
+  };
+
+  useEffect(() => {
+    loadClub();
+  }, []);
+
+  useEffect(() => {
+    loadPlayer();
+  }, []);
+
+  return (
+    <div className="container mb-3 mt-3">
+      {setupPageOrInvitation()}
     </div>
-    <BackTop>
-      <div style={style}>UP</div>
-    </BackTop>
-</div>
-  )
-}
+  );
+};
 
-export default PlayerDashboardPage
+export default PlayerDashboardPage;

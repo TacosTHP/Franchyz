@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux';
 import DashboardAdminTabs from 'components/dashboardAdminTabs';
 import Calendar from 'components/calendar';
 import * as clubAPI from 'services/clubAPI';
+
+import buildFullCalendarEvents from '../helpers/eventsHelpers';
+
 import '../styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
@@ -22,7 +25,7 @@ const AdminCoachDashboardPage = () => {
       content = (
         <>
           <DashboardAdminTabs club={club} />
-          <Calendar attendances={club.attendances} />
+          <Calendar attendances={buildFullCalendarEvents(club.attendances)} />
         </>
       );
     } else {
