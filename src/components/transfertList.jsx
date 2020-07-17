@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Transfer, Switch } from 'antd';
 import PropTypes from 'prop-types';
+import { Space, Transfer, Switch } from 'antd';
 
 const TransfertList = ({ players, setValidateKeys }) => {
   const [selectedKeys, setSelectedKeys] = useState([]);
