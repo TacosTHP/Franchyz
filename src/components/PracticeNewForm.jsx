@@ -44,7 +44,7 @@ const PracticeNewForm = ({ handleInputChange }) => {
         <Input id="country" name="country" onChange={handleInputChange} />
       </Form.Item>
       <Form.Item label="Date">
-        <DatePicker id="datetime" name="datetime" format="YYYY-MM-DD HH:mm" disabledDate={disabledDate} showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }} onChange={onDateChange} />
+        <DatePicker id="datetime" name="datetime" format="YYYY-MM-DD HH:mm" disabledDate={disabledDate} showTime={{ defaultValue: moment('00:00', 'HH:mm') }} onChange={onDateChange} />
       </Form.Item>
       <Form.Item label="Duration">
         <InputNumber name="duration" onChange={onDurationChange} />
