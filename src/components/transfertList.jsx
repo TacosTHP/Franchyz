@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Space, Transfer, Switch } from 'antd';
 
-const TransfertList = ({ players, setValidateKeys }) => {
+const TransfertList = ({ players, handleInputChange }) => {
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [disabled, setDisabled] = useState(false);
   const [targetKeys, setTargetKeys] = useState([]);
@@ -17,10 +17,10 @@ const TransfertList = ({ players, setValidateKeys }) => {
 
   const handleChange = (nextTargetKeys, direction) => {
     setTargetKeys(nextTargetKeys);
-    setValidateKeys(nextTargetKeys);
     if (direction === 'left') {
       updateData(nextTargetKeys);
     }
+    handleInputChange({ currentTarget: { name: 'players', value: nextTargetKeys } });
   };
 
   const handleSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
@@ -58,5 +58,5 @@ TransfertList.defaultProps = {
 
 TransfertList.propTypes = {
   players: PropTypes.arrayOf(PropTypes.object),
-  setValidateKeys: PropTypes.func.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
 };

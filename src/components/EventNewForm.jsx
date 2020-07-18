@@ -50,7 +50,7 @@ const EventNewForm = ({ teams }) => {
         <option value="" disabled hidden>Choose an option</option>
         {teams.map((team) => (<option key={`${team.name} ${team.id}`} value={team.id}>{team.title}</option>))}
       </select>
-      <TransfertList players={players} setValidateKeys={setValidateKeys} />
+      <TransfertList players={players} handleInputChange={handleInputChange} />
       <select id="eventType" name="eventType" className="text-center mt-3" placeholder="Choose event type" onChange={handleInputChange}>
         <option value="game"> Game </option>
         <option value="practice"> Practice </option>
