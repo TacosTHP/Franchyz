@@ -29,4 +29,15 @@ const setupErrorsMessage = (errors) => {
   return errorsMessage;
 };
 
-export { pluralyzeType, setupErrorsMessage }
+const purgeInput = ({ input }) => {
+  const purgedInput = { ...input };
+  const keys = Object.keys(purgedInput);
+  keys.forEach((key) => {
+    if (!(key === 'teamId' || key === 'players' || key === 'eventType')) {
+      delete purgedInput[key];
+    }
+  });
+  return purgedInput;
+};
+
+export { pluralyzeType, setupErrorsMessage, purgeInput };
