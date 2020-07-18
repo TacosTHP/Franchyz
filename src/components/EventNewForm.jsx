@@ -6,13 +6,14 @@ import TransfertList from 'components/transfertList';
 import * as teamAPI from 'services/teamAPI';
 import GameNewForm from 'components/GameNewForm';
 import PracticeNewForm from 'components/PracticeNewForm';
+import { purgeInput } from 'helpers/misc';
 
 const EventNewForm = ({ teams }) => {
   const [players, setPlayers] = useState();
   const [validateKeys, setValidateKeys] = useState([]);
   const clubId = useSelector((state) => state.userReducer.clubId);
 
-  const [input, handleInputChange] = useInputChange();
+  const [input, handleInputChange, setInput] = useInputChange({ eventType: 'game' });
 
   const setupForm = () => {
     let content;
@@ -40,8 +41,8 @@ const EventNewForm = ({ teams }) => {
   }, [input.teamId]);
 
   useEffect(() => {
-    console.log(input)
-  }, [input])
+    setInput(purgeInput({ input }));
+  }, [input.eventType]);
 
   return (
     <div className="container">
