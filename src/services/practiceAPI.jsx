@@ -23,7 +23,7 @@ const createPractice = ({
   title, description, address, city, country, zipCode, datetime, duration,
 }) => {
   const data = {
-    game: {
+    practice: {
       title,
       long_description: description,
       address,
@@ -37,7 +37,7 @@ const createPractice = ({
   };
 
   const baseURL = process.env.REACT_APP_API_URL;
-  const endUrl = '/games';
+  const endUrl = '/practices';
   const url = baseURL + endUrl;
 
   const request = {
