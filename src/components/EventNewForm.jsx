@@ -6,6 +6,7 @@ import TransfertList from 'components/transfertList';
 import * as teamAPI from 'services/teamAPI';
 import * as gameAPI from 'services/gameAPI';
 import * as practiceAPI from 'services/practiceAPI';
+import * as attendanceAPI from 'services/attendanceAPI';
 import GameNewForm from 'components/GameNewForm';
 import PracticeNewForm from 'components/PracticeNewForm';
 import { purgeInput } from 'helpers/misc';
@@ -36,6 +37,11 @@ const EventNewForm = ({ teams }) => {
     switch (input.eventType) {
       case 'game':
         event = await gameAPI.createGame({ ...input });
+        input.players.forEach((playerId) => {
+          attendanceAPI.createAttendance(
+            { eventType: input.eventType, eventId: event.id, playerId },
+          );
+        });
         break;
       case 'practice':
         event = await practiceAPI.createPractice({ ...input });
