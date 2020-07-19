@@ -10,10 +10,13 @@ import * as attendanceAPI from 'services/attendanceAPI';
 import GameNewForm from 'components/GameNewForm';
 import PracticeNewForm from 'components/PracticeNewForm';
 import { purgeInput } from 'helpers/misc';
+import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
 
 const EventNewForm = ({ teams }) => {
   const [players, setPlayers] = useState();
   const clubId = useSelector((state) => state.userReducer.clubId);
+  const history = useHistory();
 
   const [input, handleInputChange, setInput] = useInputChange({ eventType: 'game' });
 
@@ -49,6 +52,8 @@ const EventNewForm = ({ teams }) => {
         { eventType: input.eventType, eventId: event.id, playerId },
       );
     });
+    message.success(`${input.eventType} created`, 2.5);
+    history.push('/dashboardAdmin');
   };
 
   useEffect(() => {
