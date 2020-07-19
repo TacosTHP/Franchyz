@@ -47,11 +47,14 @@ const EventNewForm = ({ teams }) => {
       default:
     }
 
-    input.players.forEach((playerId) => {
-      attendanceAPI.createAttendance(
-        { eventType: input.eventType, eventId: event.id, playerId },
-      );
-    });
+    if (input.players !== undefined) {
+      input.players.forEach((playerId) => {
+        attendanceAPI.createAttendance(
+          { eventType: input.eventType, eventId: event.id, playerId },
+        );
+      });
+    }
+    
     message.success(`${input.eventType} created`, 2.5);
     history.push('/dashboardAdmin');
   };
