@@ -12,7 +12,6 @@ import { purgeInput } from 'helpers/misc';
 
 const EventNewForm = ({ teams }) => {
   const [players, setPlayers] = useState();
-  const [validateKeys, setValidateKeys] = useState([]);
   const clubId = useSelector((state) => state.userReducer.clubId);
 
   const [input, handleInputChange, setInput] = useInputChange({ eventType: 'game' });
@@ -36,10 +35,10 @@ const EventNewForm = ({ teams }) => {
     let event;
     switch (input.eventType) {
       case 'game':
-        event = await gameAPI.createGame({ clubId, ...input });
+        event = await gameAPI.createGame({ ...input });
         break;
       case 'practice':
-        event = await practiceAPI.createPractice({ clubId, ...input });
+        event = await practiceAPI.createPractice({ ...input });
         break;
       default:
     }
