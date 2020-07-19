@@ -37,17 +37,18 @@ const EventNewForm = ({ teams }) => {
     switch (input.eventType) {
       case 'game':
         event = await gameAPI.createGame({ ...input });
-        input.players.forEach((playerId) => {
-          attendanceAPI.createAttendance(
-            { eventType: input.eventType, eventId: event.id, playerId },
-          );
-        });
         break;
       case 'practice':
         event = await practiceAPI.createPractice({ ...input });
         break;
       default:
     }
+
+    input.players.forEach((playerId) => {
+      attendanceAPI.createAttendance(
+        { eventType: input.eventType, eventId: event.id, playerId },
+      );
+    });
   };
 
   useEffect(() => {
