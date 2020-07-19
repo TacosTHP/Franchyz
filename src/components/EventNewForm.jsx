@@ -54,9 +54,13 @@ const EventNewForm = ({ teams }) => {
         );
       });
     }
-    
-    message.success(`${input.eventType} created`, 2.5);
-    history.push('/dashboardAdmin');
+
+    if (event.error !== undefined) {
+      message.success(`${input.eventType} created`, 2.5);
+      history.push('/dashboardAdmin');
+    } else {
+      message.error(event.error, 2.5);
+    }
   };
 
   useEffect(() => {
