@@ -4,6 +4,8 @@ import useInputChange from 'customHooks/useInputChange';
 import PropTypes from 'prop-types';
 import TransfertList from 'components/transfertList';
 import * as teamAPI from 'services/teamAPI';
+import * as gameAPI from 'services/gameAPI';
+import * as practiceAPI from 'services/practiceAPI';
 import GameNewForm from 'components/GameNewForm';
 import PracticeNewForm from 'components/PracticeNewForm';
 import { purgeInput } from 'helpers/misc';
@@ -28,6 +30,19 @@ const EventNewForm = ({ teams }) => {
         content = <GameNewForm handleInputChange={handleInputChange} />;
     }
     return content;
+  };
+
+  const submit = async () => {
+    let event;
+    switch (input.eventType) {
+      case 'game':
+        event = await gameAPI.createGame({ clubId, ...input });
+        break;
+      case 'practice':
+        event = await practiceAPI.createPractice({ clubId, ...input });
+        break;
+      default:
+    }
   };
 
   useEffect(() => {
@@ -56,6 +71,7 @@ const EventNewForm = ({ teams }) => {
         <option value="practice"> Practice </option>
       </select>
       {setupForm()}
+      <button type="button" className="btn btn-primary" onClick={submit}> submit </button>
     </div>
   );
 };
