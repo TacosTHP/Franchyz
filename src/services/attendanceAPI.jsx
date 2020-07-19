@@ -21,7 +21,7 @@ const createAttendance = ({ eventId, playerId, eventType }) => {
   }
 
   const baseURL = process.env.REACT_APP_API_URL;
-  const endUrl = '/attendance';
+  const endUrl = '/attendances';
   const url = baseURL + endUrl;
 
   return fetch(url, {
