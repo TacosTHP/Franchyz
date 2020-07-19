@@ -1,26 +1,23 @@
 import Cookies from 'js-cookie';
 
 const getPlayer = (clubId, teamId, playerId) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}.json`;
+  const url = baseURL + endUrl;
 
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}.json`;
-  let url = baseURL + endUrl;
-
-  let headers = {
+  const headers = {
     'Content-Type': 'application/json',
-    Authorization: Cookies.get('token')
+    Authorization: Cookies.get('token'),
   };
 
-  let request = {
+  const request = {
     method: 'get',
-    headers: headers,
+    headers,
   };
 
   return fetch(url, request)
-    .then(response => response.json())
-    .then(response => {return response})
-
-}
+    .then((response) => response.json());
+};
 
 const playerUpdate = ({clubId, teamId, playerId, data}) => {
 
