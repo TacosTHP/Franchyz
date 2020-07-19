@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 function getGame(game_id) {
         let baseURL = process.env.REACT_APP_API_URL;
         let endUrl = `/games/${game_id}.json`
@@ -18,27 +20,31 @@ function getGame(game_id) {
   }
 
 const createGame = ({
-  clubId, teamId, title, description, address, city, country, zipCode, dateTime, duration,
+  title, description, address, city, country, zipCode, datetime, duration,
 }) => {
+
   const data = {
-    title,
-    long_description: description,
-    address,
-    city,
-    country,
-    zipCode,
-    starting_date_time: dateTime,
-    duration,
-    canceled: false,
+    game: {
+      title,
+      long_description: description,
+      address,
+      city,
+      country,
+      zip_code: zipCode,
+      starting_date_time: datetime,
+      duration,
+      canceled: false,
+    },
   };
 
   const baseURL = process.env.REACT_APP_API_URL;
-  const endUrl = `/clubs/${clubId}/teams/${teamId}/games.json`;
+  const endUrl = '/games';
   const url = baseURL + endUrl;
 
   const request = {
     method: 'post',
     headers: {
+      Authorization: Cookies.get('token'),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -48,4 +54,4 @@ const createGame = ({
     .then((response) => response.json());
 };
 
-export { createGame, getGame };
+export { getGame, createGame };
