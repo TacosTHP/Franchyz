@@ -22,7 +22,6 @@ function getGame(game_id) {
 const createGame = ({
   title, description, address, city, country, zipCode, datetime, duration,
 }) => {
-
   const data = {
     game: {
       title,
