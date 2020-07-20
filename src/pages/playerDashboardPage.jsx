@@ -7,8 +7,6 @@ import DashboardPlayerTabs from 'components/dashboardPlayerTabs';
 import * as clubAPI from 'services/clubAPI';
 import * as userAPI from 'services/userAPI';
 
-import buildFullCalendarEvents from '../helpers/eventsHelpers';
-
 import '../styles/form.scss';
 
 const PlayerDashboardPage = () => {
@@ -35,7 +33,7 @@ const PlayerDashboardPage = () => {
         <>
           <DashboardPlayerTabs club={club} />
           <div className="container mb-5">
-            <Calendar attendances={buildFullCalendarEvents(player.attendances)} />
+            <Calendar attendances={player.attendances} />
           </div>
         </>
       );
