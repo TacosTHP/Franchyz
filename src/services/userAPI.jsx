@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const getPlayer = (clubId, teamId, playerId) => {
+const getPlayer = ({ clubId, teamId, playerId }) => {
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}.json`;
   const url = baseURL + endUrl;
