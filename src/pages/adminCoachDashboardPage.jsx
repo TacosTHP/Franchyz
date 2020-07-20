@@ -38,7 +38,7 @@ const AdminCoachDashboardPage = () => {
 
   const setupPageOrInvitation = () => {
     let content;
-    if (myClubId === undefined) {
+    if (myClubId === null) {
       content = (
         <>
           <div>
