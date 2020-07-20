@@ -56,7 +56,7 @@ const EventNewForm = ({ teams }) => {
       });
     }
 
-    if (event.error !== undefined) {
+    if (event.error === undefined) {
       message.success(`${input.eventType} created`, 2.5);
       history.push('/dashboardAdmin');
     } else {
