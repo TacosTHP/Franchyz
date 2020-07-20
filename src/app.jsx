@@ -1,23 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import store from 'redux/store';
 
 import EventNewPage from 'pages/EventNewPage';
-import CreateClub from './pages/createClub';
-import Home from './pages/home';
-import LoginPage from './pages/LoginPage';
+import CreateClub from 'pages/createClub';
+import Home from 'pages/home';
+import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
-import CreateTeam from './pages/createTeam';
-import AdminCoachDashboardPage from './pages/adminCoachDashboardPage';
-import ShowGame from './pages/showGame';
-import ShowTeam from './pages/showTeam';
-import ShowPractice from './pages/showPractice';
-import PlayerDashboardPage from './pages/playerDashboardPage';
-import Profile from './pages/profile';
+import CreateTeam from 'pages/createTeam';
+import AdminCoachDashboardPage from 'pages/adminCoachDashboardPage';
+import ShowGame from 'pages/showGame';
+import ShowTeam from 'pages/showTeam';
+import ShowPractice from 'pages/showPractice';
+import PlayerDashboardPage from 'pages/playerDashboardPage';
+import Profile from 'pages/profile';
 
-import Navbar from './components/layouts/navbar';
-import PrivateRoute from './components/privateRoute';
+import Navbar from 'components/layouts/navbar';
+import PrivateRoute from 'components/privateRoute';
 
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
