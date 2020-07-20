@@ -19,7 +19,9 @@ const getPlayer = ({ clubId, teamId, playerId }) => {
     .then((response) => response.json());
 };
 
-const playerUpdate = (clubId, teamId, playerId, data) => {
+const playerUpdate = ({
+  clubId, teamId, playerId, data,
+}) => {
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}`;
   const url = baseURL + endUrl;
