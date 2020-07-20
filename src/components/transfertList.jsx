@@ -1,59 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Space, Transfer, Switch } from 'antd';
 
+const TransfertList = ({ players, handleInputChange }) => {
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [disabled, setDisabled] = useState(false);
+  const [targetKeys, setTargetKeys] = useState([]);
+  const [data, setData] = useState([]);
 
-function TransfertList({players, setValidateKeys}) {
-
-
-
-  const [selectedKeys, setSelectedKeys] = useState([])
-  const [disabled, setDisabled] = useState(false)
-  const [targetKeys, setTargetKeys] = useState([])
-  const [data, setData] = useState(
-    players.map(el => {
-      let obj = {}
-      obj['key'] = el.id.toString()
-      obj['title'] = el.first_name
-      return obj })
-  )
-
-  function handleChange(nextTargetKeys, direction, moveKeys) {
-    setTargetKeys(nextTargetKeys)
-    setValidateKeys(nextTargetKeys)
-
-    console.log('targetKeys: ', nextTargetKeys);
-    console.log('validate: ', nextTargetKeys);
-    console.log('direction: ', direction);
-    console.log('moveKeys: ', moveKeys);
+  const updateData = (nextTargetKeys) => {
+    const playersData = data.filter(
+      (el) => nextTargetKeys.includes(el.key) || players.some((player) => player.id === el.key),
+    );
+    setData(playersData);
   };
 
-  function handleSelectChange(sourceSelectedKeys, targetSelectedKeys) {
-    console.log('selec: ', selectedKeys);
-    setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys])
-
-    console.log('sourceSelectedKeys: ', sourceSelectedKeys);
-    console.log('targ: ', targetKeys);
-    console.log('selec: ', selectedKeys);
+  const handleChange = (nextTargetKeys, direction) => {
+    setTargetKeys(nextTargetKeys);
+    if (direction === 'left') {
+      updateData(nextTargetKeys);
+    }
+    handleInputChange({ currentTarget: { name: 'players', value: nextTargetKeys } });
   };
 
-  function handleScroll(direction, e) {
-    console.log('direction:', direction);
-    console.log('target:', e.target);
+  const handleSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
+    setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
   };
 
-  function handleDisable(disabled) {
-    setDisabled({ disabled })
+  const handleDisable = (disable) => {
+    setDisabled(disable);
   };
+
+  useEffect(() => {
+    const selectedPlayersData = data.filter((player) => targetKeys.includes(player.key));
+    const playersData = players.map((player) => ({ key: player.id, title: player.first_name }))
+      .concat(selectedPlayersData);
+    setData(playersData);
+  }, [players]);
 
   return (
     <div>
-      <Transfer dataSource={data} titles={['Source', 'Target']} targetKeys={targetKeys} selectedKeys={selectedKeys} onChange={handleChange} onSelectChange={handleSelectChange} onScroll={handleScroll} render={item => item.title} disabled={disabled} />
+      <h3> Choose players </h3>
+      <Transfer dataSource={data} titles={['Source', 'Target']} targetKeys={targetKeys} selectedKeys={selectedKeys} onChange={handleChange} onSelectChange={handleSelectChange} render={(item) => item.title} disabled={disabled} />
 
       <Space style={{ marginTop: 16 }}>
         <Switch unCheckedChildren="disabled" checkedChildren="disabled" checked={disabled} onChange={handleDisable} />
       </Space>
     </div>
   );
-}
+};
 
-export default TransfertList
+export default TransfertList;
+
+TransfertList.defaultProps = {
+  players: [],
+};
+
+TransfertList.propTypes = {
+  players: PropTypes.arrayOf(PropTypes.object),
+  handleInputChange: PropTypes.func.isRequired,
+};

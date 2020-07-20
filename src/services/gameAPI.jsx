@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 function getGame(game_id) {
         let baseURL = process.env.REACT_APP_API_URL;
         let endUrl = `/games/${game_id}.json`
@@ -17,39 +19,38 @@ function getGame(game_id) {
   
   }
 
-
-function createGame(clubId, teamId, eventTitle, eventDescription, address, city, country, zipCode, dateTime, duration) {
-  
+const createGame = ({
+  title, description, address, city, country, zipCode, datetime, duration,
+}) => {
   const data = {
-    title: eventTitle,
-    long_description: eventDescription,
-    address: address,
-    city: city,
-    country: country,
-    zip_code: zipCode,
-    starting_date_time: dateTime,
-    duration: duration,
-    canceled: false,
+    game: {
+      title,
+      long_description: description,
+      address,
+      city,
+      country,
+      zip_code: zipCode,
+      starting_date_time: datetime,
+      duration,
+      canceled: false,
+    },
   };
 
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = '/games';
+  const url = baseURL + endUrl;
 
-
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${clubId}/teams/${teamId}/games.json`;
-  let url = baseURL + endUrl;
-
-  return fetch(url, {
-    method: "post",
+  const request = {
+    method: 'post',
     headers: {
-      "Content-Type": "application/json",
+      Authorization: Cookies.get('token'),
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  })
-    .then( response => response.json())
-    .then((response) => { 
-      return response 
-    })
+  };
 
-}
+  return fetch(url, request)
+    .then((response) => response.json());
+};
 
-export { createGame, getGame }
+export { getGame, createGame };

@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-import NewEvent from './pages/newEvent';
+import EventNewPage from 'pages/EventNewPage';
 import CreateClub from './pages/createClub';
 import Home from './pages/home';
 import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import RegisterPage from 'pages/RegisterPage';
 import CreateTeam from './pages/createTeam';
 import AdminCoachDashboardPage from './pages/adminCoachDashboardPage';
 import ShowGame from './pages/showGame';
@@ -33,7 +33,7 @@ const App = () => (
         <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
         <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
         <PrivateRoute exact path="/newTeam" component={CreateTeam} />
-        <PrivateRoute exact path="/newEvent" component={NewEvent} />
+        <PrivateRoute exact path="/eventNewPage" component={EventNewPage} />
         <PrivateRoute exact path="/newClub" component={CreateClub} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/clubs/:clubId/teams/:teamId" component={ShowTeam} />
