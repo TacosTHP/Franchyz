@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import useInputChange from 'customHooks/useInputChange';
 import PropTypes from 'prop-types';
+import { message } from 'antd';
+
+import GameNewForm from 'components/GameNewForm';
+import PracticeNewForm from 'components/PracticeNewForm';
 import TransfertList from 'components/transfertList';
 import * as teamAPI from 'services/teamAPI';
 import * as gameAPI from 'services/gameAPI';
 import * as practiceAPI from 'services/practiceAPI';
 import * as attendanceAPI from 'services/attendanceAPI';
-import GameNewForm from 'components/GameNewForm';
-import PracticeNewForm from 'components/PracticeNewForm';
+import useInputChange from 'customHooks/useInputChange';
 import { purgeInput } from 'helpers/misc';
-import { useHistory } from 'react-router-dom';
-import { message } from 'antd';
 
 const EventNewForm = ({ teams }) => {
   const [players, setPlayers] = useState();
