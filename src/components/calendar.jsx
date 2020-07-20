@@ -8,6 +8,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
+import buildFullCalendarEvents from '../helpers/eventsHelpers';
+
 import '../styles/calendar.scss';
 
 const Calendar = ({ attendances }) => {
@@ -31,6 +33,7 @@ const Calendar = ({ attendances }) => {
   };
 
   const setupElements = () => {
+    const buildedAttendances = buildFullCalendarEvents(attendances);
     let content;
     if (attendances !== undefined) {
       content = (
@@ -58,7 +61,7 @@ const Calendar = ({ attendances }) => {
             timeZone="UTC"
             minTime="08:00"
             maxTime="23:59"
-            events={attendances}
+            events={buildedAttendances}
             dateClick={goToEventNew}
             eventClick={goToEvent}
           />

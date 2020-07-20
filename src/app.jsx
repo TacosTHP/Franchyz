@@ -7,7 +7,7 @@ import NewEvent from './pages/newEvent';
 import CreateClub from './pages/createClub';
 import Home from './pages/home';
 import LoginPage from './pages/LoginPage';
-import Register from './pages/register';
+import RegisterPage from './pages/RegisterPage';
 import CreateTeam from './pages/createTeam';
 import AdminCoachDashboardPage from './pages/adminCoachDashboardPage';
 import ShowGame from './pages/showGame';
@@ -41,7 +41,7 @@ const App = () => (
         <PrivateRoute exact path="/practices/:practicesId" component={ShowPractice} />
         <Route path="/clubs/:clubId/teams/:teamId/players/:playerId" component={Profile} />
         <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/register" component={Register} />
+        <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/" component={Home} />
       </Switch>
     </Router>
