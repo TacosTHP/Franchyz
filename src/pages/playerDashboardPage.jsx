@@ -5,6 +5,7 @@ import Calendar from 'components/calendar';
 import DashboardPlayerTabs from 'components/dashboardPlayerTabs';
 
 import * as clubAPI from 'services/clubAPI';
+import * as teamAPI from 'services/teamAPI';
 import * as userAPI from 'services/userAPI';
 
 import '../styles/form.scss';
@@ -13,25 +14,16 @@ const PlayerDashboardPage = () => {
   const myClubId = useSelector((state) => state.userReducer.clubId);
   const teamId = useSelector((state) => state.userReducer.teamId);
   const playerId = useSelector((state) => state.userReducer.id);
-  const [club, setClub] = useState([]);
-  const [player, setPlayer] = useState('');
-
-  const loadClub = async () => {
-    const response = await clubAPI.getClub(myClubId);
-    setClub(response);
-  };
-
-  const loadPlayer = async () => {
-    const response = await userAPI.getPlayer(myClubId, teamId, playerId);
-    setPlayer(response);
-  };
+  const [club, setClub] = useState();
+  const [team, setTeam] = useState();
+  const [player, setPlayer] = useState();
 
   const setupElements = () => {
     let content;
-    if (player !== '') {
+    if (player !== undefined) {
       content = (
         <>
-          <DashboardPlayerTabs club={club} />
+          <DashboardPlayerTabs club={club} team={team} />
           <div className="container mb-5">
             <Calendar attendances={player.attendances} />
           </div>
@@ -75,11 +67,16 @@ const PlayerDashboardPage = () => {
   };
 
   useEffect(() => {
-    loadClub();
-  }, []);
-
-  useEffect(() => {
-    loadPlayer();
+    const loadData = async () => {
+      let response;
+      response = await clubAPI.getClub(myClubId);
+      setClub(response);
+      response = await teamAPI.getTeam({ myClubId, teamId });
+      setTeam(response);
+      response = await userAPI.getPlayer(myClubId, teamId, playerId);
+      setPlayer(response);
+    };
+    loadData();
   }, []);
 
   return (
