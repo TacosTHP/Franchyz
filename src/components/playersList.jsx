@@ -4,20 +4,14 @@ import { Link } from 'react-router-dom';
 import Player from 'components/player';
 
 const PlayersList = ({ players }) => {
-  const setList = () => {
-    let playersList;
-    if (players !== undefined) {
-      playersList = players.map((player) => <Player key={player.id} player={player} />);
-    }
-    return playersList;
-  };
+  const setList = () => players.map((player) => <Player key={player.id} player={player} />);
 
   const setupPlayersListOrAddInvitation = () => {
     let content;
-    if (players === null) {
+    if (players.length === 0) {
       content = (
         <div className="container d-flex flex-column justify-content-center align-items-center my-5">
-          <p>It seems you don&apost have players yet, let&aposs add some of them now</p>
+          <p>It seems you don&apos;t have players yet, let&apos;s add some of them now</p>
           <Link to="/" className="btn btn-primary">Add Players</Link>
         </div>
       );
@@ -44,7 +38,7 @@ const PlayersList = ({ players }) => {
     return content;
   };
   return (
-    { setupPlayersListOrAddInvitation }
+    setupPlayersListOrAddInvitation()
   );
 };
 
