@@ -8,9 +8,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import buildFullCalendarEvents from '../helpers/eventsHelpers';
+import buildFullCalendarEvents from 'helpers/eventsHelpers';
 
-import '../styles/calendar.scss';
+import 'styles/calendar.scss';
 
 const Calendar = ({ attendances }) => {
   const userType = useSelector((state) => state.authReducer.userType);
