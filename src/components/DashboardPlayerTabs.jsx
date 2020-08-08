@@ -6,21 +6,34 @@ import ClubInformations from './clubInformations';
 import PlayersList from './playersList';
 
 const DashboardPlayerTabs = ({ club, team }) => {
-  const { TabPane } = Tabs;
+  const setupElements = () => {
+    const { TabPane } = Tabs;
+    let content;
+    if (club !== undefined && team !== undefined) {
+      content = (
+        <>
+          <div className="container rounded mt-5 mb-5 py-3">
+            <div className="card-container">
+              <Tabs type="card">
+                <TabPane tab="Your Club" key="1">
+                  <ClubInformations club={club} />
+                </TabPane>
+                <TabPane tab="Your team" key="2">
+                  <PlayersList players={team.players} />
+                </TabPane>
+              </Tabs>
+            </div>
+          </div>
+        </>
+      );
+    } else {
+      content = '';
+    }
+    return content;
+  };
 
   return (
-    <div className="container rounded mt-5 mb-5 py-3" style={{ backgroundColor: '#E8E7E7' }}>
-      <div className="card-container">
-        <Tabs type="card">
-          <TabPane tab="Your Club" key="1">
-            <ClubInformations club={club} />
-          </TabPane>
-          <TabPane tab="Your team" key="2">
-            <PlayersList players={team.players} />
-          </TabPane>
-        </Tabs>
-      </div>
-    </div>
+    setupElements()
   );
 };
 

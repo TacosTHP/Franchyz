@@ -87,5 +87,5 @@ const Calendar = ({ attendances }) => {
 export default Calendar;
 
 Calendar.propTypes = {
-  attendances: PropTypes.arrayOf(PropTypes.object).isRequired,
+  attendances: PropTypes.objectOf(PropTypes.array).isRequired,
 };

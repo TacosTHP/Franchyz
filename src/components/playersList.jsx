@@ -7,6 +7,7 @@ const PlayersList = ({ players }) => {
   const setList = () => players.map((player) => <Player key={player.id} player={player} />);
 
   const setupPlayersListOrAddInvitation = () => {
+    console.log(players);
     let content;
     if (players.length === 0) {
       content = (

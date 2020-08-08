@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import DashboardAdminTabs from 'components/dashboardAdminTabs';
-import Calendar from 'components/calendar';
+import Calendar from 'components/Calendar';
 import * as clubAPI from 'services/clubAPI';
 
 import '../styles/form.scss';
