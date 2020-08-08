@@ -1,23 +1,21 @@
 import Cookies from 'js-cookie';
 
-function getGame(game_id) {
-        let baseURL = process.env.REACT_APP_API_URL;
-        let endUrl = `/games/${game_id}.json`
-        let url = baseURL + endUrl
-  
-        let headers = {
-          'Content-Type': 'application/json'
-        }
-  
-        let request = {
-          headers: headers
-        }
-        
-        return fetch(url, request)
-          .then(response => response.json())
-          .then(response => { return response })
-  
-  }
+const getGame = ({ gameId }) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/games/${gameId}.json`;
+  const url = baseURL + endUrl;
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const request = {
+    headers,
+  };
+
+  return fetch(url, request)
+    .then((response) => response.json());
+};
 
 const createGame = ({
   title, description, address, city, country, zipCode, datetime, duration,
