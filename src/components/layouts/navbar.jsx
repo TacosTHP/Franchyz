@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Portrait from './portrait';
-import '../../styles/nav.scss';
+import 'styles/nav.scss';
 
 const Navbar = () => {
   const isAuth = useSelector((state) => state.authReducer.isAuth);
