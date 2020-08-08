@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 
-import ClubInformations from './clubInformations';
+import ClubInformations from 'components/ClubInformations';
 import ClubEdit from './clubEdit';
 import TeamList from './teamList';
 
