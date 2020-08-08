@@ -5,7 +5,7 @@ import store from 'redux/store';
 
 import EventNewPage from 'pages/EventNewPage';
 import CreateClub from 'pages/createClub';
-import Home from 'pages/home';
+import Home from 'pages/Home';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 import CreateTeam from 'pages/createTeam';
