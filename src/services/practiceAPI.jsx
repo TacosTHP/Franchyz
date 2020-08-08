@@ -1,23 +1,21 @@
 import Cookies from 'js-cookie';
 
-function getPractice(practice_id) {
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/practices/${practice_id}.json`
-  let url = baseURL + endUrl
+const getPractice = ({ practiceId }) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/practices/${practiceId}.json`;
+  const url = baseURL + endUrl;
 
-  let headers = {
-    'Content-Type': 'application/json'
-  }
+  const headers = {
+    'Content-Type': 'application/json',
+  };
 
-  let request = {
-    headers: headers
-  }
+  const request = {
+    headers,
+  };
 
   return fetch(url, request)
-    .then(response => response.json())
-    .then(response => { return response })
-
-}
+    .then((response) => response.json());
+};
 
 const createPractice = ({
   title, description, address, city, country, zipCode, datetime, duration,
