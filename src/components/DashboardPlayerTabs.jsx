@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 
-import ClubInformations from './clubInformations';
-import PlayersList from './playersList';
+import PlayersList from 'components/PlayersList';
+import ClubInformations from 'components/ClubInformations';
 
 const DashboardPlayerTabs = ({ club, team }) => {
   const setupElements = () => {
