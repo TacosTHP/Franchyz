@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 
 import ClubInformations from './clubInformations';
-import TeamList from './teamList';
+import PlayersList from './playersList';
 
-const DashboardPlayerTabs = ({ club }) => {
+const DashboardPlayerTabs = ({ club, team }) => {
   const { TabPane } = Tabs;
 
   return (
@@ -16,7 +16,7 @@ const DashboardPlayerTabs = ({ club }) => {
             <ClubInformations club={club} />
           </TabPane>
           <TabPane tab="Your team" key="2">
-            <TeamList teams={club.teams} />
+            <PlayersList players={team.players} />
           </TabPane>
         </Tabs>
       </div>
@@ -43,5 +43,13 @@ DashboardPlayerTabs.propTypes = {
     teams: PropTypes.arrayOf(PropTypes.object),
     players: PropTypes.arrayOf(PropTypes.object),
     attendances: PropTypes.objectOf(PropTypes.array),
+  }).isRequired,
+  team: PropTypes.shape({
+    title: PropTypes.string,
+    club_id: PropTypes.number,
+    coach_id: PropTypes.number,
+    creator_id: PropTypes.number,
+    attendances: PropTypes.objectOf(PropTypes.array),
+    players: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
