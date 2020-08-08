@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import Calendar from 'components/calendar';
-import DashboardPlayerTabs from 'components/dashboardPlayerTabs';
+import Calendar from 'components/Calendar';
+import DashboardPlayerTabs from 'components/DashboardPlayerTabs';
 
 import * as clubAPI from 'services/clubAPI';
 import * as teamAPI from 'services/teamAPI';
 import * as userAPI from 'services/userAPI';
 
-import '../styles/form.scss';
+import 'styles/form.scss';
 
 const PlayerDashboardPage = () => {
   const myClubId = useSelector((state) => state.userReducer.clubId);
@@ -20,7 +20,7 @@ const PlayerDashboardPage = () => {
 
   const setupElements = () => {
     let content;
-    if (player !== undefined) {
+    if (player !== undefined && club !== undefined && team !== undefined) {
       content = (
         <>
           <DashboardPlayerTabs club={club} team={team} />
@@ -68,20 +68,19 @@ const PlayerDashboardPage = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      let response;
-      response = await clubAPI.getClub(myClubId);
-      setClub(response);
-      response = await teamAPI.getTeam({ myClubId, teamId });
-      setTeam(response);
-      response = await userAPI.getPlayer(myClubId, teamId, playerId);
-      setPlayer(response);
+      const clubData = await clubAPI.getClub(myClubId);
+      setClub(clubData);
+      const teamData = await teamAPI.getTeam(myClubId, teamId);
+      setTeam(teamData);
+      const playerData = await userAPI.getPlayer(myClubId, teamId, playerId);
+      setPlayer(playerData);
     };
     loadData();
   }, []);
 
   return (
     <div className="container mb-3 mt-3">
-      {setupPageOrInvitation()}
+      { setupPageOrInvitation() }
     </div>
   );
 };

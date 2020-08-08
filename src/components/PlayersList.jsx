@@ -8,14 +8,7 @@ const PlayersList = ({ players }) => {
 
   const setupPlayersListOrAddInvitation = () => {
     let content;
-    if (players.length === 0) {
-      content = (
-        <div className="container d-flex flex-column justify-content-center align-items-center my-5">
-          <p>It seems you don&apos;t have players yet, let&apos;s add some of them now</p>
-          <Link to="/" className="btn btn-primary">Add Players</Link>
-        </div>
-      );
-    } else {
+    if (players !== undefined) {
       content = (
         <table className="table">
           <thead>
@@ -33,6 +26,13 @@ const PlayersList = ({ players }) => {
             {setList()}
           </tbody>
         </table>
+      );
+    } else {
+      content = (
+        <div className="container d-flex flex-column justify-content-center align-items-center my-5">
+          <p>It seems you don&apos;t have players yet, let&apos;s add some of them now</p>
+          <Link to="/" className="btn btn-primary">Add Players</Link>
+        </div>
       );
     }
     return content;

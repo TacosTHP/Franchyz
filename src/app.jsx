@@ -13,7 +13,7 @@ import AdminCoachDashboardPage from 'pages/adminCoachDashboardPage';
 import ShowGame from 'pages/showGame';
 import ShowTeam from 'pages/showTeam';
 import ShowPractice from 'pages/showPractice';
-import PlayerDashboardPage from 'pages/playerDashboardPage';
+import PlayerDashboardPage from 'pages/PlayerDashboardPage';
 import Profile from 'pages/profile';
 
 import Navbar from 'components/layouts/navbar';

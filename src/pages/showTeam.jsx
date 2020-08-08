@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/form.scss';
 import { Link, useParams } from 'react-router-dom';
 import * as teamAPI from 'services/teamAPI';
-import PlayersList from 'components/playersList';
+import PlayersList from 'components/PlayersList';
 
 function TeamShow() {
   let {clubId, teamId} = useParams();

@@ -15,7 +15,7 @@ const getTeams = ({ clubId }) => {
     .then((response) => response.json());
 };
 
-const getTeam = ({ clubId, teamId }) => {
+const getTeam = (clubId, teamId) => {
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/clubs/${clubId}/teams/${teamId}.json`;
   const url = baseURL + endUrl;
