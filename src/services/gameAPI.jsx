@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const getGame = ({ gameId }) => {
+const getGame = (gameId) => {
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/games/${gameId}.json`;
   const url = baseURL + endUrl;
@@ -10,6 +10,7 @@ const getGame = ({ gameId }) => {
   };
 
   const request = {
+    method: 'get',
     headers,
   };
 
