@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import store from 'redux/store';
 
 import EventNewPage from 'pages/EventNewPage';
-import CreateClub from 'pages/createClub';
+import ClubNewPage from 'pages/ClubNewPage';
 import Home from 'pages/Home';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
@@ -34,7 +34,7 @@ const App = () => (
         <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
         <PrivateRoute exact path="/newTeam" component={CreateTeam} />
         <PrivateRoute exact path="/eventNewPage" component={EventNewPage} />
-        <PrivateRoute exact path="/newClub" component={CreateClub} />
+        <PrivateRoute exact path="/newClub" component={ClubNewPage} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/clubs/:clubId/teams/:teamId" component={ShowTeam} />
         <PrivateRoute exact path="/games/:gamesId" component={ShowGame} />
