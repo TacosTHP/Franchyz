@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const getPractice = ({ practiceId }) => {
+const getPractice = (practiceId) => {
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/practices/${practiceId}.json`;
   const url = baseURL + endUrl;

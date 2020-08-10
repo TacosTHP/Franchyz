@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import localization from 'moment/locale/fr';
-import * as practiceAPI from 'services/practiceAPI';
+import * as eventsAPI from 'services/practiceAPI';
 
 const PracticeShow = () => {
-  let { practicesId } = useParams();
+  const { practicesId } = useParams();
   const [practice, setPractice] = useState({});
   moment.updateLocale('fr', localization);
 
   const setupPage = () => {
     let content;
-    if (practicesId !== undefined) {
+    if (practice !== undefined) {
       content = (
         <>
           <div className="card mx-auto">
@@ -60,10 +60,11 @@ const PracticeShow = () => {
   };
 
   useEffect(() => {
-    practiceAPI.getPractice(practicesId)
-      .then((response) => {
-        setPractice(response.practice);
-      });
+    const loadData = async () => {
+      const practiceData = await eventsAPI.getPractice(practicesId);
+      setPractice(practiceData.practice);
+    };
+    loadData();
   }, []);
 
   return (
