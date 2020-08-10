@@ -8,7 +8,7 @@ import ClubNewPage from 'pages/ClubNewPage';
 import Home from 'pages/Home';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
-import CreateTeam from 'pages/createTeam';
+import CreateTeam from 'pages/TeamNewPage';
 import AdminCoachDashboardPage from 'pages/adminCoachDashboardPage';
 import ShowGame from 'pages/showGame';
 import ShowTeam from 'pages/showTeam';
