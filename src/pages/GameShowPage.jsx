@@ -3,16 +3,16 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import localization from 'moment/locale/fr';
 import * as eventsAPI from 'services/gameAPI';
-import '../styles/app.scss';
+import 'styles/app.scss';
 
 const GameShow = () => {
-  let { gamesId } = useParams();
-  const [game, setGame] = useState({});
+  const { gamesId } = useParams();
+  const [game, setGame] = useState();
   moment.updateLocale('fr', localization);
 
   const setupPage = () => {
     let content;
-    if (gamesId !== undefined) {
+    if (game !== undefined) {
       content = (
         <>
           <div className="card auto-mx">
@@ -41,9 +41,10 @@ const GameShow = () => {
               <p>
                 {game.duration}
               </p>
-              { game.canceled !== false
-                ? ''
-                : <h6 className="redtext">The event is canceled.</h6>
+              {
+                game.canceled !== false
+                  ? ''
+                  : <h6 className="redtext">The event is canceled.</h6>
               }
             </div>
           </div>
@@ -60,10 +61,11 @@ const GameShow = () => {
   };
 
   useEffect(() => {
-    eventsAPI.getGame(gamesId)
-      .then((response) => {
-        setGame(response.game);
-      });
+    const loadData = async () => {
+      const gameData = await eventsAPI.getGame(gamesId);
+      setGame(gameData.game);
+    };
+    loadData();
   }, []);
 
   return (
