@@ -28,6 +28,7 @@ const login = (input) => {
   return async (dispatch) => {
     dispatch(loginRequest());
     let response = await authAPI.signIn(input);
+    console.log(response)
     let body = await response.json()
 
       if (response.status !== 201) {

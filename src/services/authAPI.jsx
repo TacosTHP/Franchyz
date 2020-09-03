@@ -71,7 +71,6 @@ const signIn = ({ email, password, type }) => {
   };
 
   return fetch(url, request)
-    .then((response) => response.json());
 };
 
 const signOut = (type) => {
