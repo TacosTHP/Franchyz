@@ -19,11 +19,9 @@ const getPlayer = (clubId, teamId, playerId) => {
     .then((response) => response.json());
 };
 
-const playerUpdate = ({
-  clubId, teamId, playerId, data,
-}) => {
+const playerUpdate = (input, clubId) => {
   const baseURL = process.env.REACT_APP_API_URL;
-  const endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}`;
+  const endUrl = `/clubs/${clubId}/teams/${input.team_id}/players/${input.id}`;
   const url = baseURL + endUrl;
 
   const headers = {
@@ -34,7 +32,7 @@ const playerUpdate = ({
   const request = {
     method: 'PUT',
     headers,
-    body: JSON.stringify(data),
+    body: JSON.stringify(input),
   };
 
   return fetch(url, request)
