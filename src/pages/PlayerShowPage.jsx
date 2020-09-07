@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import ProfileEdit from 'components/profileEdit';
+import PlayerEditForm from 'components/PlayerEditForm';
 import ProfileShow from 'components/profileShow';
 
 import * as userAPI from 'services/userAPI';
@@ -14,10 +14,13 @@ const Profile = () => {
 
   const setupElements = () => {
     let elements;
-    if (profile.player.id === currentUser.id) {
+    if (profile.player.id == currentUser.id) {
       elements = (
         <>
-          <ProfileEdit player={profile.player} />
+          <div>
+            Hey Mate what is up ? Welcome on your Profile Edit
+          </div>
+          <PlayerEditForm player={profile.player} team={profile.team} />
         </>
       );
     } else {
@@ -35,10 +38,6 @@ const Profile = () => {
     if (profile !== undefined) {
       content = (
         <>
-          <div>
-            {profile.player.first_name}
-            {profile.player.last_name}
-          </div>
           { setupElements() }
         </>
       );
