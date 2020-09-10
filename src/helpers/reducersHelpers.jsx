@@ -38,7 +38,7 @@ const authRefresher = () => {
       loading: false,
       isAuth: false,
       userType: '',
-      error: '',
+      error: null, 
     }
   }
   else{
@@ -47,7 +47,7 @@ const authRefresher = () => {
       loading: false,
       isAuth: true,
       userType: decodedToken['scp'],
-      error: '',
+      error: null,
     } 
   }
 }
