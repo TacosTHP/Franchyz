@@ -1,60 +1,57 @@
-import * as clubAPI from 'services/clubAPI';
-import * as userAPI from 'services/userAPI';
 import Cookies from 'js-cookie';
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode';
 
 const setUserInfo = (decodedToken) => {
   let userInfo = {
-    id: decodedToken['sub'],
-    email: decodedToken['email'],
-    firstName: decodedToken['first_name'],
-    lastName: decodedToken['last_name'],
+    id: decodedToken.sub,
+    email: decodedToken.email,
+    firstName: decodedToken.firstName,
+    lastName: decodedToken.lastName,
     isAdmin: decodedToken['admin?'],
-    clubId: decodedToken['club_id'],
-    teamId: decodedToken['team_id'],
-  }
-  userInfo = JSON.stringify(userInfo)
-  Cookies.set('userInfo', userInfo, {sameSite: 'lax'})
-}
+    clubId: decodedToken.club_id,
+    teamId: decodedToken.team_id,
+  };
+  userInfo = JSON.stringify(userInfo);
+  Cookies.set('userInfo', userInfo, { sameSite: 'lax' });
+};
 
 const updateUserInfo = (hash) => {
-  console.log(hash)
-  let userInfo = JSON.parse(Cookies.get('userInfo'))
-  for(let key in hash) {
-      console.log(hash[key])
+  let userInfo = JSON.parse(Cookies.get('userInfo'));
+  Object.entries(hash).forEach(([key, value]) => {
     userInfo = {
       ...userInfo,
-      [key]: hash[key],
-    }
-  }
-  console.log(userInfo)
-  userInfo = JSON.stringify(userInfo)
-  Cookies.set('userInfo', userInfo, {sameSite: 'lax'})
-}
+      [key]: value,
+    };
+  });
+  userInfo = JSON.stringify(userInfo);
+  Cookies.set('userInfo', userInfo, { sameSite: 'lax' });
+};
 
 const authRefresher = () => {
-  if (Cookies.get('token') === undefined || Cookies.get('token') === null){
-    return {
+  let ans;
+  if (Cookies.get('token') === undefined || Cookies.get('token') === null) {
+    ans = {
       loading: false,
       isAuth: false,
       userType: '',
-      error: null, 
-    }
-  }
-  else{
-    let decodedToken = jwt_decode(Cookies.get('token'))
-    return {
+      error: null,
+    };
+  } else {
+    const decodedToken = jwtDecode(Cookies.get('token'));
+    ans = {
       loading: false,
       isAuth: true,
-      userType: decodedToken['scp'],
+      userType: decodedToken.scp,
       error: null,
-    } 
+    };
   }
-}
+  return ans;
+};
 
 const userInfoRefresher = () => {
+  let ans;
   if (Cookies.get('userInfo') === undefined) {
-    return {
+    ans = {
       id: null,
       email: '',
       firstName: '',
@@ -62,11 +59,13 @@ const userInfoRefresher = () => {
       isAdmin: null,
       clubId: null,
       teamId: null,
-    }
+    };
+  } else {
+    ans = JSON.parse(Cookies.get('userInfo'));
   }
-  else {
-    return JSON.parse(Cookies.get('userInfo'))
-  }
-}
+  return ans;
+};
 
-export { setUserInfo, updateUserInfo, authRefresher, userInfoRefresher }
+export {
+  setUserInfo, updateUserInfo, authRefresher, userInfoRefresher,
+};
