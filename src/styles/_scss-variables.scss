@@ -1,7 +1,13 @@
 /////////////////COLORS//////////////////
-$primary: #ffa800;
+$primary: #FFA500;
 $secondary: #294667;
 $white: #fff;
+
+$theme-colors: (
+  "primary": $primary,
+  "danger": #ff4136,
+  "dark": #1d1c1c
+);
 
 :export {
   primaryColor: $primary;
