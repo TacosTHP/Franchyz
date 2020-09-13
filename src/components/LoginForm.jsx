@@ -9,7 +9,6 @@ import { login } from '../redux/middlewares/authMiddlewares';
 const LoginForm = () => {
   const [input, handleInputChange] = useInputChange();
   const history = useHistory();
-  const error = useSelector((state) => state.authReducer.error);
   const isAuth = useSelector((state) => state.authReducer.isAuth);
   const userType = useSelector((state) => state.authReducer.userType);
   const dispatch = useDispatch();
@@ -28,12 +27,6 @@ const LoginForm = () => {
       history.push('/dashboardPlayer');
     }
   }, [isAuth]);
-
-  useEffect(() => {
-    if (error !== '') {
-      message.error(error, 2.5);
-    }
-  }, [error]);
 
   return (
     <form className="form-auth p-4 mt-3 mb-3 rounded" onSubmit={submit}>
