@@ -3,6 +3,7 @@ import HomeNavbar from 'components/layouts/HomeNavbar';
 import Carousel from 'components/Carousel';
 import StatisticsBandeau from 'components/StatisticsBandeau';
 import FeatureBandeau from 'components/FeatureBandeau';
+import PrimaryCTABandeau from 'components/PrimaryCTABandeau';
 
 import image from 'assets/action-american-football-athletes-field-260697.jpg';
 
@@ -14,6 +15,12 @@ const Home = () => {
       <HomeNavbar />
       <Carousel />
       <StatisticsBandeau />
+      <PrimaryCTABandeau
+        title={title}
+        description={title}
+        CTA="Meet my Team Now !"
+        icon=""
+      />
       <FeatureBandeau
         title={title}
         description={description}
@@ -25,6 +32,12 @@ const Home = () => {
         description={description}
         image={image}
         imageFirst={false}
+      />
+      <PrimaryCTABandeau
+        title={title}
+        description={title}
+        CTA="Meet my Team Now !"
+        icon=""
       />
     </>
   );
