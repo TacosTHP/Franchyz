@@ -1,5 +1,5 @@
 import {
-  LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE, LOGOUT_SUCCESS,
+  LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE, LOGOUT_SUCCESS, RESET_ERROR,
 } from '../types/authTypes';
 
 const loginRequest = () => (
@@ -28,6 +28,12 @@ const logoutSuccess = () => (
   }
 );
 
+const resetError = () => (
+  {
+    type: RESET_ERROR,
+  }
+);
+
 export {
-  loginRequest, loginSuccess, loginFailure, logoutSuccess,
+  loginRequest, loginSuccess, loginFailure, logoutSuccess, resetError,
 };
