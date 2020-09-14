@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import * as clubAPI from 'services/clubAPI';
-import RegisterForm from 'components/RegisterForm';
+import { Link } from 'react-router-dom';
+import SideRegisterForm from 'components/SideRegisterForm';
+
+import 'styles/form.scss';
 
 const RegisterPage = () => {
   const [clubs, setClubs] = useState(null);
 
-  const setupLoadingClubs = () => {
+  const setupForm = () => {
     let content;
     if (clubs !== null) {
-      content = <RegisterForm clubs={clubs} />;
+      content = (
+        <SideRegisterForm clubs={clubs} />
+      );
     } else {
       content = <p> loading </p>;
     }
@@ -24,10 +29,33 @@ const RegisterPage = () => {
   }, []);
 
   return (
-    <>
-      <h3> Register ! </h3>
-      {setupLoadingClubs()}
-    </>
+    <div className="d-flex">
+      <div className="hero-image-register" style={{ width: '66%' }} />
+      <div
+        className="d-flex flex-column justify-content-center align-items-center py-4"
+        style={{
+          width: '34%',
+          backgroundColor: '#000',
+        }}
+      >
+        <h3 className="text-primary">Register to get Instant Access !</h3>
+        <div className="px-3 my-3">
+          {setupForm()}
+        </div>
+        <div className="d-flex flex-column align-items-center">
+          <Link to="/">
+            <p className="text-primary">
+              Forgot password?
+            </p>
+          </Link>
+          <Link to="/">
+            <p className="text-primary">
+              Already registered ? Access your account here !
+            </p>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 };
 
