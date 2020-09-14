@@ -13,7 +13,6 @@ const RegisterForm = ({ clubs }) => {
   const history = useHistory();
   const isAuth = useSelector((state) => state.authReducer.isAuth);
   const userType = useSelector((state) => state.authReducer.userType);
-  const errors = useSelector((state) => state.authReducer.error);
   const dispatch = useDispatch();
   const [input, handleInputChange] = useInputChange();
 
