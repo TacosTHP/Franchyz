@@ -1,6 +1,7 @@
 import { authRefresher } from 'helpers/reducersHelpers';
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, RESET_ERROR,
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, DISPLAY_SUCCESS_MESSAGE,
+  RESET_SUCCESS_MESSAGE, RESET_ERROR_MESSAGE,
 } from '../types/authTypes';
 
 const initialState = authRefresher();
@@ -18,12 +19,13 @@ const authReducer = (state = initialState, action) => {
         isAuth: true,
         loading: false,
         userType: action.userType,
+        successMessage: 'you are connected',
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         loading: false,
-        error: action.error,
+        errorMessage: action.errorMessage,
       };
     case LOGOUT_SUCCESS:
       return {
@@ -31,11 +33,22 @@ const authReducer = (state = initialState, action) => {
         loading: false,
         isAuth: false,
         userType: '',
+        successMessage: 'you are disconnected',
       };
-    case RESET_ERROR:
+    case DISPLAY_SUCCESS_MESSAGE:
       return {
         ...state,
-        error: null,
+        successMessage: action.successMessage,
+      };
+    case RESET_SUCCESS_MESSAGE:
+      return {
+        ...state,
+        successMessage: null,
+      };
+    case RESET_ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: null,
       };
     default:
       return {

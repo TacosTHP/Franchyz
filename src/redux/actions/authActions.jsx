@@ -1,5 +1,6 @@
 import {
-  LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE, LOGOUT_SUCCESS, RESET_ERROR,
+  LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE, LOGOUT_SUCCESS,
+  DISPLAY_SUCCESS_MESSAGE, RESET_SUCCESS_MESSAGE, RESET_ERROR_MESSAGE,
 } from '../types/authTypes';
 
 const loginRequest = () => (
@@ -15,10 +16,10 @@ const loginSuccess = (decodedToken) => (
   }
 );
 
-const loginFailure = (error) => (
+const loginFailure = (errorMessage) => (
   {
     type: LOGIN_FAILURE,
-    error,
+    errorMessage,
   }
 );
 
@@ -28,12 +29,26 @@ const logoutSuccess = () => (
   }
 );
 
-const resetError = () => (
+const displaySuccessMessage = (successMessage) => (
   {
-    type: RESET_ERROR,
+    type: DISPLAY_SUCCESS_MESSAGE,
+    successMessage,
+  }
+);
+
+const resetSuccessMessage = () => (
+  {
+    type: RESET_SUCCESS_MESSAGE,
+  }
+);
+
+const resetErrorMessage = () => (
+  {
+    type: RESET_ERROR_MESSAGE,
   }
 );
 
 export {
-  loginRequest, loginSuccess, loginFailure, logoutSuccess, resetError,
+  loginRequest, loginSuccess, loginFailure, logoutSuccess,
+  displaySuccessMessage, resetSuccessMessage, resetErrorMessage,
 };
