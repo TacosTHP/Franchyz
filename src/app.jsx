@@ -16,6 +16,7 @@ import TeamShowPage from 'pages/TeamShowPage';
 import PracticeShowPage from 'pages/PracticeShowPage';
 import PlayerDashboardPage from 'pages/PlayerDashboardPage';
 import PlayerShowPage from 'pages/PlayerShowPage';
+import Connect from 'components/Connect';
 
 import Navbar from 'components/layouts/navbar';
 import PrivateRoute from 'components/privateRoute';
@@ -31,6 +32,7 @@ const App = () => (
     <Router>
       <Alert />
       <Navbar />
+      <Connect />
       <Switch>
         <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
         <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
