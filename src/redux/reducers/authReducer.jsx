@@ -1,7 +1,7 @@
 import { authRefresher } from 'helpers/reducersHelpers';
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, DISPLAY_SUCCESS_MESSAGE,
-  RESET_SUCCESS_MESSAGE, RESET_ERROR_MESSAGE,
+  RESET_SUCCESS_MESSAGE, RESET_ERROR_MESSAGE, CONNECT, RESET_URL,
 } from '../types/authTypes';
 
 const initialState = authRefresher();
@@ -49,6 +49,16 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         errorMessage: null,
+      };
+    case CONNECT:
+      return {
+        ...state,
+        url: action.url,
+      };
+    case RESET_URL:
+      return {
+        ...state,
+        url: null,
       };
     default:
       return {

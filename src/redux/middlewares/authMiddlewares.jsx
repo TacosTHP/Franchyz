@@ -1,7 +1,9 @@
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 import * as authAPI from 'services/authAPI';
-import { loginRequest, loginSuccess, loginFailure } from 'redux/actions/authActions';
+import {
+  loginRequest, loginSuccess, loginFailure, connect,
+} from 'redux/actions/authActions';
 import { infoUserUp } from 'redux/actions/userActions';
 import { setUserInfo } from 'helpers/reducersHelpers';
 import { setupErrorsMessage } from 'helpers/misc';
@@ -45,6 +47,7 @@ const login = (input) => async (dispatch) => {
     setUserInfo(decodedToken);
     dispatch(loginSuccess(decodedToken));
     dispatch(infoUserUp(decodedToken));
+    dispatch(connect('/'));
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
