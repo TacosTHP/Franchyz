@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { message } from 'antd';
 
@@ -9,6 +9,10 @@ const ErrorAlert = () => {
       message.error(errorMessage, 2.5);
     }
   }, [errorMessage]);
+  return (
+    <>
+    </>
+  );
 };
 
 export default ErrorAlert;
