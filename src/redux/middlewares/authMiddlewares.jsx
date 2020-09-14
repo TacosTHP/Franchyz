@@ -12,8 +12,7 @@ const logup = (input) => async (dispatch) => {
     const response = await authAPI.signUp(input);
 
     if (!response.ok) {
-      const body = await response.json();
-      throw new Error(body.errors);
+      throw response;
     }
 
     Cookies.set('token', response.headers.get('Authorization'), { sameSite: 'lax' });
@@ -21,9 +20,13 @@ const logup = (input) => async (dispatch) => {
     setUserInfo(decodedToken);
     dispatch(loginSuccess(decodedToken));
     dispatch(infoUserUp(decodedToken));
-  } catch (error) {
-    const message = setupErrorsMessage(error.message);
-    dispatch(loginFailure(message));
+  } catch (response) {
+    const body = await response.json();
+    if (body.error !== undefined) {
+      dispatch(loginFailure(body.error));
+    } else {
+      dispatch(loginFailure(setupErrorsMessage(body.errors)));
+    }
   }
 };
 
