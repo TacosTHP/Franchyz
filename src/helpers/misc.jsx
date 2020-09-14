@@ -1,31 +1,38 @@
 import React from 'react';
 
-function pluralyzeType(type) {
-  if(type === 'coach')
-    return 'coaches'
-  else if(type === 'player')
-    return 'players'
-}
+const pluralyzeType = (type) => {
+  let answer;
+  if (type === 'coach') {
+    answer = 'coaches';
+  } else if (type === 'player') {
+    answer = 'players';
+  }
+  return answer;
+};
 
 const setupErrorsMessage = (errors) => {
   let errorsMessage = '';
-  const entries = Object.entries(errors);
-  entries.forEach(([key, value]) => {
-    value.forEach((error) => {
-      errorsMessage = (
-        <>
-          {errorsMessage}
-          {`${key} ${error}`}
-          <br />
-        </>
-      );
+  if (typeof errors === 'object') {
+    const entries = Object.entries(errors);
+    entries.forEach(([key, value]) => {
+      value.forEach((error) => {
+        errorsMessage = (
+          <>
+            {errorsMessage}
+            {`${key} ${error}`}
+            <br />
+          </>
+        );
+      });
     });
-  });
-  errorsMessage = (
-    <p>
-      {errorsMessage}
-    </p>
-  );
+    errorsMessage = (
+      <p>
+        {errorsMessage}
+      </p>
+    );
+  } else {
+    errorsMessage = errors;
+  }
   return errorsMessage;
 };
 
