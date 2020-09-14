@@ -7,7 +7,6 @@ import { message } from 'antd';
 import useInputChange from 'customHooks/useInputChange';
 import { logup } from 'redux/middlewares/authMiddlewares';
 import * as teamAPI from 'services/teamAPI';
-import { setupErrorsMessage } from 'helpers/misc';
 
 const RegisterForm = ({ clubs }) => {
   const [teams, setTeams] = useState(null);
@@ -57,13 +56,6 @@ const RegisterForm = ({ clubs }) => {
       history.push('/dashboardPlayer');
     }
   }, [isAuth]);
-
-  useEffect(() => {
-    if (errors !== '') {
-      const errorsMessage = setupErrorsMessage(errors);
-      message.error(errorsMessage, 2.5);
-    }
-  }, [errors]);
 
   return (
     <form className="form-auth p-4 mt-3 mb-3 rounded" onSubmit={submit}>
