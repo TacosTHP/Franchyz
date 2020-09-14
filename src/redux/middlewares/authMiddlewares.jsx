@@ -4,6 +4,7 @@ import * as authAPI from 'services/authAPI';
 import { loginRequest, loginSuccess, loginFailure } from 'redux/actions/authActions';
 import { infoUserUp } from 'redux/actions/userActions';
 import { setUserInfo } from 'helpers/reducersHelpers';
+import { setupErrorsMessage } from 'helpers/misc';
 
 const logup = (input) => async (dispatch) => {
   try {
@@ -21,7 +22,8 @@ const logup = (input) => async (dispatch) => {
     dispatch(loginSuccess(decodedToken));
     dispatch(infoUserUp(decodedToken));
   } catch (error) {
-    dispatch(loginFailure(error.message));
+    const message = setupErrorsMessage(error.message);
+    dispatch(loginFailure(message));
   }
 };
 
