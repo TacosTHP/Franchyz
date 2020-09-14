@@ -29,6 +29,8 @@ const SideRegisterForm = ({ clubs }) => {
   const setupForm = () => {
     let content;
     if (input.type === 'player') {
+      const hero = document.getElementsByClassName('hero-image-register')[0];
+      hero.style.height = '130vh';
       content = (
         <>
           <div className="form-group">
@@ -95,10 +97,10 @@ const SideRegisterForm = ({ clubs }) => {
   }, [errors]);
 
   return (
-    <form className="border rounded bg-dark p-3" onSubmit={submit}>
+    <form className="rounded bg-dark p-3" onSubmit={submit}>
       <div className="form-group">
         <label htmlFor="type">
-          You are:
+          You are :
           <select id="type" name="type" className="form-control" defaultValue="" onChange={handleInputChange} required>
             <option value="" disabled hidden>Choose an option</option>
             <option value="coach">Coach</option>
@@ -109,19 +111,19 @@ const SideRegisterForm = ({ clubs }) => {
       {setupForm()}
       <div className="form-group">
         <label htmlFor="email">
-          Email address:
+          Email address :
           <input id="email" name="email" type="email" className="form-control" placeholder="Enter email" onChange={handleInputChange} />
         </label>
       </div>
       <div className="form-group">
         <label htmlFor="password">
-          Password:
+          Password :
           <input id="password" name="password" type="password" className="form-control" placeholder="Enter password" onChange={handleInputChange} />
         </label>
       </div>
       <div className="form-group">
         <label htmlFor="password_confirmation">
-          Password confirmation:
+          Password confirmation :
           <input id="password_confirmation" name="password_confirmation" type="password" className="form-control" placeholder="Confirm password" onChange={handleInputChange} />
         </label>
       </div>

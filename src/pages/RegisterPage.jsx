@@ -30,11 +30,11 @@ const RegisterPage = () => {
 
   return (
     <div className="d-flex">
-      <div className="hero-image-register" style={{ width: '66%' }} />
+      <div className="hero-image-register" style={{ width: '60%' }} />
       <div
         className="d-flex flex-column justify-content-center align-items-center py-4"
         style={{
-          width: '34%',
+          width: '40%',
           backgroundColor: '#000',
         }}
       >
@@ -42,12 +42,7 @@ const RegisterPage = () => {
         <div className="px-3 my-3">
           {setupForm()}
         </div>
-        <div className="d-flex flex-column align-items-center">
-          <Link to="/">
-            <p className="text-primary">
-              Forgot password?
-            </p>
-          </Link>
+        <div className="d-flex flex-column align-items-center mt-3">
           <Link to="/">
             <p className="text-primary">
               Already registered ? Access your account here !
