@@ -1,29 +1,33 @@
-import {LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../types/authTypes.jsx'
+import {
+  LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE, LOGOUT_SUCCESS,
+} from '../types/authTypes';
 
-const loginRequest = () => {
-  return {
+const loginRequest = () => (
+  {
     type: LOGIN_REQUEST,
   }
-}
+);
 
-const loginSuccess = (decodedToken) => {
-  return {
+const loginSuccess = (decodedToken) => (
+  {
     type: LOGIN_SUCCESS,
-    userType: decodedToken['scp'],
+    userType: decodedToken.scp,
   }
-}
+);
 
-const loginFailure = (error) => {
-  return {
+const loginFailure = (error) => (
+  {
     type: LOGIN_FAILURE,
-    error: error
+    error,
   }
-}
+);
 
-const logoutSuccess = () => {
-  return {
+const logoutSuccess = () => (
+  {
     type: LOGOUT_SUCCESS,
   }
-}
+);
 
-export {loginRequest, loginSuccess , loginFailure, logoutSuccess}
+export {
+  loginRequest, loginSuccess, loginFailure, logoutSuccess,
+};
