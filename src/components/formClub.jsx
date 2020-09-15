@@ -34,12 +34,6 @@ const FormClub = () => {
       conference,
       creatorId,
     }));
-
-    if (code === 201) {
-      setRedirect(<Redirect to="/dashboardAdmin" />);
-    } else {
-      setRedirect(<Redirect to="/" />);
-    }
   };
 
   const onChange2 = (date, dateString) => {
