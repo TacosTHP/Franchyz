@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { message } from 'antd';
@@ -29,8 +29,6 @@ const SideRegisterForm = ({ clubs }) => {
   const setupForm = () => {
     let content;
     if (input.type === 'player') {
-      const hero = document.getElementsByClassName('hero-image-register')[0];
-      hero.style.height = '130vh';
       content = (
         <>
           <div className="form-group">
@@ -97,38 +95,50 @@ const SideRegisterForm = ({ clubs }) => {
   }, [errors]);
 
   return (
-    <form className="rounded bg-dark p-3" onSubmit={submit}>
-      <div className="form-group">
-        <label htmlFor="type">
-          You are :
-          <select id="type" name="type" className="form-control" defaultValue="" onChange={handleInputChange} required>
-            <option value="" disabled hidden>Choose an option</option>
-            <option value="coach">Coach</option>
-            <option value="player">Player</option>
-          </select>
-        </label>
+    <div className="d-flex flex-column justify-content-center align-items-center py-4" id="form-wrapper">
+      <h3 className="text-primary">Register to get Instant Access !</h3>
+      <div className="px-3 my-3">
+        <form className="rounded bg-dark p-3" onSubmit={submit}>
+          <div className="form-group">
+            <label htmlFor="type">
+              You are :
+              <select id="type" name="type" className="form-control" defaultValue="" onChange={handleInputChange} required>
+                <option value="" disabled hidden>Choose an option</option>
+                <option value="coach">Coach</option>
+                <option value="player">Player</option>
+              </select>
+            </label>
+          </div>
+          {setupForm()}
+          <div className="form-group">
+            <label htmlFor="email">
+              Email address :
+              <input id="email" name="email" type="email" className="form-control" placeholder="Enter email" onChange={handleInputChange} />
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">
+              Password :
+              <input id="password" name="password" type="password" className="form-control" placeholder="Enter password" onChange={handleInputChange} />
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="password_confirmation">
+              Password confirmation :
+              <input id="password_confirmation" name="password_confirmation" type="password" className="form-control" placeholder="Confirm password" onChange={handleInputChange} />
+            </label>
+          </div>
+          <button type="submit" className="btn btn-primary w-100">Submit</button>
+        </form>
       </div>
-      {setupForm()}
-      <div className="form-group">
-        <label htmlFor="email">
-          Email address :
-          <input id="email" name="email" type="email" className="form-control" placeholder="Enter email" onChange={handleInputChange} />
-        </label>
+      <div className="d-flex flex-column align-items-center mt-3">
+        <Link to="/">
+          <p className="text-primary">
+            Already registered ? Access your account here !
+          </p>
+        </Link>
       </div>
-      <div className="form-group">
-        <label htmlFor="password">
-          Password :
-          <input id="password" name="password" type="password" className="form-control" placeholder="Enter password" onChange={handleInputChange} />
-        </label>
-      </div>
-      <div className="form-group">
-        <label htmlFor="password_confirmation">
-          Password confirmation :
-          <input id="password_confirmation" name="password_confirmation" type="password" className="form-control" placeholder="Confirm password" onChange={handleInputChange} />
-        </label>
-      </div>
-      <button type="submit" className="btn btn-primary w-100">Submit</button>
-    </form>
+    </div>
   );
 };
 
