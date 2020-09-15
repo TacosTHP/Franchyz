@@ -22,6 +22,11 @@ const logup = (input) => async (dispatch) => {
     setUserInfo(decodedToken);
     dispatch(loginSuccess(decodedToken));
     dispatch(infoUserUp(decodedToken));
+    if (decodedToken.scp === 'coach') {
+      dispatch(connect('dashboardAdmin'));
+    } else {
+      dispatch(connect('dashboardPlayer'));
+    }
   } catch (response) {
     const body = await response.json();
     if (body.error !== undefined) {
@@ -47,7 +52,11 @@ const login = (input) => async (dispatch) => {
     setUserInfo(decodedToken);
     dispatch(loginSuccess(decodedToken));
     dispatch(infoUserUp(decodedToken));
-    dispatch(connect('/'));
+    if (decodedToken.scp === 'coach') {
+      dispatch(connect('/dashboardAdmin'));
+    } else {
+      dispatch(connect('/dashboardPlayer'));
+    }
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
