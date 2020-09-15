@@ -13,7 +13,7 @@ const Connect = () => {
       history.push(url);
       dispatch(resetUrl());
     }
-  }, [url]);
+  }, [url, dispatch, history]);
 
   return (
     <>

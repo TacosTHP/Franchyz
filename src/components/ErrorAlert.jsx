@@ -11,7 +11,7 @@ const ErrorAlert = () => {
       message.error(errorMessage, 2.5);
       dispatch(resetErrorMessage());
     }
-  }, [errorMessage]);
+  }, [errorMessage, dispatch]);
   return (
     <>
     </>

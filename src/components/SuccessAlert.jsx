@@ -11,7 +11,7 @@ const SuccessAlert = () => {
       message.success(successMessage, 2.5);
       dispatch(resetSuccessMessage());
     }
-  }, [successMessage]);
+  }, [successMessage, dispatch]);
   return (
     <>
     </>
