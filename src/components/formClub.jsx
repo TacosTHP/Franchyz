@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { DatePicker, Col, Row } from 'antd';
 import '../styles/app.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { createClub } from 'redux/middlewares/resourcesMiddlewares';
+import { createClub } from 'redux/middlewares/clubsMiddlewares';
 import { Redirect } from 'react-router-dom';
 
 const FormClub = () => {
