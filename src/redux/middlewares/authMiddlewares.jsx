@@ -66,7 +66,7 @@ const login = (input) => async (dispatch) => {
 const logout = ({ userType }) => async (dispatch) => {
   try {
     dispatch(loginRequest());
-    const response = await authAPI.signOut({userType});
+    const response = await authAPI.signOut({ userType });
 
     if (!response.ok) {
       const body = await response.json();
