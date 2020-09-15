@@ -3,8 +3,9 @@ import jwtDecode from 'jwt-decode';
 import * as authAPI from 'services/authAPI';
 import {
   loginRequest, loginSuccess, loginFailure, connect,
+  logoutSuccess,
 } from 'redux/actions/authActions';
-import { infoUserUp } from 'redux/actions/userActions';
+import { infoUserUp, infoUserDown } from 'redux/actions/userActions';
 import { setUserInfo } from 'helpers/reducersHelpers';
 import { setupErrorsMessage } from 'helpers/misc';
 
@@ -62,4 +63,24 @@ const login = (input) => async (dispatch) => {
   }
 };
 
-export { login, logup };
+const logout = () => async (dispatch) => {
+  try {
+    dispatch(loginRequest());
+    const response = await authAPI.signOut();
+
+    if (!response.ok) {
+      const body = await response.json();
+      throw new Error(body.error);
+    }
+
+    dispatch(logoutSuccess());
+    dispatch(infoUserDown());
+    Cookies.remove('token', { sameSite: 'lax' });
+    Cookies.remove('userInfo', { sameSite: 'lax' });
+    dispatch(connect('/'));
+  } catch (error) {
+    dispatch(loginFailure(error.message));
+  }
+};
+
+export { login, logup, logout };

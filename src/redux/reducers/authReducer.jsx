@@ -33,7 +33,7 @@ const authReducer = (state = initialState, action) => {
         loading: false,
         isAuth: false,
         userType: '',
-        successMessage: 'you are disconnected',
+        successMessage: 'You successfully logged out',
       };
     case DISPLAY_SUCCESS_MESSAGE:
       return {
