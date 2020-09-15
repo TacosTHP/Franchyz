@@ -34,7 +34,9 @@ const authRefresher = () => {
       loading: false,
       isAuth: false,
       userType: '',
-      error: null,
+      successMessage: null,
+      errorMessage: null,
+      url: null,
     };
   } else {
     const decodedToken = jwtDecode(Cookies.get('token'));
@@ -42,7 +44,9 @@ const authRefresher = () => {
       loading: false,
       isAuth: true,
       userType: decodedToken.scp,
-      error: null,
+      successMessage: null,
+      errorMessage: null,
+      url: null,
     };
   }
   return ans;
