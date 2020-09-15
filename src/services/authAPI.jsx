@@ -76,7 +76,6 @@ const signOut = (type) => {
   };
 
   return fetch(url, request)
-    .then((response) => response.json());
 };
 
 const profile = ({ id, type }) => {
