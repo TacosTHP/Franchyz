@@ -62,20 +62,20 @@ const signIn = ({ email, password, type }) => {
   return fetch(url, request);
 };
 
-const signOut = (type) => {
-  const types = pluralyzeType(type);
+const signOut = ({ userType }) => {
+  const types = pluralyzeType(userType);
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/${types}/sign_out.json`;
   const url = baseURL + endUrl;
 
   const request = {
-    method: 'deconste',
+    method: 'delete',
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  return fetch(url, request)
+  return fetch(url, request);
 };
 
 const profile = ({ id, type }) => {

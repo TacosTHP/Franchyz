@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from 'redux/middlewares/authMiddlewares';
 import 'bootstrap';
 
 import portrait from 'assets/portrait.jpeg';
-import * as authAPI from 'services/authAPI';
 
 const Portrait = () => {
   const clubId = useSelector((state) => state.userReducer.clubId);
   const teamId = useSelector((state) => state.userReducer.teamId);
   const userId = useSelector((state) => state.userReducer.id);
   const userType = useSelector((state) => state.authReducer.userType);
+  const dispatch = useDispatch();
 
   const setupProfileLink = () => {
     let profileLink;
@@ -22,8 +23,8 @@ const Portrait = () => {
     return profileLink;
   };
 
-  const logout = () => {
-    authAPI.signOut(userType);
+  const disconnect = () => {
+    dispatch(logout({ userType }));
   };
 
   return (
@@ -33,7 +34,7 @@ const Portrait = () => {
       </div>
       <div id="portrait-menu" className="dropdown-menu mt-2" aria-labelledby="navbarDropdownMenuLink">
         {setupProfileLink}
-        <p className="m-0 dropdown-item" onClick={logout}> Logout </p>  
+        <p className="m-0 dropdown-item" onClick={disconnect}> Logout </p>  
       </div>
     </div>
   );
