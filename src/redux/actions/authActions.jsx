@@ -14,6 +14,7 @@ const loginSuccess = (decodedToken) => (
   {
     type: LOGIN_SUCCESS,
     userType: decodedToken.scp,
+    successMessage: `You successfully connected to your account as a ${decodedToken.scp}.`,
   }
 );
 
