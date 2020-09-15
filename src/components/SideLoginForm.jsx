@@ -60,7 +60,7 @@ const SideLoginForm = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="pwd">
+            <label htmlFor="password">
               Password :
               <input id="password" name="password" type="password" className="form-control" placeholder="Enter password" onChange={handleInputChange} />
             </label>
