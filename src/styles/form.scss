@@ -1,14 +1,4 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: "Roboto Slab", sans-serif;
-}
-h1 {
-	font-size: 3em !important;
-}
+@import '_scss-variables.scss';
 
 .form-auth {
 	width: 40vw;
@@ -78,6 +68,11 @@ h1 {
 	background: #fff;
 }
 
+#form-wrapper {
+	width: 40%;
+	background-color: $black
+}
+
 .hero-image-register {
   /* Use "linear-gradient" to add a darken background effect to the image. This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/men-playing-football-2966245.jpg');
@@ -100,6 +95,7 @@ h1 {
 
   /* Set a specific height */
   height: 100vh;
+	width: 60%;
 
   /* Position and center the image to scale nicely on all screens */
   background-position: center;

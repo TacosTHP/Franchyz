@@ -2,9 +2,11 @@
 $primary: #ffa800;
 $secondary: #294667;
 $white: #fff;
+$black: #000;
 
 :export {
   primaryColor: $primary;
   secondaryColor: $secondary;
-  white: $white;
+  whiteColor: $white;
+  blackColor: black
 }
