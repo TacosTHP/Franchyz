@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { resetSuccessMessage } from 'redux/actions/authActions';
 import { message } from 'antd';
 
-const ErrorAlert = () => {
+const SuccessAlert = () => {
   const successMessage = useSelector((state) => state.authReducer.successMessage);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,4 +18,4 @@ const ErrorAlert = () => {
   );
 };
 
-export default ErrorAlert;
+export default SuccessAlert;
