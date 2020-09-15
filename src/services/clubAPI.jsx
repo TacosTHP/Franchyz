@@ -68,8 +68,7 @@ const createClub = ({
     body: JSON.stringify(data),
   };
 
-  return fetch(url, request)
-    .then((response) => response.json());
+  return fetch(url, request);
 };
 
 const editClub = ({ clubId, fields }) => {
