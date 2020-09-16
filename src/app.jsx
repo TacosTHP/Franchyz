@@ -18,20 +18,17 @@ import PlayerDashboardPage from 'pages/PlayerDashboardPage';
 import PlayerShowPage from 'pages/PlayerShowPage';
 import Connect from 'components/Connect';
 
-import Navbar from 'components/layouts/navbar';
 import PrivateRoute from 'components/privateRoute';
 
 import 'bootstrap/dist/js/bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
 import 'antd/dist/antd.css';
 
-import 'styles/form.scss';
+import 'styles/app.scss';
 
 const App = () => (
   <Provider store={store}>
     <Router>
       <Alert />
-      <Navbar />
       <Connect />
       <Switch>
         <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
