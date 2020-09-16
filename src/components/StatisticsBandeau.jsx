@@ -80,6 +80,8 @@ const StatisticsBandeau = ({ statisticObject }) => {
   );
 };
 
+export default StatisticsBandeau;
+
 StatisticsBandeau.propTypes = {
   statisticObject: PropTypes.shape({
     first_resource: PropTypes.shape({
@@ -94,7 +96,22 @@ StatisticsBandeau.propTypes = {
       property_title: PropTypes.string,
       property_value: PropTypes.number,
     }),
-  }).isRequired,
+  }),
 };
 
-export default StatisticsBandeau;
+StatisticsBandeau.defaultProps = {
+  statisticObject: {
+    first_resource: {
+      property_title: 'Title',
+      property_value: 1000,
+    },
+    second_resource: {
+      property_title: 'Title',
+      property_value: 1000,
+    },
+    third_resource: {
+      property_title: 'Title',
+      property_value: 1000,
+    },
+  },
+};
