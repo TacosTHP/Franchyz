@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import PrimaryButton from 'components/Buttons/PrimaryButton';
@@ -9,19 +9,15 @@ const FeatureBandeau = ({
   image,
   imageLeft,
 }) => {
+  const [rowLayout, setRowLayout] = useState('flex-row');
   const setupSide = (rule) => {
-    let layout;
-    if (rule) {
-      layout = (
-        'd-flex flex-row align-items-center py-3 px-2 bg-dark'
-      );
-    } else {
-      layout = (
-        'd-flex flex-row-reverse align-items-center py-3 px-2 bg-dark'
-      );
+    const layout = `d-flex ${rowLayout} align-items-center py-3 px-2 bg-dark`;
+    if (!rule) {
+      setRowLayout('flex-row-reverse');
     }
     return layout;
   };
+
   const setupElements = () => {
     let content;
     if (
