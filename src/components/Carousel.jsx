@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import PrimaryButton from 'components/Buttons/PrimaryButton';
+
 import 'styles/carousel.scss';
 
 const Carousel = () => (
@@ -12,7 +15,7 @@ const Carousel = () => (
               <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
               <p>TEAM MANAGEMENT THE EASY WAY</p>
               <Link to="/register">
-                <button type="button" className="btn btn-primary"> Register now</button>
+                <PrimaryButton text="Meet my Team now !" icon="" />
               </Link>
             </div>
           </div>
@@ -23,7 +26,7 @@ const Carousel = () => (
               <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
               <p>TEAM MANAGEMENT THE EASY WAY</p>
               <Link to="/register">
-                <button type="button" className="btn btn-primary"> Register now</button>
+                <PrimaryButton text="Meet my Team now !" icon="" />
               </Link>
             </div>
           </div>
@@ -34,7 +37,7 @@ const Carousel = () => (
               <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
               <p>TEAM MANAGEMENT THE EASY WAY</p>
               <Link to="/register">
-                <button type="button" className="btn btn-primary"> Register now</button>
+                <PrimaryButton text="Meet my Team now !" icon="" />
               </Link>
             </div>
           </div>

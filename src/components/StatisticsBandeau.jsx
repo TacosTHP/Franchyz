@@ -12,7 +12,7 @@ const StatisticsBandeau = ({ statisticObject }) => {
   };
 
   const titleStyling = {
-    color: variables.white,
+    color: variables.whiteColor,
     fontSize: '2em',
   };
 

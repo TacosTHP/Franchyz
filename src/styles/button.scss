@@ -1,0 +1,8 @@
+@import "_scss-variables.scss";
+
+#primary-button {
+  &:hover {
+    background-color: $grey !important;
+    border-color: $grey !important;
+  }
+}
