@@ -64,6 +64,7 @@ const userInfoRefresher = () => {
     };
   } else {
     ans = Cookies.get('userInfo');
+    ans = JSON.parse(ans);
   }
   return ans;
 };
