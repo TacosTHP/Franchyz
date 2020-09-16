@@ -27,7 +27,23 @@ const Testimonials = ({ testimonials }) => {
 };
 
 Testimonials.propTypes = {
-  testimonials: PropTypes.objectOf(PropTypes.object).isRequired,
+  testimonials: PropTypes.shape({
+    first_user: PropTypes.shape({
+      user_identity: PropTypes.string,
+      user_testimonial: PropTypes.string,
+      user_picture: PropTypes.string,
+    }),
+    second_user: PropTypes.shape({
+      user_identity: PropTypes.string,
+      user_testimonial: PropTypes.string,
+      user_picture: PropTypes.string,
+    }),
+    third_user: PropTypes.shape({
+      user_identity: PropTypes.string,
+      user_testimonial: PropTypes.string,
+      user_picture: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default Testimonials;
