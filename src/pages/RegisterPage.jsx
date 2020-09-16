@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import * as clubAPI from 'services/clubAPI';
+import Hero from 'components/Hero';
 import SideRegisterForm from 'components/SideRegisterForm';
+import image from 'assets/men-playing-football-2966245.jpg';
+
+import * as clubAPI from 'services/clubAPI';
 
 import 'styles/form.scss';
 
@@ -30,7 +33,7 @@ const RegisterPage = () => {
   return (
     <>
       <div className="d-flex">
-        <div className="hero-image-register" style={{ width: '60%' }} />
+        <Hero width="60" image={image} />
         {setupForm()}
       </div>
     </>
