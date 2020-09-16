@@ -44,7 +44,7 @@ const Portrait = () => {
         <img src={portrait} className="rounded-circle" alt="portrait" id="portrait" />
       </div>
       <div id="portrait-menu" className="dropdown-menu mt-2" aria-labelledby="navbarDropdownMenuLink">
-        {setupProfileLink}
+        {setupProfileLink()}
         <p className="m-0 dropdown-item" onClick={logout}> Logout </p>  
       </div>
     </div>
