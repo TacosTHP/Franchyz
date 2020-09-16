@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PrimaryButton = ({ text, icon }) => (
+const DarkButton = ({ text, icon }) => (
   <>
     <button type="button" className="btn btn-dark text-white font-weight-bold d-flex justify-content-center">
       <div>
@@ -14,9 +14,9 @@ const PrimaryButton = ({ text, icon }) => (
   </>
 );
 
-export default PrimaryButton;
+export default DarkButton;
 
-PrimaryButton.propTypes = {
+DarkButton.propTypes = {
   text: PropTypes.string,
   icon: PropTypes.elementType,
 }.isRequired;
