@@ -15,7 +15,7 @@ const PrimaryCTABandeau = ({
       content = (
         <>
           <div className=" container d-flex justify-content-around align-items-center py-5 bg-primary">
-            <div>
+            <div className="mx-4 w-75">
               <h3 className="text-dark">
                 {title}
               </h3>
@@ -23,7 +23,7 @@ const PrimaryCTABandeau = ({
                 {description}
               </p>
             </div>
-            <div>
+            <div className="mx-4 w-25">
               <DarkButton text={CTA} icon={icon} />
             </div>
           </div>
