@@ -1,10 +1,16 @@
 import React from 'react';
-import LoginForm from 'components/LoginForm';
+
+import SideLoginForm from 'components/SideLoginForm';
+import Hero from 'components/Hero';
+
+import image from 'assets/men-playing-football-2966245.jpg';
 
 const LoginPage = () => (
   <>
-    <h3 className="text-center"> Login </h3>
-    <LoginForm />
+    <div className="d-flex">
+      <SideLoginForm />
+      <Hero width="60" image={image} />
+    </div>
   </>
 );
 

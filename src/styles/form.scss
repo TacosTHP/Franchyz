@@ -1,14 +1,4 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: "Roboto Slab", sans-serif;
-}
-h1 {
-	font-size: 3em !important;
-}
+@import '_scss-variables.scss';
 
 .form-auth {
 	width: 40vw;
@@ -76,4 +66,9 @@ h1 {
 .site-custom-tab-bar {
 	z-index: 1;
 	background: #fff;
+}
+
+#form-wrapper {
+	width: 40%;
+	background-color: $black
 }

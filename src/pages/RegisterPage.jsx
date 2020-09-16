@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import Hero from 'components/Hero';
+import SideRegisterForm from 'components/SideRegisterForm';
+import image from 'assets/men-playing-football-2966245.jpg';
+
 import * as clubAPI from 'services/clubAPI';
-import RegisterForm from 'components/RegisterForm';
+
+import 'styles/form.scss';
 
 const RegisterPage = () => {
   const [clubs, setClubs] = useState(null);
 
-  const setupLoadingClubs = () => {
+  const setupForm = () => {
     let content;
     if (clubs !== null) {
-      content = <RegisterForm clubs={clubs} />;
+      content = (
+        <SideRegisterForm clubs={clubs} />
+      );
     } else {
       content = <p> loading </p>;
     }
@@ -25,8 +32,10 @@ const RegisterPage = () => {
 
   return (
     <>
-      <h3> Register ! </h3>
-      {setupLoadingClubs()}
+      <div className="d-flex">
+        <Hero width="60" image={image} />
+        {setupForm()}
+      </div>
     </>
   );
 };
