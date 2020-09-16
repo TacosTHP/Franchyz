@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import 'styles/button.scss';
+
 const PrimaryButton = ({ text, icon }) => (
   <>
-    <button type="button" className="btn btn-primary text-white font-weight-bold d-flex justify-content-center">
+    <button id="primary-button" type="button" className="btn btn-primary text-white font-weight-bold d-flex justify-content-center">
       <div>
         {icon}
       </div>
