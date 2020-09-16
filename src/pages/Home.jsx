@@ -24,13 +24,13 @@ const Home = () => (
       title={content.title}
       description={content.description}
       image={content.footballImage}
-      imageFirst
+      imageLeft
     />
     <FeatureBandeau
       title={content.title}
       description={content.description}
       image={content.footballImage}
-      imageFirst={false}
+      imageLeft={false}
     />
     <PrimaryCTABandeau
       title={content.title}

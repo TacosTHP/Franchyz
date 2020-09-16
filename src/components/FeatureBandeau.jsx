@@ -7,7 +7,7 @@ const FeatureBandeau = ({
   title,
   description,
   image,
-  imageFirst,
+  imageLeft,
 }) => {
   const setupSide = (rule) => {
     let layout;
@@ -28,11 +28,11 @@ const FeatureBandeau = ({
       title !== undefined
       && description !== undefined
       && image !== undefined
-      && imageFirst !== undefined
+      && imageLeft !== undefined
     ) {
       content = (
         <>
-          <div className={setupSide(imageFirst)}>
+          <div className={setupSide(imageLeft)}>
             <div className="col-lg-6 mr-auto">
               <img src={image} alt="jndxjsndj" className="img-fluid rounded" />
             </div>
@@ -65,7 +65,7 @@ FeatureBandeau.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  imageFirst: PropTypes.bool.isRequired,
+  imageLeft: PropTypes.bool.isRequired,
 };
 
 export default FeatureBandeau;
