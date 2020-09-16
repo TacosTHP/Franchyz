@@ -24,46 +24,23 @@ const StatisticsBandeau = ({ statisticObject }) => {
           <div>
             <Statistic
               value={statisticObject.first_resource.property_value}
+              valueStyle={valueStyling}
             />
             <p style={titleStyling}>{statisticObject.third_resource.property_title}</p>
           </div>
           <div>
             <Statistic
               value={statisticObject.second_resource.property_value}
+              valueStyle={valueStyling}
             />
             <p style={titleStyling}>{statisticObject.third_resource.property_title}</p>
           </div>
           <div>
             <Statistic
               value={statisticObject.third_resource.property_value}
+              valueStyle={valueStyling}
             />
             <p style={titleStyling}>{statisticObject.third_resource.property_title}</p>
-          </div>
-        </>
-      );
-    } else {
-      content = (
-        <>
-          <div>
-            <Statistic
-              value="10000"
-              valueStyle={valueStyling}
-            />
-            <p style={titleStyling}>Title</p>
-          </div>
-          <div>
-            <Statistic
-              value="10000"
-              valueStyle={valueStyling}
-            />
-            <p style={titleStyling}>Title</p>
-          </div>
-          <div>
-            <Statistic
-              value="10000"
-              valueStyle={valueStyling}
-            />
-            <p style={titleStyling}>Title</p>
           </div>
         </>
       );
