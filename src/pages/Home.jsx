@@ -7,6 +7,8 @@ import PrimaryCTABandeau from 'components/PrimaryCTABandeau';
 import Testimonials from 'components/Testimonials';
 import Footer from 'components/layouts/Footer';
 
+import { GiAmericanFootballHelmet } from 'react-icons/gi';
+
 import * as content from 'helpers/contentHelpers';
 
 const Home = () => (
@@ -18,25 +20,33 @@ const Home = () => (
       title={content.title}
       description={content.description}
       CTA="Meet my Team Now !"
-      icon=""
+      icon={<GiAmericanFootballHelmet />}
+      url="/register"
     />
     <FeatureBandeau
       title={content.title}
       description={content.description}
       image={content.footballImage}
       imageLeft
+      CTA="Meet my Team now"
+      icon={<GiAmericanFootballHelmet />}
+      url="/register"
     />
     <FeatureBandeau
       title={content.title}
       description={content.description}
       image={content.footballImage}
       imageLeft={false}
+      CTA="Meet my Team now"
+      icon={<GiAmericanFootballHelmet />}
+      url="/register"
     />
     <PrimaryCTABandeau
       title={content.title}
       description={content.description}
       CTA="Meet my Team Now !"
-      icon=""
+      icon={<GiAmericanFootballHelmet />}
+      url="/register"
     />
     <Testimonials testimonials={content.testimonials} />
     <Footer />
