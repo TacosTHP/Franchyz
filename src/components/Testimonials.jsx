@@ -6,7 +6,7 @@ const Testimonials = ({ testimonials }) => {
     let content;
     if (testimonials !== undefined && Object.keys(testimonials).length <= 3) {
       content = Object.keys(testimonials).map((item) => (
-        <div className="d-flex w-25 flex-column" key={item.id}>
+        <div className="d-flex w-25 flex-column" key={item}>
           <div className=" d-flex justify-content-center mb-4">
             <img className="img-fluid rounded-circle w-50" src={testimonials[item].user_picture} alt="Card cap" />
           </div>
