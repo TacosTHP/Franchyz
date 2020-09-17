@@ -27,12 +27,16 @@ const Home = () => (
       description={content.description}
       image={content.footballImage}
       imageLeft
+      CTA="Meet my Team now"
+      icon={<GiAmericanFootballHelmet />}
     />
     <FeatureBandeau
       title={content.title}
       description={content.description}
       image={content.footballImage}
       imageLeft={false}
+      CTA="Meet my Team now"
+      icon={<GiAmericanFootballHelmet />}
     />
     <PrimaryCTABandeau
       title={content.title}

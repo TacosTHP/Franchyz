@@ -8,6 +8,8 @@ const FeatureBandeau = ({
   description,
   image,
   imageLeft,
+  CTA,
+  icon
 }) => {
   const setupSide = (rule) => {
     let layout;
@@ -42,7 +44,7 @@ const FeatureBandeau = ({
                   {description}
                 </p>
               </div>
-              <PrimaryButton text="Meet my Team now !" icon="" />
+              <PrimaryButton text={CTA} icon={icon} />
             </div>
           </div>
         </>
@@ -63,6 +65,8 @@ FeatureBandeau.propTypes = {
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   imageLeft: PropTypes.bool.isRequired,
+  CTA: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
 };
 
 export default FeatureBandeau;
