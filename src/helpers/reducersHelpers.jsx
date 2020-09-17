@@ -69,6 +69,18 @@ const userInfoRefresher = () => {
   return ans;
 };
 
+const resourcesRefresher = () => {
+  let ans;
+  if (Cookies.get('resources') === undefined) {
+    ans = {
+      currentClub: null,
+    };
+  } else {
+    ans = Cookies.get('resources');
+    ans = JSON.parse(ans);
+  }
+  return ans;
+};
 export {
-  setUserInfo, updateUserInfo, authRefresher, userInfoRefresher,
+  setUserInfo, updateUserInfo, authRefresher, userInfoRefresher, resourcesRefresher,
 };
