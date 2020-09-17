@@ -17,7 +17,7 @@ const getClubs = () => {
     .then((response) => response.json());
 };
 
-const getClub = (clubId) => {
+const getClub = ({ clubId }) => {
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/clubs/${clubId}.json`;
   const url = baseURL + endUrl;
@@ -30,8 +30,7 @@ const getClub = (clubId) => {
     headers,
   };
 
-  return fetch(url, request)
-    .then((response) => response.json());
+  return fetch(url, request);
 };
 
 const createClub = ({
