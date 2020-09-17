@@ -14,7 +14,7 @@ const PrimaryCTABandeau = ({
     if (title !== undefined && description !== undefined && CTA !== undefined) {
       content = (
         <>
-          <div className=" container d-flex justify-content-around align-items-center py-5 bg-primary">
+          <div className="container d-flex justify-content-around align-items-center py-5 bg-primary rounded">
             <div className="mx-4 w-75">
               <h3 className="text-dark">
                 {title}
