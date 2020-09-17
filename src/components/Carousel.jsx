@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import PrimaryButton from 'components/Buttons/PrimaryButton';
+import { GiAmericanFootballHelmet } from 'react-icons/gi';
 
 import 'styles/carousel.scss';
 
@@ -15,7 +16,7 @@ const Carousel = () => (
               <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
               <p>TEAM MANAGEMENT THE EASY WAY</p>
               <Link to="/register">
-                <PrimaryButton text="Meet my Team now !" icon="" />
+                <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} />
               </Link>
             </div>
           </div>
@@ -26,7 +27,7 @@ const Carousel = () => (
               <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
               <p>TEAM MANAGEMENT THE EASY WAY</p>
               <Link to="/register">
-                <PrimaryButton text="Meet my Team now !" icon="" />
+                <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} />
               </Link>
             </div>
           </div>
@@ -37,7 +38,7 @@ const Carousel = () => (
               <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
               <p>TEAM MANAGEMENT THE EASY WAY</p>
               <Link to="/register">
-                <PrimaryButton text="Meet my Team now !" icon="" />
+                <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} />
               </Link>
             </div>
           </div>
