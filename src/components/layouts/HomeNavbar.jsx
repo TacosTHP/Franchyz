@@ -32,9 +32,7 @@ const HomeNavbar = () => {
       <Link to="/" className="logo">FRANCHYZ</Link>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <div className="float-right" id="authNav">
-          <Link to="/register">
-            <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} />
-          </Link>
+          <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} url="/register" />
         </div>
       </div>
     </nav>

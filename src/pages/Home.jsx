@@ -21,6 +21,7 @@ const Home = () => (
       description={content.description}
       CTA="Meet my Team Now !"
       icon={<GiAmericanFootballHelmet />}
+      url="/register"
     />
     <FeatureBandeau
       title={content.title}
@@ -29,6 +30,7 @@ const Home = () => (
       imageLeft
       CTA="Meet my Team now"
       icon={<GiAmericanFootballHelmet />}
+      url="/register"
     />
     <FeatureBandeau
       title={content.title}
@@ -37,12 +39,14 @@ const Home = () => (
       imageLeft={false}
       CTA="Meet my Team now"
       icon={<GiAmericanFootballHelmet />}
+      url="/register"
     />
     <PrimaryCTABandeau
       title={content.title}
       description={content.description}
       CTA="Meet my Team Now !"
       icon={<GiAmericanFootballHelmet />}
+      url="/register"
     />
     <Testimonials testimonials={content.testimonials} />
     <Footer />

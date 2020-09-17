@@ -8,6 +8,7 @@ const PrimaryCTABandeau = ({
   description,
   CTA,
   icon,
+  url,
 }) => {
   const setupElements = () => {
     let content;
@@ -24,7 +25,7 @@ const PrimaryCTABandeau = ({
               </p>
             </div>
             <div className="mx-4 w-25">
-              <DarkButton text={CTA} icon={icon} />
+              <DarkButton text={CTA} icon={icon} url={url} />
             </div>
           </div>
         </>
@@ -42,11 +43,12 @@ const PrimaryCTABandeau = ({
 export default PrimaryCTABandeau;
 
 PrimaryCTABandeau.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  CTA: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  CTA: PropTypes.string,
   icon: PropTypes.element,
-};
+  url: PropTypes.string,
+}.isRequired;
 
 PrimaryCTABandeau.defaultProps = {
   icon: '',
