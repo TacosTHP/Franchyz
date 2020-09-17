@@ -1,56 +1,58 @@
-function getAllTeams(id) {
-  const data = {
-    id: id,
+const getTeams = ({ clubId }) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/clubs/${clubId}/teams.json`;
+  const url = baseURL + endUrl;
+
+  const headers = {
+    'Content-Type': 'application/json',
   };
 
-  return fetch(`http://localhost:3000/clubs/${data.id}/teams.json`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((response) => { return response });
-}
-
-function createTeam(TeamName, Creator_id, Coach_id, Club_id) {
-  const data = {
-    title: TeamName,
-    creator_id: Creator_id,
-    club_id: Club_id,
-    coach_id: Coach_id,
+  const request = {
+    headers,
   };
-
-  console.log(data);
-
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${Club_id}/teams.json`;
-  let url = baseURL + endUrl;
-
-  return fetch(url, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then((response) => { return response });
-}
-
-
-const getTeam = (clubId, teamId) => {
-
-  let baseUrl = process.env.REACT_APP_API_URL;
-  let endUrl = `/clubs/${clubId}/teams/${teamId}.json`;
-  let url = baseUrl + endUrl;
-
-  let request = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
 
   return fetch(url, request)
-    .then(response => response.json())
-    .then(response => { return response })
+    .then((response) => response.json());
 };
 
-export { createTeam, getAllTeams, getTeam };
+const getTeam = (clubId, teamId) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/clubs/${clubId}/teams/${teamId}.json`;
+  const url = baseURL + endUrl;
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const request = {
+    headers,
+  };
+
+  return fetch(url, request)
+    .then((response) => response.json());
+};
+
+const createTeam = ({
+  team, creatorId, coachId, clubId,
+}) => {
+  const data = {
+    title: team,
+    creator_id: creatorId,
+    club_id: clubId,
+    coach_id: coachId,
+  };
+
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/clubs/${clubId}/teams.json`;
+  const url = baseURL + endUrl;
+
+  return fetch(url, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json());
+};
+export { createTeam, getTeam, getTeams };

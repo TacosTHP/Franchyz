@@ -1,43 +1,46 @@
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
-import * as API from 'services/authAPI';
+import * as authAPI from 'services/authAPI';
 import {loginRequest, loginSuccess , loginFailure} from 'redux/actions/authActions';
 import { infoUserUp } from 'redux/actions/userActions';
+import { setUserInfo } from 'helpers/reducersHelpers';
 
-const logup = (email, password, type, team) => {
-  return (dispatch) => {
+const logup = (input) => {
+  return async (dispatch) => {
     dispatch(loginRequest());
-    let promise = API.signUp(email, password, type, team);
+    let response = await authAPI.signUp(input);
+    let body = await response.json()
 
-    promise.then((response) => {
-      if (response.body.errors !== undefined) {
-        dispatch(loginFailure(response.body.errors))
-      } else {
-        Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
-        let decoded_token = jwt_decode(response.headers.get('Authorization'))
-        dispatch(loginSuccess(decoded_token))
-        dispatch(infoUserUp(decoded_token))
-      };
-    });
+    if (response.status !== 201) {
+      dispatch(loginFailure(body.errors))
+    } else {
+      Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
+      let decodedToken = jwt_decode(response.headers.get('Authorization'))
+      setUserInfo(decodedToken)
+      dispatch(loginSuccess(decodedToken))
+      dispatch(infoUserUp(decodedToken))
+    };
+    return response.status;
   };
 };
 
-const login = (email, password, type) => {
-  return (dispatch) => {
+const login = (input) => {
+  return async (dispatch) => {
     dispatch(loginRequest());
-    let promise = API.signIn(email, password, type);
+    let response = await authAPI.signIn(input);
+    console.log(response)
+    let body = await response.json()
 
-    promise.then((response) => {
-      if (response.body.error !== undefined) {
-        dispatch(loginFailure(response.body.error))
+      if (response.status !== 201) {
+        dispatch(loginFailure(body.error))
       } else {
         Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
-        let decoded_token = jwt_decode(response.headers.get('Authorization'))
-        dispatch(loginSuccess(decoded_token))
-        dispatch(infoUserUp(decoded_token))
-        return 'ok'
+        let decodedToken = jwt_decode(response.headers.get('Authorization'))
+        setUserInfo(decodedToken)
+        dispatch(loginSuccess(decodedToken))
+        dispatch(infoUserUp(decodedToken))
       };
-    });
+    return response.status;
   };
 };
 

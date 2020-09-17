@@ -1,43 +1,73 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/form.scss'
-import {useSelector } from 'react-redux'
-import {Link} from 'react-router-dom'
-import DashboardAdmin from 'components/dashboardAdmin.jsx'
-import * as clubAPI from 'services/clubAPI.jsx'
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function AdminCoachDashboardPage () {
+import DashboardAdminTabs from 'components/dashboardAdminTabs';
+import Calendar from 'components/Calendar';
+import * as clubAPI from 'services/clubAPI';
 
-  const myClubId = useSelector(state => state.userReducer.club_id)
+import '../styles/form.scss';
 
-  useEffect(() => { loadClub() }, [])
-  const [club, setClub] = useState('')
+const AdminCoachDashboardPage = () => {
+  const myClubId = useSelector((state) => state.userReducer.clubId);
+  const [club, setClub] = useState(null);
 
+  const loadClub = async () => {
+    const response = await clubAPI.getClub(myClubId);
+    setClub(response);
+  };
 
-  async function loadClub() {
-    const response = await clubAPI.getClub(myClubId)
-    setClub( response )
-  }
-
-   function setupElements() {
-    let ans 
-
-    if (myClubId == null ) {
-      ans = (
-        <Link to="/newClub"><button type="button" className="btn btn-primary"> Create Club </button> </Link>
-      )
+  const setupElements = () => {
+    let content;
+    if (club !== null) {
+      content = (
+        <>
+          <DashboardAdminTabs club={club} />
+          <Calendar attendances={club.attendances} />
+        </>
+      );
     } else {
-      ans = (
-        <DashboardAdmin club={club} />
-      )
+      content = (
+        <p> loading... </p>
+      );
     }
-    return ans
-  }
+    return content;
+  };
 
-  return(
-    <>
-      {setupElements()}
-    </>
-  )
-}
+  const setupPageOrInvitation = () => {
+    let content;
+    if (myClubId === null) {
+      content = (
+        <>
+          <div>
+            <h1> Welcome to FRANCHYZ </h1>
+            <h4> You just created an acccount for your sport club. </h4>
+            <h4> Start creating a club and adding a team before you start creating events. </h4>
+          </div>
+          <Link to="/newClub">
+            <button type="button" className="btn btn-primary mt-4 ml-3"> Create club </button>
+          </Link>
+        </>
+      );
+    } else {
+      content = (
+        <>
+          <h1>Dashboard FRANCHYZ</h1>
+          <h4> Your club </h4>
+          { setupElements() }
+        </>
+      );
+    }
+    return content;
+  };
 
-export default AdminCoachDashboardPage
+  useEffect(() => { loadClub(); }, []);
+
+  return (
+    <div className="container mb-3 mt-3">
+      {setupPageOrInvitation()}
+    </div>
+  );
+};
+
+export default AdminCoachDashboardPage;

@@ -1,22 +1,29 @@
-import {INFO_USER_UP, INFO_USER_DOWN} from '../types/userTypes.jsx'
+import { INFO_USER_UP, INFO_USER_DOWN, UPDATE_CLUB_ID } from '../types/userTypes.jsx'
 
-function infoUserUp(decoded_token){
+const infoUserUp = (decodedToken) => {
   return {
     type: INFO_USER_UP,
-    id: decoded_token['sub'],
-    email: decoded_token['email'],
-    first_name: decoded_token['first_name'],
-    last_name: decoded_token['last_name'],
-    isAdmin: decoded_token['admin?'],
-    club_id: decoded_token['club_id'],
-    team_id: decoded_token['team_id'],
+    id: decodedToken['sub'],
+    email: decodedToken['email'],
+    firstName: decodedToken['first_name'],
+    lastName: decodedToken['last_name'],
+    isAdmin: decodedToken['admin?'],
+    clubId: decodedToken['club_id'],
+    teamId: decodedToken['team_id'],
   }
 }
 
-function infoUserDown(decoded_token){
+const infoUserDown = () => {
   return {
     type: INFO_USER_DOWN,
   }
 }
 
-export {infoUserUp, infoUserDown}
+const updateClubId = (clubId) => {
+  return {
+    type: UPDATE_CLUB_ID,
+    clubId: clubId,
+  }
+}
+
+export {infoUserUp, infoUserDown, updateClubId}

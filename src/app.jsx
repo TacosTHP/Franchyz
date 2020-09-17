@@ -1,49 +1,47 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// Redux
-import { Provider } from "react-redux";
-import store from "./redux/store.js";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from 'redux/store';
 
-// Pages
-import CreateEvent from "./pages/createEvent.jsx";
-import CreateClub from "./pages/createClub.jsx";
-import Home from "./pages/home.jsx";
-import Login from "./pages/login.jsx";
-import Register from "./pages/register.jsx";
-import CreateTeam from "./pages/createTeam.jsx";
-import AdminCoachDashboardPage from "./pages/adminCoachDashboardPage.jsx";
-import ShowTeam from './pages/showTeam.jsx'
-import PlayerDashboardPage from './pages/playerDashboardPage.jsx'
+import EventNewPage from 'pages/EventNewPage';
+import ClubNewPage from 'pages/ClubNewPage';
+import Home from 'pages/Home';
+import LoginPage from 'pages/LoginPage';
+import RegisterPage from 'pages/RegisterPage';
+import CreateTeam from 'pages/TeamNewPage';
+import AdminCoachDashboardPage from 'pages/adminCoachDashboardPage';
+import GameShowPage from 'pages/GameShowPage';
+import TeamShowPage from 'pages/TeamShowPage';
+import PracticeShowPage from 'pages/PracticeShowPage';
+import PlayerDashboardPage from 'pages/PlayerDashboardPage';
+import PlayerShowPage from 'pages/PlayerShowPage';
 
-//Component
-import Navbar from "./components/layouts/navbar.jsx";
-import Footer from "./components/layouts/footer.jsx";
+import PrivateRoute from 'components/privateRoute';
 
-//CSS
-import "bootstrap/dist/js/bootstrap.js";
-import "bootstrap/dist/css/bootstrap.css";
-import "antd/dist/antd.css";
+import 'bootstrap/dist/js/bootstrap';
+import 'antd/dist/antd.css';
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path="/login"> <Login /> </Route>
-          <Route path="/register"> <Register /> </Route>
-          <Route exact path="/create-event"> <CreateEvent /> </Route>
-          <Route exact path="/newClub"> <CreateClub /> </Route>
-          <Route path={`/clubs/:clubId/teams/:teamId`}><ShowTeam /></Route>
-          <Route path="/dashboardAdmin"> <AdminCoachDashboardPage /> </Route>
-          <Route path="/create-team"> <CreateTeam /> </Route>
-          <Route exact path="/"> <Home /> </Route>
-          <Route path="/dashboardPlayer"> <PlayerDashboardPage /> </Route>
-        </Switch>
-        <Footer />
-      </Router>
-    </Provider>
-  );
-};
+import 'styles/app.scss';
+
+const App = () => (
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
+        <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
+        <PrivateRoute exact path="/newTeam" component={CreateTeam} />
+        <PrivateRoute exact path="/eventNewPage" component={EventNewPage} />
+        <PrivateRoute exact path="/newClub" component={ClubNewPage} />
+        <PrivateRoute exact path="/clubs/:clubId/teams/:teamId" component={TeamShowPage} />
+        <PrivateRoute exact path="/games/:gamesId" component={GameShowPage} />
+        <PrivateRoute exact path="/practices/:practicesId" component={PracticeShowPage} />
+        <Route path="/clubs/:clubId/teams/:teamId/players/:playerId" component={PlayerShowPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/register" component={RegisterPage} />
+        <Route exact path="/" component={Home} />
+      </Switch>
+    </Router>
+  </Provider>
+);
 
 export default App;

@@ -1,27 +1,42 @@
-import Cookies from 'js-cookie'
-import {pluralyzeType} from 'helpers/misc.jsx'
+import Cookies from 'js-cookie';
 
-function profile(id, type) {
+const getPlayer = (clubId, teamId, playerId) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/clubs/${clubId}/teams/${teamId}/players/${playerId}.json`;
+  const url = baseURL + endUrl;
 
-  type = pluralyzeType(type)
-
-  let headers = {
+  const headers = {
     'Content-Type': 'application/json',
-    Authorization: Cookies.get('token')
-  }
+    Authorization: Cookies.get('token'),
+  };
 
-  let request = {
+  const request = {
     method: 'get',
-    headers: headers,
-  }
-  
-  let baseURL = process.env.REACT_APP_API_URL
-  let endUrl = `/${type}/${id}.json`
-  let url = baseURL + endUrl
+    headers,
+  };
 
-  fetch(url, request)
-    .then(response => response.json())
-    .then(response => {return response})
-}
+  return fetch(url, request)
+    .then((response) => response.json());
+};
 
-export { profile }
+const playerUpdate = (input, clubId) => {
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/clubs/${clubId}/teams/${input.team_id}/players/${input.id}`;
+  const url = baseURL + endUrl;
+
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: Cookies.get('token'),
+  };
+
+  const request = {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(input),
+  };
+
+  return fetch(url, request)
+    .then((response) => response.json());
+};
+
+export { getPlayer, playerUpdate };

@@ -1,125 +1,116 @@
 import Cookies from 'js-cookie';
-import {pluralyzeType} from 'helpers/misc.jsx'
+import { pluralyzeType } from 'helpers/misc';
 
-function signUp(email, password, type, team) {
+const signUp = ({
+  email, password, type, teamId,
+}) => {
   let data;
   if (type === 'player') {
-    data = {[type]: {
-      email: email,
-      password: password,
-      team_id: team,
-    }};
+    data = {
+      [type]: {
+        email,
+        password,
+        team_id: teamId,
+      },
+    };
   } else {
-    data = {[type]: {
-      email: email,
-      password: password,
-    }};
-  };
+    data = {
+      [type]: {
+        email,
+        password,
+      },
+    };
+  }
 
-  let types = pluralyzeType(type);
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/${types}.json`;
-  let url = baseURL + endUrl;
+  const types = pluralyzeType(type);
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/${types}.json`;
+  const url = baseURL + endUrl;
 
-  let ans = {
+  const ans = {
     headers: '',
-    body: ''
+    body: '',
   };
 
-  let request = {
+  const request = {
     method: 'post',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   };
-
-
 
   return fetch(url, request)
-    .then(response => {
-      ans.headers = response.headers
-      return response.json()
-    })
-    .then(response => {
-      ans.body = response
-      return ans
-    });
+    .then((response) => response.json());
 };
 
-function signIn(email, password, type) {
-  const data = {[type]: {
-    email: email,
-    password: password,
-  }};
-
-  let types = pluralyzeType(type);
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/${types}/sign_in.json`;
-  let url = baseURL + endUrl;
-
-  let ans = {
-    headers: '',
-    body: ''
+const signIn = ({ email, password, type }) => {
+  const data = {
+    [type]: {
+      email,
+      password,
+    },
   };
 
-  let request = {
+  const types = pluralyzeType(type);
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/${types}/sign_in.json`;
+  const url = baseURL + endUrl;
+
+  const ans = {
+    headers: '',
+    body: '',
+  };
+
+  const request = {
     method: 'post',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   };
 
   return fetch(url, request)
-    .then(response => {
-      ans.headers = response.headers
-      return response.json()
-    })
-    .then(response => {
-      ans.body = response
-      return ans
-    });
 };
 
-function sign_out(type) {
-  let types = pluralyzeType(type);
-  let baseURL = process.env.REACT_APP_API_URL;
-  let endUrl = `/${types}/sign_out.json`;
-  let url = baseURL + endUrl;
+const signOut = (type) => {
+  const types = pluralyzeType(type);
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/${types}/sign_out.json`;
+  const url = baseURL + endUrl;
 
-  let request = {
-    method: 'delete',
+  const request = {
+    method: 'deconste',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
   };
 
   return fetch(url, request)
-    .then(response => {return response});
+    .then((response) => response.json());
 };
 
-function profile(id, type) {
+const profile = ({ id, type }) => {
+  const userType = pluralyzeType(type);
 
-  type = pluralyzeType(type)
-
-  let headers = {
+  const headers = {
     'Content-Type': 'application/json',
-    Authorization: Cookies.get('token')
-  }
+    Authorization: Cookies.get('token'),
+  };
 
-  let request = {
+  const request = {
     method: 'get',
-    headers: headers,
-  }
+    headers,
+  };
 
-  let baseURL = process.env.REACT_APP_API_URL
-  let endUrl = `/${type}/${id}.json`
-  let url = baseURL + endUrl
+  const baseURL = process.env.REACT_APP_API_URL;
+  const endUrl = `/${userType}/${id}.json`;
+  const url = baseURL + endUrl;
 
   return fetch(url, request)
-    .then(response => response.json())
-    .then(response => {return response})
-}
+    .then((response) => response.json());
+};
 
-export {signIn, signUp, sign_out, profile}
+export {
+  signIn, signUp, signOut, profile,
+};
