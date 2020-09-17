@@ -1,5 +1,5 @@
 import {
-  LOGIN_SUCCESS, REQUEST, REQUEST_FAILURE, LOGOUT_SUCCESS,
+  LOGIN_SUCCESS, REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE, LOGOUT_SUCCESS,
   DISPLAY_SUCCESS_MESSAGE, RESET_SUCCESS_MESSAGE, RESET_ERROR_MESSAGE,
   CONNECT, RESET_URL,
 } from '../types/authTypes';
@@ -7,6 +7,13 @@ import {
 const request = () => (
   {
     type: REQUEST,
+  }
+);
+
+const requestSuccess = ({ successMessage = null }) => (
+  {
+    type: REQUEST_SUCCESS,
+    successMessage,
   }
 );
 
@@ -64,7 +71,7 @@ const resetUrl = () => (
 );
 
 export {
-  request, loginSuccess, requestFailure, logoutSuccess,
+  request, requestSuccess, loginSuccess, requestFailure, logoutSuccess,
   displaySuccessMessage, resetSuccessMessage, resetErrorMessage,
   connect, resetUrl,
 };
