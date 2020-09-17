@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PrimaryButton from 'components/Buttons/PrimaryButton';
+
+import { GiAmericanFootballHelmet } from 'react-icons/gi';
+
 import 'styles/nav.scss';
 
 const HomeNavbar = () => {
@@ -30,7 +33,7 @@ const HomeNavbar = () => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <div className="float-right" id="authNav">
           <Link to="/register">
-            <PrimaryButton text="Meet my Team now !" icon="" />
+            <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} />
           </Link>
         </div>
       </div>
