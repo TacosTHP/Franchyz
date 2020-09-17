@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import useInputChange from 'customHooks/useInputChange';
+import { editClub } from 'redux/middlewares/clubsMiddlewares';
 
 const ClubEdit = ({ club }) => {
+  const dispatch = useDispatch();
+
   const [input, handleInputChange] = useInputChange({
     name: club.name,
     date_of_creation: club.date_of_creation,
@@ -16,7 +20,9 @@ const ClubEdit = ({ club }) => {
     zip_code: club.zip_code,
   });
 
-  const submit = (event) => {
+  const submit = async (event) => {
+    event.preventDefault();
+    await dispatch(editClub({ clubId: club.id, input }));
   };
 
   return (
