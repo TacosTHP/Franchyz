@@ -5,8 +5,8 @@ import 'styles/button.scss';
 
 const PrimaryButton = ({ text, icon }) => (
   <>
-    <button id="primary-button" type="button" className="btn btn-primary text-white font-weight-bold d-flex align-items-center justify-content-center mx-auto">
-      <div>
+    <button id="primary-button" type="button" className="btn btn-primary d-flex align-items-center justify-content-around text-white font-weight-bold mx-auto">
+      <div className="mr-2" id="icon">
         {icon}
       </div>
       <div>
