@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { message } from 'antd';
 
 import useInputChange from 'customHooks/useInputChange';
 import { logup } from 'redux/middlewares/authMiddlewares';
 import * as teamAPI from 'services/teamAPI';
-import { setupErrorsMessage } from 'helpers/misc';
 
 const SideRegisterForm = ({ clubs }) => {
   const [teams, setTeams] = useState(null);
-  const history = useHistory();
-  const isAuth = useSelector((state) => state.authReducer.isAuth);
-  const userType = useSelector((state) => state.authReducer.userType);
-  const errors = useSelector((state) => state.authReducer.error);
   const dispatch = useDispatch();
   const [input, handleInputChange] = useInputChange();
 
@@ -76,23 +70,6 @@ const SideRegisterForm = ({ clubs }) => {
       handleInputChange(e);
     }
   }, [teams]);
-
-  useEffect(() => {
-    if (userType === 'coach') {
-      message.success('You successfully connected to your account as a coach.', 2.5);
-      history.push('/dashboardAdmin');
-    } else if (userType === 'player') {
-      message.success('You successfully connected to your account as a player.', 2.5);
-      history.push('/dashboardPlayer');
-    }
-  }, [isAuth]);
-
-  useEffect(() => {
-    if (errors !== '') {
-      const errorsMessage = setupErrorsMessage(errors);
-      message.error(errorsMessage, 2.5);
-    }
-  }, [errors]);
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center py-4" id="form-wrapper">
