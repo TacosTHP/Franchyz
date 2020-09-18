@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 import * as authAPI from 'services/authAPI';
 import {
-  loginRequest, loginSuccess, loginFailure, connect,
+  request, loginSuccess, requestFailure, connect,
   logoutSuccess,
 } from 'redux/actions/authActions';
 import { infoUserUp, infoUserDown } from 'redux/actions/userActions';
@@ -11,7 +11,7 @@ import { setupErrorsMessage } from 'helpers/misc';
 
 const logup = (input) => async (dispatch) => {
   try {
-    dispatch(loginRequest());
+    dispatch(request());
     const response = await authAPI.signUp(input);
 
     if (!response.ok) {
@@ -31,16 +31,16 @@ const logup = (input) => async (dispatch) => {
   } catch (response) {
     const body = await response.json();
     if (body.error !== undefined) {
-      dispatch(loginFailure(body.error));
+      dispatch(requestFailure(body.error));
     } else {
-      dispatch(loginFailure(setupErrorsMessage(body.errors)));
+      dispatch(requestFailure(setupErrorsMessage(body.errors)));
     }
   }
 };
 
 const login = (input) => async (dispatch) => {
   try {
-    dispatch(loginRequest());
+    dispatch(request());
     const response = await authAPI.signIn(input);
 
     if (!response.ok) {
@@ -59,14 +59,14 @@ const login = (input) => async (dispatch) => {
       dispatch(connect('/dashboardPlayer'));
     }
   } catch (error) {
-    dispatch(loginFailure(error.message));
+    dispatch(requestFailure(error.message));
   }
 };
 
 const logout = ({ userType }) => async (dispatch) => {
   try {
-    dispatch(loginRequest());
-    const response = await authAPI.signOut({userType});
+    dispatch(request());
+    const response = await authAPI.signOut({ userType });
 
     if (!response.ok) {
       const body = await response.json();
@@ -79,7 +79,7 @@ const logout = ({ userType }) => async (dispatch) => {
     Cookies.remove('userInfo', { sameSite: 'lax' });
     dispatch(connect('/'));
   } catch (error) {
-    dispatch(loginFailure(error.message));
+    dispatch(requestFailure(error.message));
   }
 };
 

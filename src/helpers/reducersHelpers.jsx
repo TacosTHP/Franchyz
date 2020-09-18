@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 
 const setUserInfo = (decodedToken) => {
-  let userInfo = {
+  const userInfo = {
     id: decodedToken.sub,
     email: decodedToken.email,
     firstName: decodedToken.firstName,
@@ -11,19 +11,17 @@ const setUserInfo = (decodedToken) => {
     clubId: decodedToken.club_id,
     teamId: decodedToken.team_id,
   };
-  userInfo = JSON.stringify(userInfo);
   Cookies.set('userInfo', userInfo, { sameSite: 'lax' });
 };
 
 const updateUserInfo = (hash) => {
-  let userInfo = JSON.parse(Cookies.get('userInfo'));
+  let userInfo = Cookies.get('userInfo');
   Object.entries(hash).forEach(([key, value]) => {
     userInfo = {
       ...userInfo,
       [key]: value,
     };
   });
-  userInfo = JSON.stringify(userInfo);
   Cookies.set('userInfo', userInfo, { sameSite: 'lax' });
 };
 
@@ -65,11 +63,24 @@ const userInfoRefresher = () => {
       teamId: null,
     };
   } else {
-    ans = JSON.parse(Cookies.get('userInfo'));
+    ans = Cookies.get('userInfo');
+    ans = JSON.parse(ans);
   }
   return ans;
 };
 
+const resourcesRefresher = () => {
+  let ans;
+  if (Cookies.get('resources') === undefined) {
+    ans = {
+      currentClub: null,
+    };
+  } else {
+    ans = Cookies.get('resources');
+    ans = JSON.parse(ans);
+  }
+  return ans;
+};
 export {
-  setUserInfo, updateUserInfo, authRefresher, userInfoRefresher,
+  setUserInfo, updateUserInfo, authRefresher, userInfoRefresher, resourcesRefresher,
 };

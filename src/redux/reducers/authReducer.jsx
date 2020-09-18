@@ -1,6 +1,6 @@
 import { authRefresher } from 'helpers/reducersHelpers';
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, DISPLAY_SUCCESS_MESSAGE,
+  REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS, DISPLAY_SUCCESS_MESSAGE,
   RESET_SUCCESS_MESSAGE, RESET_ERROR_MESSAGE, CONNECT, RESET_URL,
 } from '../types/authTypes';
 
@@ -8,10 +8,22 @@ const initialState = authRefresher();
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case REQUEST:
       return {
         ...state,
         loading: true,
+      };
+    case REQUEST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        successMessage: action.successMessage,
+      };
+    case REQUEST_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errorMessage: action.errorMessage,
       };
     case LOGIN_SUCCESS:
       return {
@@ -20,12 +32,6 @@ const authReducer = (state = initialState, action) => {
         loading: false,
         userType: action.userType,
         successMessage: 'you are connected',
-      };
-    case LOGIN_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        errorMessage: action.errorMessage,
       };
     case LOGOUT_SUCCESS:
       return {

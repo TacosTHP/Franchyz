@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DashboardAdminTabs from 'components/dashboardAdminTabs';
 import Calendar from 'components/Calendar';
-import * as clubAPI from 'services/clubAPI';
+import { getClub } from 'redux/middlewares/clubsMiddlewares';
 
 import '../styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
-  const myClubId = useSelector((state) => state.userReducer.clubId);
-  const [club, setClub] = useState(null);
+  const clubId = useSelector((state) => state.userReducer.clubId);
+  const currentClub = useSelector((state) => state.resourcesReducer.currentClub);
+  const dispatch = useDispatch();
 
   const loadClub = async () => {
-    const response = await clubAPI.getClub(myClubId);
-    setClub(response);
+    await dispatch(getClub({ clubId }));
   };
 
   const setupElements = () => {
     let content;
-    if (club !== null) {
+    if (currentClub !== null) {
       content = (
         <>
-          <DashboardAdminTabs club={club} />
-          <Calendar attendances={club.attendances} />
+          <DashboardAdminTabs club={currentClub} />
+          <Calendar attendances={currentClub.attendances} />
         </>
       );
     } else {
@@ -36,7 +36,7 @@ const AdminCoachDashboardPage = () => {
 
   const setupPageOrInvitation = () => {
     let content;
-    if (myClubId === null) {
+    if (clubId === null) {
       content = (
         <>
           <div>

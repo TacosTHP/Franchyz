@@ -1,12 +1,26 @@
 import {
-  LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE, LOGOUT_SUCCESS,
+  LOGIN_SUCCESS, REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE, LOGOUT_SUCCESS,
   DISPLAY_SUCCESS_MESSAGE, RESET_SUCCESS_MESSAGE, RESET_ERROR_MESSAGE,
   CONNECT, RESET_URL,
 } from '../types/authTypes';
 
-const loginRequest = () => (
+const request = () => (
   {
-    type: LOGIN_REQUEST,
+    type: REQUEST,
+  }
+);
+
+const requestSuccess = ({ successMessage = null }) => (
+  {
+    type: REQUEST_SUCCESS,
+    successMessage,
+  }
+);
+
+const requestFailure = (errorMessage) => (
+  {
+    type: REQUEST_FAILURE,
+    errorMessage,
   }
 );
 
@@ -15,13 +29,6 @@ const loginSuccess = (decodedToken) => (
     type: LOGIN_SUCCESS,
     userType: decodedToken.scp,
     successMessage: `You successfully connected to your account as a ${decodedToken.scp}.`,
-  }
-);
-
-const loginFailure = (errorMessage) => (
-  {
-    type: LOGIN_FAILURE,
-    errorMessage,
   }
 );
 
@@ -64,7 +71,7 @@ const resetUrl = () => (
 );
 
 export {
-  loginRequest, loginSuccess, loginFailure, logoutSuccess,
+  request, requestSuccess, loginSuccess, requestFailure, logoutSuccess,
   displaySuccessMessage, resetSuccessMessage, resetErrorMessage,
   connect, resetUrl,
 };

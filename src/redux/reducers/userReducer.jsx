@@ -1,11 +1,9 @@
-import { INFO_USER_UP, INFO_USER_DOWN, UPDATE_CLUB_ID } from '../types/userTypes'
-import { userInfoRefresher } from 'helpers/reducersHelpers'
+import { userInfoRefresher } from 'helpers/reducersHelpers';
+import { INFO_USER_UP, INFO_USER_DOWN, UPDATE_CLUB_ID } from '../types/userTypes';
 
-
-const initialState = userInfoRefresher()
-
+const initialState = userInfoRefresher();
 const userReducer = (state = initialState, action) => {
-  switch(action.type){
+  switch (action.type) {
     case INFO_USER_UP:
       return {
         ...state,
@@ -16,7 +14,7 @@ const userReducer = (state = initialState, action) => {
         isAdmin: action.isAdmin,
         teamId: action.teamId,
         clubId: action.clubId,
-      }
+      };
     case INFO_USER_DOWN:
       return {
         ...state,
@@ -27,18 +25,17 @@ const userReducer = (state = initialState, action) => {
         isAdmin: null,
         teamId: null,
         clubId: null,
-      }
+      };
     case UPDATE_CLUB_ID:
       return {
         ...state,
-        clubId: action.clubId
-      }
-
+        clubId: action.clubId,
+      };
     default:
       return {
-        ...state
-      }
+        ...state,
+      };
   }
-}
+};
 
-export default userReducer
+export default userReducer;
