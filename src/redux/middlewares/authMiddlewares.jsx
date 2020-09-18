@@ -1,47 +1,86 @@
 import Cookies from 'js-cookie';
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import * as authAPI from 'services/authAPI';
-import {loginRequest, loginSuccess , loginFailure} from 'redux/actions/authActions';
-import { infoUserUp } from 'redux/actions/userActions';
+import {
+  loginRequest, loginSuccess, loginFailure, connect,
+  logoutSuccess,
+} from 'redux/actions/authActions';
+import { infoUserUp, infoUserDown } from 'redux/actions/userActions';
 import { setUserInfo } from 'helpers/reducersHelpers';
+import { setupErrorsMessage } from 'helpers/misc';
 
-const logup = (input) => {
-  return async (dispatch) => {
+const logup = (input) => async (dispatch) => {
+  try {
     dispatch(loginRequest());
-    let response = await authAPI.signUp(input);
-    let body = await response.json()
+    const response = await authAPI.signUp(input);
 
-    if (response.status !== 201) {
-      dispatch(loginFailure(body.errors))
+    if (!response.ok) {
+      throw response;
+    }
+
+    Cookies.set('token', response.headers.get('Authorization'), { sameSite: 'lax' });
+    const decodedToken = jwtDecode(response.headers.get('Authorization'));
+    setUserInfo(decodedToken);
+    dispatch(loginSuccess(decodedToken));
+    dispatch(infoUserUp(decodedToken));
+    if (decodedToken.scp === 'coach') {
+      dispatch(connect('dashboardAdmin'));
     } else {
-      Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
-      let decodedToken = jwt_decode(response.headers.get('Authorization'))
-      setUserInfo(decodedToken)
-      dispatch(loginSuccess(decodedToken))
-      dispatch(infoUserUp(decodedToken))
-    };
-    return response.status;
-  };
+      dispatch(connect('dashboardPlayer'));
+    }
+  } catch (response) {
+    const body = await response.json();
+    if (body.error !== undefined) {
+      dispatch(loginFailure(body.error));
+    } else {
+      dispatch(loginFailure(setupErrorsMessage(body.errors)));
+    }
+  }
 };
 
-const login = (input) => {
-  return async (dispatch) => {
+const login = (input) => async (dispatch) => {
+  try {
     dispatch(loginRequest());
-    let response = await authAPI.signIn(input);
-    console.log(response)
-    let body = await response.json()
+    const response = await authAPI.signIn(input);
 
-      if (response.status !== 201) {
-        dispatch(loginFailure(body.error))
-      } else {
-        Cookies.set('token', response.headers.get('Authorization'), {sameSite: 'lax'})
-        let decodedToken = jwt_decode(response.headers.get('Authorization'))
-        setUserInfo(decodedToken)
-        dispatch(loginSuccess(decodedToken))
-        dispatch(infoUserUp(decodedToken))
-      };
-    return response.status;
-  };
+    if (!response.ok) {
+      const body = await response.json();
+      throw new Error(body.error);
+    }
+
+    Cookies.set('token', response.headers.get('Authorization'), { sameSite: 'lax' });
+    const decodedToken = jwtDecode(response.headers.get('Authorization'));
+    setUserInfo(decodedToken);
+    dispatch(loginSuccess(decodedToken));
+    dispatch(infoUserUp(decodedToken));
+    if (decodedToken.scp === 'coach') {
+      dispatch(connect('/dashboardAdmin'));
+    } else {
+      dispatch(connect('/dashboardPlayer'));
+    }
+  } catch (error) {
+    dispatch(loginFailure(error.message));
+  }
 };
 
-export {login, logup};
+const logout = ({ userType }) => async (dispatch) => {
+  try {
+    dispatch(loginRequest());
+    const response = await authAPI.signOut({userType});
+
+    if (!response.ok) {
+      const body = await response.json();
+      throw new Error(body.error);
+    }
+
+    dispatch(logoutSuccess());
+    dispatch(infoUserDown());
+    Cookies.remove('token', { sameSite: 'lax' });
+    Cookies.remove('userInfo', { sameSite: 'lax' });
+    dispatch(connect('/'));
+  } catch (error) {
+    dispatch(loginFailure(error.message));
+  }
+};
+
+export { login, logup, logout };

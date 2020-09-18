@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from 'redux/store';
 
+import Alert from 'components/Alert';
 import EventNewPage from 'pages/EventNewPage';
 import ClubNewPage from 'pages/ClubNewPage';
 import Home from 'pages/Home';
@@ -15,6 +16,7 @@ import TeamShowPage from 'pages/TeamShowPage';
 import PracticeShowPage from 'pages/PracticeShowPage';
 import PlayerDashboardPage from 'pages/PlayerDashboardPage';
 import PlayerShowPage from 'pages/PlayerShowPage';
+import Connect from 'components/Connect';
 
 import PrivateRoute from 'components/privateRoute';
 
@@ -26,6 +28,8 @@ import 'styles/app.scss';
 const App = () => (
   <Provider store={store}>
     <Router>
+      <Alert />
+      <Connect />
       <Switch>
         <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
         <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
