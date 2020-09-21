@@ -1,5 +1,5 @@
 import { resourcesRefresher } from 'helpers/reducersHelpers';
-import { UPDATE_CURRENT_CLUB } from 'redux/types/resourcesTypes';
+import { UPDATE_CURRENT_CLUB, UPDATE_CURRENT_TEAMS } from 'redux/types/resourcesTypes';
 
 const initialState = resourcesRefresher();
 
@@ -9,6 +9,11 @@ const resourcesReducer = (state = initialState, action) => {
       return {
         ...state,
         currentClub: action.club,
+      };
+    case UPDATE_CURRENT_TEAMS:
+      return {
+        ...state,
+        currentClub: action.teams,
       };
     default:
       return {

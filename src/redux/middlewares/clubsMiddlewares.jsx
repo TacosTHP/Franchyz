@@ -3,7 +3,7 @@ import {
   request, requestSuccess, requestFailure, connect,
 } from 'redux/actions/authActions';
 import { updateClubId } from 'redux/actions/userActions';
-import { updateCurrentClub } from 'redux/actions/resourcesActions';
+import { updateCurrentClub, updateCurrentTeams } from 'redux/actions/resourcesActions';
 import { updateUserInfo } from 'helpers/reducersHelpers';
 import { setupErrorsMessage } from 'helpers/misc';
 
@@ -18,6 +18,7 @@ const getClub = (args) => async (dispatch) => {
     }
 
     dispatch(updateCurrentClub({ club: body }));
+    dispatch(updateCurrentTeams({ teams: body.teams }));
   } catch (errors) {
     dispatch(requestFailure(setupErrorsMessage(errors)));
   }
@@ -35,6 +36,7 @@ const createClub = (args) => async (dispatch) => {
 
     updateUserInfo({ clubId: body.id });
     dispatch(updateClubId({ clubId: body.id }));
+    dispatch(updateCurrentTeams({ teams: body.teams }));
     dispatch(connect('dashboardAdmin'));
   } catch (errors) {
     dispatch(requestFailure(setupErrorsMessage(errors)));
