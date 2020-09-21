@@ -1,4 +1,4 @@
-import { UPDATE_CURRENT_CLUB, UPDATE_CURRENT_TEAMS } from 'redux/types/resourcesTypes';
+import { UPDATE_CURRENT_CLUB, UPDATE_CURRENT_TEAMS, ADD_TEAM_TO_CURRENT_TEAMS } from 'redux/types/resourcesTypes';
 
 const updateCurrentClub = ({ club }) => (
   {
@@ -15,4 +15,11 @@ const updateCurrentTeams = ({ teams }) => (
   }
 );
 
-export { updateCurrentClub, updateCurrentTeams };
+const addTeamToCurrentTeams = ({ team }) => (
+  {
+    type: ADD_TEAM_TO_CURRENT_TEAMS,
+    team: [team],
+  }
+);
+
+export { updateCurrentClub, updateCurrentTeams, addTeamToCurrentTeams };
