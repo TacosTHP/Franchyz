@@ -21,7 +21,7 @@ const AdminCoachDashboardPage = () => {
   };
 
   const setupEvents = () => (
-    buildFullCalendarEvents(userType, currentClub.currentTeams, currentClub.currentTeam)
+    buildFullCalendarEvents(userType, currentClub.teams, currentClub.currentTeam)
   );
 
   const setupElements = () => {
