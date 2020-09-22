@@ -4,38 +4,51 @@ import { useSelector } from 'react-redux';
 
 import DashboardAdminTabs from 'components/dashboardAdminTabs';
 import Calendar from 'components/Calendar';
+import Navbar from 'components/layouts/navbar';
+
+import buildFullCalendarEvents from 'helpers/eventsHelpers';
+import * as content from 'helpers/contentHelpers';
+
 import * as clubAPI from 'services/clubAPI';
 
-import '../styles/form.scss';
+import 'styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
   const myClubId = useSelector((state) => state.userReducer.clubId);
+  const userType = useSelector((state) => state.authReducer.userType);
   const [club, setClub] = useState(null);
+  const { clubReducer } = content;
+  // clubReducer.currentTeam = 4;
 
   const loadClub = async () => {
     const response = await clubAPI.getClub(myClubId);
     setClub(response);
   };
 
+  const setupEvents = () => (
+    buildFullCalendarEvents(userType, clubReducer.currentTeams, clubReducer.currentTeam)
+  );
+
   const setupElements = () => {
-    let content;
+    let yocontent;
     if (club !== null) {
-      content = (
+      yocontent = (
         <>
+          <Navbar />
           <DashboardAdminTabs club={club} />
-          <Calendar attendances={club.attendances} />
+          <Calendar attendances={setupEvents()} />
         </>
       );
     } else {
-      content = (
+      yocontent = (
         <p> loading... </p>
       );
     }
-    return content;
+    return yocontent;
   };
 
   const setupPageOrInvitation = () => {
-    let content;
+    let yocontent;
     if (myClubId === null) {
       content = (
         <>
@@ -50,7 +63,7 @@ const AdminCoachDashboardPage = () => {
         </>
       );
     } else {
-      content = (
+      yocontent = (
         <>
           <h1>Dashboard FRANCHYZ</h1>
           <h4> Your club </h4>
@@ -58,7 +71,7 @@ const AdminCoachDashboardPage = () => {
         </>
       );
     }
-    return content;
+    return yocontent;
   };
 
   useEffect(() => { loadClub(); }, []);
