@@ -30,7 +30,7 @@ const AdminCoachDashboardPage = () => {
       content = (
         <>
           <DashboardAdminTabs club={currentClub} />
-          <Calendar attendances={setupEvents} />
+          <Calendar attendances={setupEvents()} />
         </>
       );
     } else {
