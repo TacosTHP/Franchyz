@@ -27,11 +27,6 @@ const signUp = ({
   const endUrl = `/${types}.json`;
   const url = baseURL + endUrl;
 
-  const ans = {
-    headers: '',
-    body: '',
-  };
-
   const request = {
     method: 'post',
     headers: {
@@ -40,8 +35,7 @@ const signUp = ({
     body: JSON.stringify(data),
   };
 
-  return fetch(url, request)
-    .then((response) => response.json());
+  return fetch(url, request);
 };
 
 const signIn = ({ email, password, type }) => {
@@ -57,11 +51,6 @@ const signIn = ({ email, password, type }) => {
   const endUrl = `/${types}/sign_in.json`;
   const url = baseURL + endUrl;
 
-  const ans = {
-    headers: '',
-    body: '',
-  };
-
   const request = {
     method: 'post',
     headers: {
@@ -70,24 +59,23 @@ const signIn = ({ email, password, type }) => {
     body: JSON.stringify(data),
   };
 
-  return fetch(url, request)
+  return fetch(url, request);
 };
 
-const signOut = (type) => {
-  const types = pluralyzeType(type);
+const signOut = ({ userType }) => {
+  const types = pluralyzeType(userType);
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/${types}/sign_out.json`;
   const url = baseURL + endUrl;
 
   const request = {
-    method: 'deconste',
+    method: 'delete',
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  return fetch(url, request)
-    .then((response) => response.json());
+  return fetch(url, request);
 };
 
 const profile = ({ id, type }) => {

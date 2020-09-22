@@ -1,22 +1,23 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { displaySuccessMessage } from 'redux/actions/authActions';
 import useInputChange from 'customHooks/useInputChange';
 
 import * as userAPI from 'services/userAPI';
-
-import { message } from 'antd';
 
 const PlayerEditForm = ({ player, team }) => {
   const [input, handleInputChange] = useInputChange(player);
   const clubId = team.club_id;
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const submit = async (e) => {
     e.preventDefault();
     await userAPI.playerUpdate(input, clubId);
-    await message.success('You successfully edited your profile', 2.5);
+    dispatch(displaySuccessMessage('You successfully edited your profile'));
     history.push('/dashboardPlayer');
   };
 

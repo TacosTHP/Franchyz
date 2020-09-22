@@ -17,7 +17,7 @@ const getClubs = () => {
     .then((response) => response.json());
 };
 
-const getClub = (clubId) => {
+const getClub = ({ clubId }) => {
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/clubs/${clubId}.json`;
   const url = baseURL + endUrl;
@@ -30,8 +30,7 @@ const getClub = (clubId) => {
     headers,
   };
 
-  return fetch(url, request)
-    .then((response) => response.json());
+  return fetch(url, request);
 };
 
 const createClub = ({
@@ -68,11 +67,10 @@ const createClub = ({
     body: JSON.stringify(data),
   };
 
-  return fetch(url, request)
-    .then((response) => response.json());
+  return fetch(url, request);
 };
 
-const editClub = ({ clubId, fields }) => {
+const editClub = ({ clubId, input }) => {
   const baseUrl = process.env.REACT_APP_API_URL;
   const endUrl = `/clubs/${clubId}.json`;
   const url = baseUrl + endUrl;
@@ -83,16 +81,16 @@ const editClub = ({ clubId, fields }) => {
   };
 
   const data = {
-    name: fields.data.name,
-    date_of_creation: fields.data.date_of_creation,
-    description: fields.data.description,
-    league: fields.data.league,
-    pool: fields.data.pool,
-    conference: fields.data.conference,
-    address: fields.data.address,
-    zip_code: fields.data.zip_code,
-    city: fields.data.city,
-    country: fields.data.country,
+    name: input.name,
+    date_of_creation: input.date_of_creation,
+    description: input.description,
+    league: input.league,
+    pool: input.pool,
+    conference: input.conference,
+    address: input.address,
+    zip_code: input.zip_code,
+    city: input.city,
+    country: input.country,
   };
 
   const request = {
@@ -101,8 +99,7 @@ const editClub = ({ clubId, fields }) => {
     body: JSON.stringify(data),
   };
 
-  return fetch(url, request)
-    .then((response) => response.json());
+  return fetch(url, request);
 };
 
 export {

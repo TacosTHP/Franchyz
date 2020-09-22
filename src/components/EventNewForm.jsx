@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { message } from 'antd';
 
 import GameNewForm from 'components/GameNewForm';
 import PracticeNewForm from 'components/PracticeNewForm';
@@ -18,6 +17,7 @@ const EventNewForm = ({ teams }) => {
   const [players, setPlayers] = useState();
   const clubId = useSelector((state) => state.userReducer.clubId);
   const history = useHistory();
+  const error = useSelector((state) => state.authReducer.error);
 
   const [input, handleInputChange, setInput] = useInputChange({ eventType: 'game' });
 
@@ -56,11 +56,8 @@ const EventNewForm = ({ teams }) => {
       });
     }
 
-    if (event.error === undefined) {
-      message.success(`${input.eventType} created`, 2.5);
+    if (error !== null) {
       history.push('/dashboardAdmin');
-    } else {
-      message.error(event.error, 2.5);
     }
   };
 

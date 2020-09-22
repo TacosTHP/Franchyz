@@ -1,55 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DashboardAdminTabs from 'components/dashboardAdminTabs';
 import Calendar from 'components/Calendar';
-import Navbar from 'components/layouts/navbar';
 
+import { getClub } from 'redux/middlewares/clubsMiddlewares';
 import buildFullCalendarEvents from 'helpers/eventsHelpers';
-import * as content from 'helpers/contentHelpers';
-
-import * as clubAPI from 'services/clubAPI';
 
 import 'styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
-  const myClubId = useSelector((state) => state.userReducer.clubId);
+  const clubId = useSelector((state) => state.userReducer.clubId);
+  const currentClub = useSelector((state) => state.resourcesReducer.currentClub);
   const userType = useSelector((state) => state.authReducer.userType);
-  const [club, setClub] = useState(null);
-  const { clubReducer } = content;
-  // clubReducer.currentTeam = 4;
+  const dispatch = useDispatch();
 
   const loadClub = async () => {
-    const response = await clubAPI.getClub(myClubId);
-    setClub(response);
+    await dispatch(getClub({ clubId }));
   };
 
   const setupEvents = () => (
-    buildFullCalendarEvents(userType, clubReducer.currentTeams, clubReducer.currentTeam)
+    buildFullCalendarEvents(userType, currentClub.currentTeams, currentClub.currentTeam)
   );
 
   const setupElements = () => {
-    let yocontent;
-    if (club !== null) {
-      yocontent = (
+    let content;
+    if (currentClub !== null) {
+      content = (
         <>
-          <Navbar />
-          <DashboardAdminTabs club={club} />
-          <Calendar attendances={setupEvents()} />
+          <DashboardAdminTabs club={currentClub} />
+          <Calendar attendances={setupEvents} />
         </>
       );
     } else {
-      yocontent = (
+      content = (
         <p> loading... </p>
       );
     }
-    return yocontent;
+    return content;
   };
 
   const setupPageOrInvitation = () => {
-    let yocontent;
-    if (myClubId === null) {
+    let content;
+    if (clubId === null) {
       content = (
         <>
           <div>
@@ -63,7 +57,7 @@ const AdminCoachDashboardPage = () => {
         </>
       );
     } else {
-      yocontent = (
+      content = (
         <>
           <h1>Dashboard FRANCHYZ</h1>
           <h4> Your club </h4>
@@ -71,7 +65,7 @@ const AdminCoachDashboardPage = () => {
         </>
       );
     }
-    return yocontent;
+    return content;
   };
 
   useEffect(() => { loadClub(); }, []);

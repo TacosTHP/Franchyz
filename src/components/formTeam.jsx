@@ -9,6 +9,7 @@ const FormTeam = () => {
   const creatorId = useSelector((state) => state.userReducer.id);
   const clubId = useSelector((state) => state.userReducer.clubId);
   const coachId = useSelector((state) => state.userReducer.id);
+  const error = useSelector((state) => state.auth.error);
 
   const [teamName, setTeamName] = useState("");
 
@@ -22,9 +23,8 @@ const FormTeam = () => {
 
     let response = await teamAPI.createTeam(teamName, creatorId, coachId, clubId)
 
-    if (response.errors === undefined) {
+    if (error !== null) {
       history.push("/dashboardAdmin");
-      message.success('You added a new team', 2.5)
     }
 
   }
