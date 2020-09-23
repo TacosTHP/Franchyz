@@ -1,67 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Avatar, Col, Row } from 'antd';
 
 const ClubInformations = ({ club }) => (
-  <div className="container scrolly">
-    <Row>
-      <Col>
-        {club.logo_url === null || 'undefined' ? (
-          <Avatar size={50}>LOGO</Avatar>
-        ) : (
-          <img src={club.logo_url} alt="logo" className="mt-5" />
-        )}
-      </Col>
-      <Col>
-        <h5 className="font-weight-bold  mt-3 ml-5">Club details:</h5>
-        <div style={{ marginLeft: '50px' }}>
-          <Row>
-            <h6 className="mr-2">Club name:</h6>
-            <p>{club.name}</p>
-          </Row>
-          <Row>
-            <h6 className="mr-2">Founded in:</h6>
-            <p>{club.date_of_creation}</p>
-          </Row>
-          <Row>
-            <h6 className="mr-2">Club description:</h6>
-            <p>{club.description}</p>
-          </Row>
-          <Row>
-            <h6 className="mr-2">League:</h6>
-            <p>{club.league}</p>
-          </Row>
-          <Row>
-            <h6 className="mr-2">Pool:</h6>
-            <p>{club.pool}</p>
-          </Row>
-          <Row>
-            <h6 className="mr-2">Conference:</h6>
-            <p>{club.conference}</p>
-          </Row>
+  <div className="container">
+    <h5 className="font-weight-bold  mt-3 mb-3 ml-5 text-center">Club details:</h5>
+    <div className="row">
+      <div className="col">
+        <p>
+          <span className="fieldTitleClubInfo"> Club Name : </span>
+          {club.name}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> Founded in : </span>
+          {club.date_of_creation}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> Description : </span>
+          {club.description}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> League : </span>
+          {club.league}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> Pool : </span>
+          {club.pool}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> Conference : </span>
+          {club.conference}
+        </p>
+      </div>
 
-          <Row>
-            <h5 className="mr-2 mt-5">Club address:</h5>
-          </Row>
-          <Row>
-            <h6 className="mr-2">Address:</h6>
-            <p>{club.address}</p>
-          </Row>
-          <Row>
-            <h6 className="mr-2">Zip code:</h6>
-            <p>{club.zip_code}</p>
-          </Row>
-          <Row>
-            <h6 className="mr-2">City:</h6>
-            <p>{club.city}</p>
-          </Row>
-          <Row>
-            <h6 className="mr-2">Country:</h6>
-            <p>{club.country}</p>
-          </Row>
-        </div>
-      </Col>
-    </Row>
+      <div className="col">
+        <p>
+          <span className="fieldTitleClubInfo"> Address : </span>
+          {club.address}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> Zip Code : </span>
+          {club.zip_code}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> City : </span>
+          {club.city}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> Country : </span>
+          {club.country}
+        </p>
+      </div>
+    </div>
   </div>
 );
 
