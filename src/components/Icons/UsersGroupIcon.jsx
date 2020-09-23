@@ -34,7 +34,7 @@ const UsersGroupIcon = ({
 
 export default UsersGroupIcon;
 
-UsersGroupIcon.PropTypes = {
+UsersGroupIcon.propTypes = {
   color: PropTypes.string,
   size: PropTypes.string,
   className: PropTypes.string,

@@ -34,7 +34,7 @@ const SlashUserIcon = ({
 
 export default SlashUserIcon;
 
-SlashUserIcon.PropTypes = {
+SlashUserIcon.propTypes = {
   color: PropTypes.string,
   size: PropTypes.string,
   className: PropTypes.string,

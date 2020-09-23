@@ -34,7 +34,7 @@ const CalendarIcon = ({
 
 export default CalendarIcon;
 
-CalendarIcon.PropTypes = {
+CalendarIcon.propTypes = {
   color: PropTypes.string,
   size: PropTypes.string,
   className: PropTypes.string,
