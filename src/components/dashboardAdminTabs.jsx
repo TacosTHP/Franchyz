@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 
 import ClubInformations from 'components/ClubInformations';
+import TeamList from 'components/TeamList';
 import ClubEdit from './clubEdit';
-import TeamList from './teamList';
 
 const DashboardAdminTabs = ({ club }) => {
   const { TabPane } = Tabs;
