@@ -76,6 +76,7 @@ const resourcesRefresher = () => {
       currentClub: null,
       currentTeams: null,
       currentTeam: null,
+      currentAttendances: null,
     };
   } else {
     ans = Cookies.get('resources');
