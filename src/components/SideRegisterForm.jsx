@@ -109,7 +109,7 @@ const SideRegisterForm = ({ clubs }) => {
         </form>
       </div>
       <div className="d-flex flex-column align-items-center mt-3">
-        <Link to="/">
+        <Link to="/login">
           <p className="text-primary">
             Already registered ? Access your account here !
           </p>
