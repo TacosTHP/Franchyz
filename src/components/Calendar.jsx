@@ -33,7 +33,7 @@ const Calendar = ({ attendances }) => {
   };
 
   const setupElements = () => {
-    const buildedAttendances = buildFullCalendarEvents(attendances);
+    const buildedAttendances = attendances ;
     let content;
     if (attendances !== undefined) {
       content = (

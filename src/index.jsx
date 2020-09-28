@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 import App from './app';
 import 'styles/index.scss';
+import 'styles/layoutDashboard.scss';
 
 WebFont.load({
   google: {
