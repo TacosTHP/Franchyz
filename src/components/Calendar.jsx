@@ -66,6 +66,7 @@ const Calendar = ({ attendances }) => {
   };
 
   const setupElements = () => {
+    const buildedAttendances = attendances;
     let content;
     if (attendances !== undefined) {
       content = (
