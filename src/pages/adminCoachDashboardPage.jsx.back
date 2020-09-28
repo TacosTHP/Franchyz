@@ -4,18 +4,25 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import DashboardAdminTabs from 'components/dashboardAdminTabs';
 import Calendar from 'components/Calendar';
-import { getClub } from 'redux/middlewares/clubsMiddlewares';
 
-import '../styles/form.scss';
+import { getClub } from 'redux/middlewares/clubsMiddlewares';
+import buildFullCalendarEvents from 'helpers/eventsHelpers';
+
+import 'styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
   const clubId = useSelector((state) => state.userReducer.clubId);
   const currentClub = useSelector((state) => state.resourcesReducer.currentClub);
+  const userType = useSelector((state) => state.authReducer.userType);
   const dispatch = useDispatch();
 
   const loadClub = async () => {
     await dispatch(getClub({ clubId }));
   };
+
+  const setupEvents = () => (
+    buildFullCalendarEvents(userType, currentClub.teams, currentClub.currentTeam)
+  );
 
   const setupElements = () => {
     let content;
@@ -23,7 +30,7 @@ const AdminCoachDashboardPage = () => {
       content = (
         <>
           <DashboardAdminTabs club={currentClub} />
-          <Calendar attendances={currentClub.attendances} />
+          <Calendar attendances={setupEvents()} />
         </>
       );
     } else {

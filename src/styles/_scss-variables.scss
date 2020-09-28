@@ -13,8 +13,17 @@ $theme-colors: (
   "dark": $dark
 );
 
-
 :export {
+  redColor: #FF0000;
+  oliveColor:	#808000;
+  limeColor:	#00FF00;
+  greenColor:	#008000;
+  aguaColor:	#00FFFF;
+  tealColor:	#008080;
+  blueColor:	#0000FF;
+  navyColor:	#000080;
+  fuschiaColor:	#FF00FF;
+  purpleColor:	#800080;
   primaryColor: $primary;
   secondaryColor: $secondary;
   whiteColor: $white;
