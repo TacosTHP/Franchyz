@@ -33,26 +33,27 @@ const getTeam = (clubId, teamId) => {
 };
 
 const createTeam = ({
-  team, creatorId, coachId, clubId,
+  clubId, coachId, teamName,
 }) => {
   const data = {
-    title: team,
-    creator_id: creatorId,
+    title: teamName,
+    creator_id: coachId,
     club_id: clubId,
     coach_id: coachId,
+  };
+
+  const request = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
   };
 
   const baseURL = process.env.REACT_APP_API_URL;
   const endUrl = `/clubs/${clubId}/teams.json`;
   const url = baseURL + endUrl;
 
-  return fetch(url, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json());
+  return fetch(url, request);
 };
 export { createTeam, getTeam, getTeams };

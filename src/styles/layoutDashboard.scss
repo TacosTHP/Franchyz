@@ -1,0 +1,30 @@
+.layoutPage{
+  padding: 5vh;
+}
+
+#dashboardContainer{
+  width: 100%;
+  max-width: 100%;
+  height: 90vh;
+  box-sizing: border-box;
+  padding-top: 1vh;
+}
+
+#tabsAdmin{
+  height: 85vh;
+  overflow: hidden;
+}
+
+#teamListContainer{
+  height: 45vh;
+}
+
+#teamInfoContainer{
+  height: 27vh;
+}
+
+.fieldTitleClubInfo{
+  font-size: large;
+  font-weight: bold;
+}
+
