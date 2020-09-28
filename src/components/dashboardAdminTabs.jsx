@@ -7,7 +7,6 @@ import ClubInformations from 'components/ClubInformations';
 import Button from 'react-bootstrap/Button';
 import TeamNewModal from 'components/TeamNewModal';
 import ClubEdit from './clubEdit';
-import TeamList from './teamList';
 
 const DashboardAdminTabs = ({ club }) => {
   const { TabPane } = Tabs;
