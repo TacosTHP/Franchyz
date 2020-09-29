@@ -20,6 +20,7 @@ const getClub = (args) => async (dispatch) => {
 
     dispatch(updateCurrentClub({ club: body }));
     dispatch(updateCurrentTeam({ team: body.teams }));
+    initTeamsColors({ teams: body.teams });
     const attendances = prepareAttendancesForFullCalendar({ attendancesOwners: body });
     dispatch(updateCurrentAttendances({ attendances }));
     dispatch(requestSuccess({ successMessage: null }));
