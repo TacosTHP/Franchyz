@@ -7,6 +7,7 @@ import { updateCurrentClub, updateCurrentTeam, updateCurrentAttendances } from '
 import { updateUserInfo } from 'helpers/reducersHelpers';
 import { setupErrorsMessage } from 'helpers/misc';
 import prepareAttendancesForFullCalendar from 'helpers/attendancesHelpers';
+import { initTeamsColors } from 'helpers/teamsHelpers';
 
 const getClub = (args) => async (dispatch) => {
   try {

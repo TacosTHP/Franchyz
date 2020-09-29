@@ -31,7 +31,9 @@ const prepareAttendancesFromTeam = ({ team }) => {
   let preparedTeamAttendances = [];
   const teamColor = JSON.parse(Cookies.get('teamsColors'))[team.title];
   team.players.forEach((player) => {
-    const preparedPlayerAttendances = prepareAttendancesFromPlayer(player, teamColor);
+    const preparedPlayerAttendances = prepareAttendancesFromPlayer(
+      { player, backgroundColor: teamColor },
+    );
     preparedTeamAttendances = preparedTeamAttendances.concat(preparedPlayerAttendances);
   });
 
@@ -42,7 +44,7 @@ const prepareAttendancesFromTeam = ({ team }) => {
 const prepareAttendancesFromClub = ({ club }) => {
   let preparedClubAttendances = [];
   club.teams.forEach((team) => {
-    const preparedTeamAttendances = prepareAttendancesFromTeam(team);
+    const preparedTeamAttendances = prepareAttendancesFromTeam({ team });
     preparedClubAttendances = preparedClubAttendances.concat(preparedTeamAttendances);
   });
   return preparedClubAttendances;
@@ -51,15 +53,15 @@ const prepareAttendancesFromClub = ({ club }) => {
 const prepareAttendancesForFullCalendar = ({ attendancesOwners }) => {
   const ownersKeys = Object.keys(attendancesOwners);
 
-  if (ownersKeys.some('league')) {
-    return prepareAttendancesFromClub(attendancesOwners);
+  if (ownersKeys.includes('league')) {
+    return prepareAttendancesFromClub({ club: attendancesOwners });
   }
 
-  if (ownersKeys.some('players')) {
-    return prepareAttendancesFromTeam(attendancesOwners);
+  if (ownersKeys.includes('players')) {
+    return prepareAttendancesFromTeam({ team: attendancesOwners });
   }
 
-  return prepareAttendancesFromPlayer(attendancesOwners);
+  return prepareAttendancesFromPlayer({ player: attendancesOwners });
 };
 
 export default prepareAttendancesForFullCalendar;
