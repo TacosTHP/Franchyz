@@ -16,7 +16,7 @@ const prepareAttendancesFromPlayer = ({ player, backgroundColor = '#0000FF' }) =
   player.attendances.practices.forEach((practice) => {
     preparedPlayerAttendances.push({
       type: 'practice',
-      title: `GAME - ${practice.title}`,
+      title: `PRACTICE - ${practice.title}`,
       start: practice.starting_date_time,
       end: practice.starting_date_time + practice.duration,
       backgroundColor,
@@ -37,7 +37,10 @@ const prepareAttendancesFromTeam = ({ team }) => {
     preparedTeamAttendances = preparedTeamAttendances.concat(preparedPlayerAttendances);
   });
 
+  preparedTeamAttendances = preparedTeamAttendances.map((attendance) => JSON.stringify(attendance));
   preparedTeamAttendances = Array.from(new Set(preparedTeamAttendances));
+  preparedTeamAttendances = preparedTeamAttendances.map((attendance) => JSON.parse(attendance));
+
   return preparedTeamAttendances;
 };
 
