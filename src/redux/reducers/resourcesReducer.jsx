@@ -1,6 +1,7 @@
 import { resourcesRefresher } from 'helpers/reducersHelpers';
 import {
-  UPDATE_CURRENT_CLUB, UPDATE_CURRENT_TEAMS, ADD_TEAM_TO_CURRENT_TEAMS, UPDATE_CURRENT_TEAM, UPDATE_CURRENT_ATTENDANCES,
+  UPDATE_CURRENT_CLUB, UPDATE_CURRENT_TEAMS, ADD_TEAM_TO_CURRENT_TEAMS, UPDATE_CURRENT_TEAM,
+  UPDATE_CURRENT_ATTENDANCES,
 } from 'redux/types/resourcesTypes';
 
 const initialState = resourcesRefresher();
