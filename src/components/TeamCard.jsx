@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { updateCurrentTeam } from 'redux/actions/resourcesActions';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   availablePlayersOfTeam, unavailablePlayersOfTeam, extractFollowingEventFromTeam,
 } from 'helpers/teamsHelpers';
@@ -14,11 +16,17 @@ import 'styles/teamListCard.scss';
 import colors from 'styles/_scss-variables.scss';
 
 const TeamCard = ({ team }) => {
+
+  const dispatch = useDispatch();
   const followingEventData = extractFollowingEventFromTeam({ team });
+
+  const setCurrentTeam = () => {
+    dispatch(updateCurrentTeam({ team }));
+  };
 
   return (
     <>
-      <div id="team-card" className="card w-25 mx-2 bg-dark">
+      <div id="team-card" className="card w-25 mx-2 bg-dark" onClick={setCurrentTeam} >
 
         <div className="ml-auto mr-2 mt-2">
           <Link to="/"><TopRightArrowIcon size="1.5em" color={colors.whiteColor} /></Link>
