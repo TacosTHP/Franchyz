@@ -3,10 +3,9 @@ import {
   request, requestSuccess, requestFailure, connect,
 } from 'redux/actions/authActions';
 import { updateClubId } from 'redux/actions/userActions';
-import { updateCurrentClub, updateCurrentTeam, updateCurrentAttendances } from 'redux/actions/resourcesActions';
+import { updateCurrentClub } from 'redux/actions/resourcesActions';
 import { updateUserInfo } from 'helpers/reducersHelpers';
 import { setupErrorsMessage } from 'helpers/misc';
-import prepareAttendancesForFullCalendar from 'helpers/attendancesHelpers';
 import { initTeamsColors } from 'helpers/teamsHelpers';
 
 const getClub = (args) => async (dispatch) => {
@@ -21,8 +20,6 @@ const getClub = (args) => async (dispatch) => {
 
     dispatch(updateCurrentClub({ club: body }));
     initTeamsColors({ teams: body.teams });
-    const attendances = prepareAttendancesForFullCalendar({ attendancesOwners: body });
-    dispatch(updateCurrentAttendances({ attendances }));
     dispatch(requestSuccess({ successMessage: null }));
   } catch (errors) {
     dispatch(requestFailure(setupErrorsMessage(errors)));
