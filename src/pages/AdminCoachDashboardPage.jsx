@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
 import Loading from 'components/Loading';
 import InvitationToCreateClub from 'components/InvitationToCreateClub';
-import TeamList from 'components/teamList';
+import TeamList from 'components/TeamList';
 import TeamInfo from 'components/TeamInfo';
 import ClubInformations from 'components/ClubInformations';
 import Calendar from 'components/Calendar';
@@ -14,11 +14,11 @@ import { getClub } from 'redux/middlewares/clubsMiddlewares';
 import '../styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
+  const [resourceToDisplay, setResourceToDisplay] = useState(null);
   const loading = useSelector((state) => state.authReducer.loading);
   const clubId = useSelector((state) => state.userReducer.clubId);
   const currentClub = useSelector((state) => state.resourcesReducer.currentClub);
   const currentTeam = useSelector((state) => state.resourcesReducer.currentTeam);
-  const currentAttendances = useSelector((state) => state.resourcesReducer.currentAttendances);
   const dispatch = useDispatch();
 
   const loadClub = async () => {
@@ -26,6 +26,14 @@ const AdminCoachDashboardPage = () => {
   };
 
   useEffect(() => { loadClub(); }, []);
+
+  useEffect(() => {
+    if (currentTeam !== null) {
+      setResourceToDisplay(currentTeam);
+    } else {
+      setResourceToDisplay(currentClub);
+    }
+  }, [currentTeam, currentClub]);
 
   if (loading) {
     return (<Loading />);
@@ -47,7 +55,7 @@ const AdminCoachDashboardPage = () => {
                   <TeamList teams={currentClub.teams} />
                 </div>
                 <div id="teamInfoContainer" className="container mt-3">
-                  <TeamInfo team={currentTeam} />
+                  <TeamInfo teams={currentClub.teams} team={currentTeam} />
                 </div>
               </Tab>
 
@@ -61,7 +69,7 @@ const AdminCoachDashboardPage = () => {
             </Tabs>
           </div>
           <div id="calendarContainer" className="col-4">
-            <Calendar attendances={currentAttendances} />
+            <Calendar resourceToDisplay={resourceToDisplay} />
           </div>
         </div>
       </div>
