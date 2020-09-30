@@ -1,6 +1,6 @@
 import {
   UPDATE_CURRENT_CLUB, UPDATE_CURRENT_TEAMS, ADD_TEAM_TO_CURRENT_TEAMS, UPDATE_CURRENT_TEAM,
-  UPDATE_CURRENT_ATTENDANCES,
+  UPDATE_CURRENT_ATTENDANCES, UPDATE_CURRENT_PLAYER,
 } from 'redux/types/resourcesTypes';
 
 const updateCurrentClub = ({ club }) => (
@@ -39,7 +39,14 @@ const updateCurrentAttendances = ({ attendances }) => (
   }
 );
 
+const updateCurrentPlayer = ({ player }) => (
+  {
+    type: UPDATE_CURRENT_PLAYER,
+    player,
+  }
+);
+
 export {
   updateCurrentClub, updateCurrentTeams, addTeamToCurrentTeams, updateCurrentTeam,
-  updateCurrentAttendances,
+  updateCurrentAttendances, updateCurrentPlayer,
 };
