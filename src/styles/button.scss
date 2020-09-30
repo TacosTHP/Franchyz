@@ -12,6 +12,11 @@
 
 #dark-button {
   &:hover {
+    background-color: $dark !important;
+    border-color: $white !important;
+    box-shadow: 0 0 5px 5px $dark;
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
   }
 }
 
