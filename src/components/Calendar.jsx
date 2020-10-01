@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
+import prepareAttendancesForFullCalendar from 'helpers/attendancesHelpers';
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -11,9 +12,10 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import 'styles/calendar.scss';
 
-const Calendar = ({ attendances }) => {
+const Calendar = ({ resourceToDisplay }) => {
   const userType = useSelector((state) => state.authReducer.userType);
   const history = useHistory();
+  const events = prepareAttendancesForFullCalendar({ attendancesOwners: resourceToDisplay });
 
   const goToEventNew = () => {
     if (userType === 'coach') {
@@ -45,6 +47,7 @@ const Calendar = ({ attendances }) => {
         borderColor: color,
       }
     );
+
     const obj = JSON.parse(Cookies.get('teamsColors'));
     if (obj !== undefined) {
       return Object.keys(obj).map((team) => (
@@ -66,9 +69,8 @@ const Calendar = ({ attendances }) => {
   };
 
   const setupElements = () => {
-    const buildedAttendances = attendances;
     let content;
-    if (attendances !== undefined) {
+    if (events !== undefined) {
       content = (
         <>
           <div className="">
@@ -109,7 +111,7 @@ const Calendar = ({ attendances }) => {
                   minute: '2-digit',
                   meridiem: false,
                 }}
-                events={attendances}
+                events={events}
                 dateClick={goToEventNew}
                 eventClick={goToEvent}
               />
@@ -137,7 +139,7 @@ const Calendar = ({ attendances }) => {
                   minute: '2-digit',
                   meridiem: false,
                 }}
-                events={attendances}
+                events={events}
                 dateClick={goToEventNew}
                 eventClick={goToEvent}
               />

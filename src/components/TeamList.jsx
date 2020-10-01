@@ -1,25 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import InvitationToCreateTeam from 'components/InvitationToCreateTeam';
 import TeamCard from 'components/TeamCard';
+import CreationTeamCard from 'components/CreationTeamCard';
 
 const TeamList = ({ teams }) => {
-  const setList = () => {
-    let list;
-    if (teams !== undefined) {
-      list = teams.map((team) => <TeamCard key={team.id} team={team} />);
-    } else {
-      list = (
-        <div className="container">
-          <p>This club doesn&apos;t have team yet !</p>
-        </div>
-      );
-    }
-    return list;
-  };
+  if (teams === undefined) {
+    return (<> </>);
+  }
+
+  if (teams.length === 0) {
+    return <InvitationToCreateTeam />;
+  }
+
   return (
     <div id="team-list" className="d-flex py-2 border">
-      {setList()}
-      <TeamCard />
+      { teams.map((team) => <TeamCard key={team.id} team={team} />) }
+      <CreationTeamCard />
     </div>
   );
 };
