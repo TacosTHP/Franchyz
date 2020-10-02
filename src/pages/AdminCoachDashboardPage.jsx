@@ -51,7 +51,7 @@ const AdminCoachDashboardPage = () => {
             <h4> Main Dashboard </h4>
             <Tabs defaultActiveKey="main">
               <Tab eventKey="main" title="Main">
-                <div id="teamListContainer" className="container">
+                <div id="teamListContainer" className="d-flex justify-content-center">
                   <TeamList teams={currentClub.teams} />
                 </div>
                 <div id="teamInfoContainer" className="container mt-3">
