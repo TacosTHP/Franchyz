@@ -32,12 +32,12 @@ const TeamCard = ({ team }) => {
           <Link to="/"><TopRightArrowIcon size="1.5em" color={colors.whiteColor} /></Link>
         </div>
 
-        <h4 className="card-header mh-25 text-primary">{team.title}</h4>
-        <div className="card-body d-flex justify-content-center align-items-center h-50">
+        <h4 className="card-header mh-25 text-primary team-title mb-2">{team.title}</h4>
+        <div className="card-body d-flex justify-content-center align-items-center">
           <div className="d-flex flex-column align-items-center mx-2">
-            <UsersGroupIcon size="2em" color={colors.primaryColor} className="mb-3" />
+            <UsersGroupIcon size="2em" color={colors.primaryColor} className="mb-2" />
             <div className="text-white d-flex flex-column justify-content-center align-items-center">
-              <h5 className="text-white">
+              <h5 className="text-white players-number">
                 {availablePlayersOfTeam({ team })}
               </h5>
               <div className="text-center">
@@ -46,9 +46,9 @@ const TeamCard = ({ team }) => {
             </div>
           </div>
           <div className="d-flex flex-column align-items-center justify-content-center mx-2">
-            <SlashUserIcon size="2em" color={colors.redColor} className="mb-3" />
+            <SlashUserIcon size="2em" color={colors.redColor} className="mb-2" />
             <div className="text-white d-flex flex-column justify-content-center align-items-center">
-              <h5 className="text-white">
+              <h5 className="text-white players-number">
                 {unavailablePlayersOfTeam({ team })}
               </h5>
               <div className="text-center">
@@ -57,12 +57,14 @@ const TeamCard = ({ team }) => {
             </div>
           </div>
         </div>
-        <div className="card-footer d-flex justify-content-between align-items-center">
-          <CalendarIcon size="2em" color={colors.primaryColor} />
-          <div className="text-white">
-            <Link to={`/${followingEventData.type}/${followingEventData.followingEvent.id}`}>{followingEventData.followingEvent.title}</Link>
+        <Link to={`/${followingEventData.type}/${followingEventData.followingEvent.id}`}>
+          <div className="d-flex align-items-center py-2 px-2 mt-3">
+            <CalendarIcon size="2em" color={colors.primaryColor} className="mr-3" />
+            <div className="text-white event-title">
+              {followingEventData.followingEvent.title}
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
     </>
   );
