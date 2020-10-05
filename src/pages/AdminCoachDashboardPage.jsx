@@ -4,6 +4,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
 import Loading from 'components/Loading';
+import HomeNavbar from 'components/layouts/HomeNavbar';
 import InvitationToCreateClub from 'components/InvitationToCreateClub';
 import TeamList from 'components/TeamList';
 import TeamInfo from 'components/TeamInfo';
@@ -44,32 +45,33 @@ const AdminCoachDashboardPage = () => {
   }
 
   return (
-    <div className="layoutPage">
+    <div className="layoutPage black-background">
+      <HomeNavbar />
       <div id="dashboardContainer" className="container">
         <div className="row">
           <div id="tabsAdmin" className="col-8">
-            <h4> Main Dashboard </h4>
+            <h4 className="text-white"> Main Dashboard </h4>
             <Tabs defaultActiveKey="main">
-              <Tab eventKey="main" title="Main">
+              <Tab eventKey="main" title="Main" tabClassName="bg-dark">
                 <div id="teamListContainer" className="d-flex justify-content-center">
                   <TeamList teams={currentClub.teams} />
                 </div>
-                <div id="teamInfoContainer" className="container mt-3">
+                <div id="teamInfoContainer" className="mt-2">
                   <TeamInfo teams={currentClub.teams} team={currentTeam} />
                 </div>
               </Tab>
 
-              <Tab eventKey="clubInfo" title="Club Info">
+              <Tab eventKey="clubInfo" title="Club Info" tabClassName="bg-dark">
                 <ClubInformations club={currentClub} />
               </Tab>
 
-              <Tab eventKey="settings" title="Settings">
+              <Tab eventKey="settings" title="Settings" tabClassName="bg-dark">
                 <p> soon... </p>
               </Tab>
             </Tabs>
           </div>
           <div id="calendarContainer" className="col-4">
-            <Calendar resourceToDisplay={resourceToDisplay} />
+            { /* <Calendar resourceToDisplay={resourceToDisplay} /> */ }
           </div>
         </div>
       </div>
