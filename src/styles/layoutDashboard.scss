@@ -38,7 +38,16 @@
   max-height: 100vh;
 }
 
-.fieldTitleClubInfo{
-  font-size: large;
-  font-weight: bold;
+.club-informations-container {
+
+  .fieldTitleClubInfo{
+    font-size: large;
+    font-weight: bold;
+    color: $primary;
+  }
+
+  .club-description {
+    max-height: 40vh;
+    overflow-y: auto;
+  }
 }

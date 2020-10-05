@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ClubInformations = ({ club }) => (
-  <div className="container">
-    <h5 className="font-weight-bold  mt-3 mb-3 ml-5 text-center">Club details:</h5>
+  <div className="container text-white club-informations-container">
+    <h5 className="font-weight-bold  mt-3 mb-3 ml-5 text-center text-primary">Club details:</h5>
     <div className="row">
       <div className="col">
         <p>
@@ -16,19 +16,9 @@ const ClubInformations = ({ club }) => (
         </p>
         <p>
           <span className="fieldTitleClubInfo"> Description : </span>
-          {club.description}
-        </p>
-        <p>
-          <span className="fieldTitleClubInfo"> League : </span>
-          {club.league}
-        </p>
-        <p>
-          <span className="fieldTitleClubInfo"> Pool : </span>
-          {club.pool}
-        </p>
-        <p>
-          <span className="fieldTitleClubInfo"> Conference : </span>
-          {club.conference}
+          <div className="club-description">
+            {club.description}
+          </div>
         </p>
       </div>
 
@@ -48,6 +38,21 @@ const ClubInformations = ({ club }) => (
         <p>
           <span className="fieldTitleClubInfo"> Country : </span>
           {club.country}
+        </p>
+      </div>
+
+      <div className="col">
+        <p>
+          <span className="fieldTitleClubInfo"> League : </span>
+          {club.league}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> Pool : </span>
+          {club.pool}
+        </p>
+        <p>
+          <span className="fieldTitleClubInfo"> Conference : </span>
+          {club.conference}
         </p>
       </div>
     </div>
