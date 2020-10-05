@@ -59,7 +59,7 @@ const TeamCard = ({ team }) => {
         </div>
         <Link to={`/${followingEventData.type}/${followingEventData.followingEvent.id}`}>
           <div className="d-flex align-items-center py-2 px-2 mt-3">
-            <CalendarIcon size="2em" color={colors.primaryColor} className="mr-3" />
+            <CalendarIcon size="1.5em" color={colors.primaryColor} className="mr-3" />
             <div className="text-white event-title">
               {followingEventData.followingEvent.title}
             </div>
