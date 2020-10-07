@@ -45,7 +45,7 @@ const AdminCoachDashboardPage = () => {
   }
 
   return (
-    <div className="layoutPage black-background">
+    <div className="layoutPage">
       <HomeNavbar />
       <div id="dashboardContainer" className="container">
         <div className="row">
@@ -66,12 +66,12 @@ const AdminCoachDashboardPage = () => {
               </Tab>
 
               <Tab eventKey="settings" title="Settings" tabClassName="bg-dark">
-                <p> soon... </p>
+                <p className="text-primary"> soon... </p>
               </Tab>
             </Tabs>
           </div>
           <div id="calendarContainer" className="col-4">
-            { /* <Calendar resourceToDisplay={resourceToDisplay} /> */ }
+            <Calendar resourceToDisplay={resourceToDisplay} />
           </div>
         </div>
       </div>
