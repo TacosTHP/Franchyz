@@ -14,3 +14,24 @@
 .calendar-container {
   height: 78%;
 }
+
+.fc {
+  background-color: $dark;
+  color: $primary;
+  padding: 10px;
+  border-radius: 4px;
+
+  .fc-center {
+    h2 {
+      color: $primary
+    }
+  }
+
+  .fc-right {
+    .fc-button-group {
+      .fc-button-primary {
+        background-color: $primary;
+      }
+    }
+  }
+}
