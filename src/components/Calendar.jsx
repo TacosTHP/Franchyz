@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import Cookies from 'js-cookie';
+import Modal from 'react-bootstrap/Modal';
+
 import prepareAttendancesForFullCalendar from 'helpers/attendancesHelpers';
+
+import TeamsColorsCaption from 'components/TeamsColorsCaption';
+import QuestionMarkIcon from 'components/Icons/QuestionMarkIcon';
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -13,9 +17,16 @@ import interactionPlugin from '@fullcalendar/interaction';
 import 'styles/calendar.scss';
 
 const Calendar = ({ resourceToDisplay }) => {
+  const [show, setShow] = useState(false);
   const userType = useSelector((state) => state.authReducer.userType);
   const history = useHistory();
   const events = prepareAttendancesForFullCalendar({ attendancesOwners: resourceToDisplay });
+
+  const handleClose = () => setShow(false);
+  const handleShow = (e) => {
+    e.preventDefault();
+    setShow(true);
+  };
 
   const goToEventNew = () => {
     if (userType === 'coach') {
@@ -33,119 +44,53 @@ const Calendar = ({ resourceToDisplay }) => {
     }
   };
 
-  const setupCaption = () => {
-    const practiceStyling = (color) => (
-      {
-        color,
-        borderColor: color,
-      }
-    );
-
-    const gameStyling = (color) => (
-      {
-        backgroundColor: color,
-        borderColor: color,
-      }
-    );
-
-    const obj = JSON.parse(Cookies.get('teamsColors'));
-    if (obj !== undefined) {
-      return Object.keys(obj).map((team) => (
-        <div key={team} className="d-flex flex-column justify-content-center align-items-center my-3">
-          <div className="text-white font-weight-bold mb-3">
-            {team}
-          </div>
-          <div className="d-flex justify-content-around w-75">
-            <div className="d-flex justify-content-center rounded p-3 text-white font-weight-bold w-25" style={gameStyling(obj[team])}>
-              GAME
-            </div>
-            <div className="d-flex justify-content-center rounded p-3 bg-white font-weight-bold w-25" style={practiceStyling(obj[team])}>
-              PRACTICE
-            </div>
-          </div>
-        </div>
-      ));
-    }
-  };
-
   const setupElements = () => {
     let content;
     if (events !== undefined) {
       content = (
-        <>
-          <div className="">
-            <div className="bg-dark border rounded w-50 mx-auto p-3">
-              <h3 className="text-white">
-                Caption
-              </h3>
-              <div className="d-flex flex-column justify-content-around">
-                {setupCaption()}
-              </div>
-            </div>
-            <div>
-              <FullCalendar
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                defaultView="timeGridDay"
-                themeSystem="bootstrap"
-                height="auto"
-                header={{
-                  left: '',
-                  center: 'title',
-                  right: 'prev,next',
-                }}
-                buttonText={{
-                  today: 'Today',
-                  day: 'Daily',
-                  month: 'Monthly',
-                  week: 'Weekly',
-                }}
-                navLinks
-                allDaySlot={false}
-                firstDay={1}
-                locale="en"
-                timeZone="UTC"
-                minTime="08:00"
-                maxTime="23:59"
-                eventTimeFormat={{
-                  hour: 'numeric',
-                  minute: '2-digit',
-                  meridiem: false,
-                }}
-                events={events}
-                dateClick={goToEventNew}
-                eventClick={goToEvent}
-              />
-            </div>
-            <div>
-              <FullCalendar
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                defaultView="dayGridMonth"
-                themeSystem="bootstrap"
-                height="auto"
-                header={{
-                  left: '',
-                  center: '',
-                  right: '',
-                }}
-                navLinks
-                allDaySlot={false}
-                firstDay={1}
-                locale="en"
-                timeZone="UTC"
-                minTime="08:00"
-                maxTime="23:59"
-                eventTimeFormat={{
-                  hour: 'numeric',
-                  minute: '2-digit',
-                  meridiem: false,
-                }}
-                events={events}
-                dateClick={goToEventNew}
-                eventClick={goToEvent}
-              />
-            </div>
+        <div className="h-100 d-flex flex-column align-items-center">
+          <button type="button" className="caption-button text-primary" onClick={handleShow}><QuestionMarkIcon /></button>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header className="bg-dark text-primary" closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="bg-dark text-white"><TeamsColorsCaption /></Modal.Body>
+          </Modal>
+          <div className="calendar-container">
+            <FullCalendar
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              defaultView="timeGridDay"
+              themeSystem="standard"
+              height="parent"
+              header={{
+                left: '',
+                center: 'title',
+                right: 'prev,next',
+              }}
+              buttonText={{
+                today: 'Today',
+                day: 'Daily',
+                month: 'Monthly',
+                week: 'Weekly',
+              }}
+              navLinks
+              allDaySlot={false}
+              firstDay={1}
+              locale="en"
+              timeZone="UTC"
+              minTime="08:00"
+              maxTime="23:59"
+              eventTimeFormat={{
+                hour: 'numeric',
+                minute: '2-digit',
+                meridiem: false,
+              }}
+              events={events}
+              dateClick={goToEventNew}
+              eventClick={goToEvent}
+            />
           </div>
-        </>
+        </div>
       );
     } else {
       content = (
@@ -158,9 +103,9 @@ const Calendar = ({ resourceToDisplay }) => {
   };
 
   return (
-    <div>
+    <>
       { setupElements() }
-    </div>
+    </>
   );
 };
 

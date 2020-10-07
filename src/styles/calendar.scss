@@ -2,3 +2,15 @@
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
 @import '_scss-variables.scss';
+
+.caption-button {
+  cursor: pointer;
+  height: 5%;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2em;
+}
+
+.calendar-container {
+  height: 78%;
+}
