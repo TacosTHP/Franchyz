@@ -45,7 +45,7 @@ const AdminCoachDashboardPage = () => {
   }
 
   return (
-    <div className="layoutPage">
+    <div className="layoutPage black-background">
       <HomeNavbar />
       <div id="dashboardContainer" className="container">
         <div className="row">
