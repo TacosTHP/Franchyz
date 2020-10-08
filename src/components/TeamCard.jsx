@@ -28,18 +28,20 @@ const TeamCard = ({ team }) => {
     if (eventData.followingEvent.id !== 0) {
       return `/${eventData.type}/${eventData.followingEvent.id}`;
     }
-    return '';
+    return '#';
   };
 
   return (
     <>
       <div id="team-card" className="card w-25 mx-2 bg-dark" onClick={setCurrentTeam} >
 
-        <div className="ml-auto mr-2 mt-2">
-          <Link to="/"><TopRightArrowIcon size="1.5em" color={colors.whiteColor} /></Link>
+        <div className="d-flex justify-content-between px-2 pt-2 mb-2">
+          <h4 className="text-primary team-title ">{team.title}</h4>
+          <div className="ml-3">
+            <Link to="/"><TopRightArrowIcon size="1.5em" color={colors.whiteColor} /></Link>
+          </div>
         </div>
 
-        <h4 className="card-header mh-25 text-primary team-title mb-2">{team.title}</h4>
         <div className="card-body d-flex justify-content-center align-items-center">
           <div className="d-flex flex-column align-items-center mx-2">
             <UsersGroupIcon size="2em" color={colors.primaryColor} className="mb-2" />
@@ -65,7 +67,7 @@ const TeamCard = ({ team }) => {
           </div>
         </div>
         <Link to={eventLink(followingEventData)}>
-          <div className="d-flex align-items-center py-2 px-2 mt-3">
+          <div className="d-flex align-items-center my-2 mx-2">
             <CalendarIcon size="1.5em" color={colors.primaryColor} className="mr-3" />
             <div className="text-white event-title">
               {followingEventData.followingEvent.title}
