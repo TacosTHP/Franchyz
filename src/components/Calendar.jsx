@@ -72,7 +72,7 @@ const Calendar = ({ resourceToDisplay }) => {
               themeSystem="standard"
               height="parent"
               header={{
-                left: '',
+                left: 'timeGridDay,dayGridWeek',
                 center: 'title',
                 right: 'prev,next',
               }}

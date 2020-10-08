@@ -23,15 +23,24 @@
 
   .fc-center {
     h2 {
-      color: $primary
+      color: $white;
+      font-size: 1.5em;
     }
+  }
+
+  .fc-button-primary {
+    background-color: $primary;
+    &:focus {
+      background-color: $black;
+    }
+  }
+
+  .fc-button-active {
+    background-color: $black !important;
   }
 
   .fc-right {
     .fc-button-group {
-      .fc-button-primary {
-        background-color: $primary;
-      }
     }
   }
 }
