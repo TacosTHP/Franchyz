@@ -24,6 +24,13 @@ const TeamCard = ({ team }) => {
     dispatch(updateCurrentTeam({ team }));
   };
 
+  const eventLink = (eventData) => {
+    if (eventData.followingEvent.id !== 0) {
+      return `/${eventData.type}/${eventData.followingEvent.id}`;
+    }
+    return '';
+  };
+
   return (
     <>
       <div id="team-card" className="card w-25 mx-2 bg-dark" onClick={setCurrentTeam} >
@@ -57,7 +64,7 @@ const TeamCard = ({ team }) => {
             </div>
           </div>
         </div>
-        <Link to={`/${followingEventData.type}/${followingEventData.followingEvent.id}`}>
+        <Link to={eventLink(followingEventData)}>
           <div className="d-flex align-items-center py-2 px-2 mt-3">
             <CalendarIcon size="1.5em" color={colors.primaryColor} className="mr-3" />
             <div className="text-white event-title">
