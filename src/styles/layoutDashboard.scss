@@ -18,6 +18,7 @@
   }
 
   .nav-link {
+    color: $primary;
     border-color: $primary;
   }
 }
@@ -35,7 +36,7 @@
 }
 
 #calendarContainer {
-  height: 100vh;
+  height: 95vh;
 }
 
 .club-informations-container {
