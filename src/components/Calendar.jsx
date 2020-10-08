@@ -22,9 +22,11 @@ const Calendar = ({ resourceToDisplay }) => {
   const history = useHistory();
   const events = prepareAttendancesForFullCalendar({ attendancesOwners: resourceToDisplay });
 
-  const handleClose = () => setShow(false);
-  const handleShow = (e) => {
-    e.preventDefault();
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleShow = () => {
     setShow(true);
   };
 
@@ -49,12 +51,19 @@ const Calendar = ({ resourceToDisplay }) => {
     if (events !== undefined) {
       content = (
         <div className="h-100 d-flex flex-column align-items-center">
-          <button type="button" className="caption-button text-primary" onClick={handleShow}><QuestionMarkIcon /></button>
+          <button type="button" className="caption-button text-primary" onClick={handleShow}>
+            <QuestionMarkIcon />
+          </button>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header className="bg-dark text-primary" closeButton>
               <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body className="bg-dark text-white"><TeamsColorsCaption /></Modal.Body>
+            <Modal.Footer className="bg-dark">
+              <button type="button" className="btn btn-primary text-white" onClick={handleClose}>
+                CLOSE
+              </button>
+            </Modal.Footer>
           </Modal>
           <div className="calendar-container">
             <FullCalendar
