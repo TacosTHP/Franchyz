@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
+
+import { updateCurrentTeam } from 'redux/actions/resourcesActions';
 
 import prepareAttendancesForFullCalendar from 'helpers/attendancesHelpers';
 
@@ -17,10 +19,11 @@ import interactionPlugin from '@fullcalendar/interaction';
 import 'styles/calendar.scss';
 
 const Calendar = ({ resourceToDisplay }) => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
   const userType = useSelector((state) => state.authReducer.userType);
   const history = useHistory();
   const events = prepareAttendancesForFullCalendar({ attendancesOwners: resourceToDisplay });
+  const [show, setShow] = useState(false);
 
   const handleClose = () => {
     setShow(false);
@@ -28,6 +31,10 @@ const Calendar = ({ resourceToDisplay }) => {
 
   const handleShow = () => {
     setShow(true);
+  };
+
+  const allTeamsEvents = () => {
+    dispatch(updateCurrentTeam({ team: null }));
   };
 
   const goToEventNew = () => {
@@ -51,9 +58,15 @@ const Calendar = ({ resourceToDisplay }) => {
     if (events !== undefined) {
       content = (
         <div className="h-100 d-flex flex-column align-items-center">
-          <button type="button" className="caption-button text-primary" onClick={handleShow}>
-            <QuestionMarkIcon />
-          </button>
+          <div className="d-flex">
+            <button type="button" className="btn btn-primary" onClick={allTeamsEvents}>
+              YO
+            </button>
+            <button type="button" className="caption-button text-primary" onClick={handleShow}>
+              <QuestionMarkIcon />
+            </button>
+          </div>
+
           <Modal show={show} onHide={handleClose}>
             <Modal.Header className="bg-dark text-primary" closeButton>
               <Modal.Title>Modal heading</Modal.Title>
