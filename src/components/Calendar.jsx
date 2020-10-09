@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -21,11 +21,24 @@ import 'styles/calendar.scss';
 const Calendar = ({ resourceToDisplay }) => {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.authReducer.userType);
+  const currentTeam = useSelector((state) => state.resourcesReducer.currentTeam);
   const history = useHistory();
   const events = prepareAttendancesForFullCalendar({ attendancesOwners: resourceToDisplay });
 
   const allTeamsEvents = () => {
     dispatch(updateCurrentTeam({ team: null }));
+  };
+
+  const setupAllEventsButton = () => {
+    if (currentTeam !== null) {
+      return (
+        <PrimaryButton text="See all Events" onClick={allTeamsEvents} icon={<CalendarIcon />} />
+      );
+    }
+    return (
+      <>
+      </>
+    );
   };
 
   const goToEventNew = () => {
@@ -50,7 +63,7 @@ const Calendar = ({ resourceToDisplay }) => {
       content = (
         <div className="h-100 d-flex flex-column align-items-center">
           <div className="w-100 d-flex mb-2">
-            <PrimaryButton text="See all Events" onClick={allTeamsEvents} icon={<CalendarIcon />} />
+            {setupAllEventsButton()}
             <div className="align-self-end ml-auto">
               <TeamsColorsCaption />
             </div>
