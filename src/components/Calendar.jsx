@@ -10,6 +10,8 @@ import prepareAttendancesForFullCalendar from 'helpers/attendancesHelpers';
 
 import TeamsColorsCaption from 'components/TeamsColorsCaption';
 import QuestionMarkIcon from 'components/Icons/QuestionMarkIcon';
+import CalendarIcon from 'components/Icons/CalendarIcon';
+import PrimaryButton from 'components/Buttons/PrimaryButton';
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -58,10 +60,8 @@ const Calendar = ({ resourceToDisplay }) => {
     if (events !== undefined) {
       content = (
         <div className="h-100 d-flex flex-column align-items-center">
-          <div className="d-flex">
-            <button type="button" className="btn btn-primary" onClick={allTeamsEvents}>
-              YO
-            </button>
+          <div className="d-flex justify-content-center mb-2">
+            <PrimaryButton text="See all Events" onClick={allTeamsEvents} icon={<CalendarIcon />} />
             <button type="button" className="caption-button text-primary" onClick={handleShow}>
               <QuestionMarkIcon />
             </button>

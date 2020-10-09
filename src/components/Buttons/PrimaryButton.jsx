@@ -1,28 +1,62 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import 'styles/button.scss';
 
-const PrimaryButton = ({ text, icon, url }) => (
-  <>
-    <Link to={url}>
-      <button id="primary-button" type="button" className="btn btn-primary d-flex align-items-center justify-content-around text-white font-weight-bold mx-auto">
-        <div className="mr-2" id="icon">
+const PrimaryButton = ({
+  text,
+  icon,
+  url,
+  onClick,
+}) => {
+  const history = useHistory();
+  const setActionOnClick = () => {
+    if (url !== '#') {
+      history.push(url);
+    } else {
+      onClick();
+    }
+  };
+
+  const setupIcon = () => {
+    if (icon !== '') {
+      return (
+        <div className="h-100 d-flex justify-content-center align-items-center mr-2" id="icon">
           {icon}
         </div>
-        <div>
+      );
+    }
+  };
+
+  return (
+    <>
+      <button
+        id="primary-button"
+        type="button"
+        onClick={setActionOnClick}
+        className="btn btn-primary d-flex justify-content-center align-items-center text-white font-weight-bold"
+      >
+        {setupIcon()}
+        <div className="h-100 d-flex justify-content-center align-items-center">
           {text}
         </div>
       </button>
-    </Link>
-  </>
-);
+    </>
+  );
+};
 
 export default PrimaryButton;
 
 PrimaryButton.propTypes = {
-  text: PropTypes.string,
-  icon: PropTypes.elementType,
+  text: PropTypes.string.isRequired,
   url: PropTypes.string,
-}.isRequired;
+  icon: PropTypes.elementType,
+  onClick: PropTypes.func,
+};
+
+PrimaryButton.defaultProps = {
+  url: '#',
+  icon: '',
+  onClick: () => {},
+};
