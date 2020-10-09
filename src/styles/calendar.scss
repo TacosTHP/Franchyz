@@ -37,10 +37,11 @@
 
   .fc-button-active {
     background-color: $black !important;
+    color: $primary !important;
+    font-weight: bold !important;
   }
 
-  .fc-right {
-    .fc-button-group {
-    }
+  .fc-today{
+    background-color: $dark !important;
   }
 }
