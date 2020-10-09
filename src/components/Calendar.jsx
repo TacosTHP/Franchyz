@@ -65,7 +65,7 @@ const Calendar = ({ resourceToDisplay }) => {
           <div className="w-100 d-flex mb-2">
             {setupAllEventsButton()}
             <div className="align-self-end ml-auto">
-              <TeamsColorsCaption />
+              <TeamsColorsCaption currentTeam={currentTeam} />
             </div>
           </div>
           <div className="calendar-container">

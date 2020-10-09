@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import Modal from 'react-bootstrap/Modal';
 
 import PrimaryButton from 'components/Buttons/PrimaryButton';
 import QuestionMarkIcon from 'components/Icons/QuestionMarkIcon';
 
-const TeamsColorsCaption = () => {
+const TeamsColorsCaption = ({ currentTeam }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -30,22 +31,39 @@ const TeamsColorsCaption = () => {
 
   const setupCaption = () => {
     const obj = JSON.parse(Cookies.get('teamsColors'));
-    return (
-      Object.keys(obj).map((team) => (
-        <div key={team} className="d-flex flex-column justify-content-center align-items-center my-3">
-          <div className="text-white font-weight-bold mb-3">
-            {team}
+    if (currentTeam === null) {
+      return (
+        Object.keys(obj).map((team) => (
+          <div key={team} className="d-flex flex-column justify-content-center align-items-center my-3">
+            <div className="text-white font-weight-bold mb-3">
+              {team}
+            </div>
+            <div className="d-flex justify-content-around w-75">
+              <div className="d-flex justify-content-center rounded p-3 text-white font-weight-bold w-25" style={gameStyling(obj[team])}>
+                GAME
+              </div>
+              <div className="d-flex justify-content-center rounded p-3 bg-white font-weight-bold w-25" style={practiceStyling(obj[team])}>
+                PRACTICE
+              </div>
+            </div>
           </div>
-          <div className="d-flex justify-content-around w-75">
-            <div className="d-flex justify-content-center rounded p-3 text-white font-weight-bold w-25" style={gameStyling(obj[team])}>
-              GAME
-            </div>
-            <div className="d-flex justify-content-center rounded p-3 bg-white font-weight-bold w-25" style={practiceStyling(obj[team])}>
-              PRACTICE
-            </div>
+        ))
+      );
+    }
+    return (
+      <div className="d-flex flex-column justify-content-center align-items-center my-3">
+        <div className="text-white font-weight-bold mb-3">
+          {currentTeam.title}
+        </div>
+        <div className="d-flex justify-content-around w-75">
+          <div className="d-flex justify-content-center rounded p-3 text-white font-weight-bold w-25" style={gameStyling(obj[currentTeam.title])}>
+            GAME
+          </div>
+          <div className="d-flex justify-content-center rounded p-3 bg-white font-weight-bold w-25" style={practiceStyling(obj[currentTeam.title])}>
+            PRACTICE
           </div>
         </div>
-      ))
+      </div>
     );
   };
 
@@ -56,7 +74,7 @@ const TeamsColorsCaption = () => {
       </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header className="bg-dark text-primary" closeButton>
-          <Modal.Title>Teams Colors</Modal.Title>
+          <Modal.Title>Colors Caption</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-dark text-white">{setupCaption()}</Modal.Body>
         <Modal.Footer className="bg-dark">
@@ -68,3 +86,9 @@ const TeamsColorsCaption = () => {
 };
 
 export default TeamsColorsCaption;
+
+TeamsColorsCaption.propTypes = {
+  currentTeam: PropTypes.shape(
+
+  ).isRequired,
+};
