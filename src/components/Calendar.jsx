@@ -57,66 +57,58 @@ const Calendar = ({ resourceToDisplay }) => {
     }
   };
 
-  const setupElements = () => {
-    let content;
-    if (events !== undefined) {
-      content = (
-        <div className="h-100 d-flex flex-column align-items-center">
-          <div className="w-100 d-flex mb-2">
-            {setupAllEventsButton()}
-            <div className="align-self-end ml-auto">
-              <TeamsColorsCaption currentTeam={currentTeam} />
-            </div>
-          </div>
-          <div className="calendar-container">
-            <FullCalendar
-              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-              defaultView="timeGridDay"
-              themeSystem="standard"
-              height="parent"
-              header={{
-                left: 'timeGridDay,dayGridWeek',
-                center: 'title',
-                right: 'prev,next',
-              }}
-              buttonText={{
-                today: 'Today',
-                day: 'Daily',
-                month: 'Monthly',
-                week: 'Weekly',
-              }}
-              navLinks
-              allDaySlot={false}
-              firstDay={1}
-              locale="en"
-              timeZone="UTC"
-              minTime="08:00"
-              maxTime="23:59"
-              eventTimeFormat={{
-                hour: 'numeric',
-                minute: '2-digit',
-                meridiem: false,
-              }}
-              events={events}
-              dateClick={goToEventNew}
-              eventClick={goToEvent}
-            />
-          </div>
-        </div>
-      );
-    } else {
-      content = (
-        <div>
-          <h2>No events booked yet mate.......</h2>
-        </div>
-      );
-    }
-    return content;
-  };
+  if (events === undefined) {
+    return (
+      <div>
+        <h2>No events booked yet mate.......</h2>
+      </div>
+    );
+  }
 
   return (
     <>
-      { setupElements() }
+      <div className="h-100 d-flex flex-column align-items-center">
+        <div className="w-100 d-flex mb-2">
+          {setupAllEventsButton()}
+          <div className="align-self-end ml-auto">
+            <TeamsColorsCaption currentTeam={currentTeam} />
+          </div>
+        </div>
+        <div className="calendar-container">
+          <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            defaultView="timeGridDay"
+            themeSystem="standard"
+            height="parent"
+            header={{
+              left: 'timeGridDay,dayGridWeek',
+              center: 'title',
+              right: 'prev,next',
+            }}
+            buttonText={{
+              today: 'Today',
+              day: 'Daily',
+              month: 'Monthly',
+              week: 'Weekly',
+            }}
+            navLinks
+            allDaySlot={false}
+            firstDay={1}
+            locale="en"
+            timeZone="UTC"
+            minTime="08:00"
+            maxTime="23:59"
+            eventTimeFormat={{
+              hour: 'numeric',
+              minute: '2-digit',
+              meridiem: false,
+            }}
+            events={events}
+            dateClick={goToEventNew}
+            eventClick={goToEvent}
+          />
+        </div>
+      </div>
     </>
   );
 };
