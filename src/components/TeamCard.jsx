@@ -16,6 +16,7 @@ import 'styles/teamListCard.scss';
 import colors from 'styles/_scss-variables.scss';
 
 const TeamCard = ({ team }) => {
+  console.log(team);
 
   const dispatch = useDispatch();
   const followingEventData = extractFollowingEventFromTeam({ team });
@@ -38,7 +39,7 @@ const TeamCard = ({ team }) => {
         <div className="d-flex justify-content-between px-2 pt-2 mb-2">
           <h4 className="text-primary team-title ">{team.title}</h4>
           <div className="ml-3">
-            <Link to="/"><TopRightArrowIcon size="1.5em" color={colors.whiteColor} /></Link>
+            <Link to={`/clubs/${team.club_id}/teams/${team.id}`}><TopRightArrowIcon size="1.5em" color={colors.whiteColor} /></Link>
           </div>
         </div>
 
