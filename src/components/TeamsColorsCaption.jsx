@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 
 import PrimaryButton from 'components/Buttons/PrimaryButton';
 import QuestionMarkIcon from 'components/Icons/QuestionMarkIcon';
+import CloseIcon from 'components/Icons/CloseIcon';
 
 const TeamsColorsCaption = ({ currentTeam }) => {
   const [show, setShow] = useState(false);
@@ -78,7 +79,7 @@ const TeamsColorsCaption = ({ currentTeam }) => {
         </Modal.Header>
         <Modal.Body className="bg-dark text-white">{setupCaption()}</Modal.Body>
         <Modal.Footer className="bg-dark">
-          <PrimaryButton text="Close Caption" onClick={handleClose} icon={<QuestionMarkIcon />} />
+          <PrimaryButton text="Close Caption" onClick={handleClose} icon={<CloseIcon />} />
         </Modal.Footer>
       </Modal>
     </>
