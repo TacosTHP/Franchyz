@@ -4,7 +4,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
 import Loading from 'components/Loading';
-import HomeNavbar from 'components/layouts/HomeNavbar';
+import CoachDashboardNavbar from 'components/layouts/CoachDashboardNavbar';
 import InvitationToCreateClub from 'components/InvitationToCreateClub';
 import TeamList from 'components/TeamList';
 import TeamInfo from 'components/TeamInfo';
@@ -46,7 +46,7 @@ const AdminCoachDashboardPage = () => {
 
   return (
     <div className="layoutPage black-background">
-      <HomeNavbar />
+      <CoachDashboardNavbar club={currentClub} />
       <div id="dashboardContainer" className="container">
         <div className="row">
           <div id="tabsAdmin" className="col-8">
