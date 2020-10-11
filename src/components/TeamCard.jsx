@@ -16,8 +16,6 @@ import 'styles/teamListCard.scss';
 import colors from 'styles/_scss-variables.scss';
 
 const TeamCard = ({ team }) => {
-  console.log(team);
-
   const dispatch = useDispatch();
   const followingEventData = extractFollowingEventFromTeam({ team });
 
