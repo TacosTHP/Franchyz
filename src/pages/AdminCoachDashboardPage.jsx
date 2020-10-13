@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
-import Loading from 'components/Loading';
+import SkeletonPage from 'components/SkeletonPage';
 import InvitationToCreateClub from 'components/InvitationToCreateClub';
 import TeamList from 'components/TeamList';
 import TeamInfo from 'components/TeamInfo';
@@ -36,7 +36,7 @@ const AdminCoachDashboardPage = () => {
   }, [currentTeam, currentClub]);
 
   if (loading) {
-    return (<Loading />);
+    return (<SkeletonPage />);
   }
 
   if (currentClub === null) {
