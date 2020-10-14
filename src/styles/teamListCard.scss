@@ -6,4 +6,26 @@
 
 #team-card {
   flex: 0 0 auto;
+  cursor: pointer;
+
+  #link-to-team {
+    height: 10%
+  }
+
+  .team-title {
+    font-size: 1.2em;
+    display: inline-block;
+  }
+
+  .players-number {
+    font-size: 1.2em;
+  }
+
+  .event-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 160px;
+    height: 1.2em;
+    white-space: nowrap;
+  }
 }

@@ -12,8 +12,11 @@ const Carousel = () => (
         <div className="carousel-item active">
           <div className="hero-image-1">
             <div className="hero-text-1">
-              <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
-              <p>TEAM MANAGEMENT THE EASY WAY</p>
+              <h1 className="text-white">
+                Manage your team to the
+                {'\n'}
+                <span>NEXT LEVEL</span>
+              </h1>
               <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} url="/register" />
             </div>
           </div>
@@ -21,8 +24,11 @@ const Carousel = () => (
         <div className="carousel-item">
           <div className="hero-image-2">
             <div className="hero-text-2">
-              <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
-              <p>TEAM MANAGEMENT THE EASY WAY</p>
+              <h1 className="text-white">
+                Manage your team to the
+                {'\n'}
+                <span>NEXT LEVEL</span>
+              </h1>
               <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} url="/register" />
             </div>
           </div>
@@ -30,8 +36,11 @@ const Carousel = () => (
         <div className="carousel-item">
           <div className="hero-image-3">
             <div className="hero-text-3">
-              <h1 style={{ color: 'white' }}>FRANCHYZ</h1>
-              <p>TEAM MANAGEMENT THE EASY WAY</p>
+              <h1 className="text-white">
+                Manage your team to the
+                {'\n'}
+                <span>NEXT LEVEL</span>
+              </h1>
               <PrimaryButton text="Meet my Team now !" icon={<GiAmericanFootballHelmet />} url="/register" />
             </div>
           </div>

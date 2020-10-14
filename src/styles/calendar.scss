@@ -2,3 +2,45 @@
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
 @import '_scss-variables.scss';
+
+.caption-button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2em;
+}
+
+.calendar-container {
+  height: 78%;
+}
+
+.fc {
+  background-color: $dark;
+  color: $primary;
+  padding: 10px;
+  border-radius: 4px;
+
+  .fc-center {
+    h2 {
+      color: $white;
+      font-size: 1.5em;
+    }
+  }
+
+  .fc-button-primary {
+    background-color: $primary;
+    &:focus {
+      background-color: $black;
+    }
+  }
+
+  .fc-button-active {
+    background-color: $black !important;
+    color: $primary !important;
+    font-weight: bold !important;
+  }
+
+  .fc-today{
+    background-color: $dark !important;
+  }
+}

@@ -9,8 +9,17 @@ h1 {
 	font-size: 3em !important;
 }
 
-.redtext {
-	color: red;
+.black-background {
+	background-color: $black;
+}
+
+.loading-animation {
+	height: 100%;
+}
+
+.skeleton-page {
+	height: 100vh;
+	background-color: $black;
 }
 
 ul {
@@ -27,4 +36,8 @@ ul {
 	width: 6em;
 	margin-left: 1em;
 	margin-top: 1em;
+}
+
+.description-bandeau {
+	white-space: pre-line;
 }

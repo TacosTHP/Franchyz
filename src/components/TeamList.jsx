@@ -14,9 +14,11 @@ const TeamList = ({ teams }) => {
   }
 
   return (
-    <div id="team-list" className="d-flex py-2 border">
+    <div id="team-list" className="d-flex py-2 pr-5">
       { teams.map((team) => <TeamCard key={team.id} team={team} />) }
-      <CreationTeamCard />
+      <div className="mr-5 pr-2 w-25 ">
+        <CreationTeamCard />
+      </div>
     </div>
   );
 };
