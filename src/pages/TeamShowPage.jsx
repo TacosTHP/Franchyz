@@ -1,56 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import * as teamAPI from 'services/teamAPI';
-import PlayersList from 'components/PlayersList';
-import 'styles/form.scss';
+import { useSelector } from 'react-redux';
 
-const TeamShow = () => {
+import * as teamAPI from 'services/teamAPI';
+
+import Loading from 'components/Loading';
+import CoachCard from 'components/CoachCard';
+import PlayersTable from 'components/PlayersTable';
+
+const TeamShowPage = () => {
   const { clubId, teamId } = useParams();
   const [team, setTeam] = useState();
-
-  const setupElements = () => {
-    let elements;
-    if (team.players !== undefined) {
-      elements = (
-        <>
-          <PlayersList players={team.players} />
-        </>
-      );
-    } else {
-      elements = (
-        <>
-          <div>
-            No players in the team yet....
-          </div>
-        </>
-      );
-    }
-  };
-
-  const setupPage = () => {
-    let content;
-    if (team !== undefined) {
-      content = (
-        <>
-          <div className="text-center">
-            <h1>
-              {team.title}
-            </h1>
-          </div>
-          { setupElements() }
-        </>
-      );
-    } else {
-      content = (
-        <>
-          <div className="text-center">
-            <p>Loading.....</p>
-          </div>
-        </>
-      );
-    }
-    return content;
-  };
+  const loading = useSelector((state) => state.authReducer.loading);
 
   useEffect(() => {
     const loadData = async () => {
@@ -60,11 +21,25 @@ const TeamShow = () => {
     loadData();
   }, []);
 
-  return (
-    <div className="container mb-3 mt-3">
-      { setupPage() }
-    </div>
-  );
+  if (loading) {
+    return (<Loading />);
+  }
+
+  if (team !== undefined) {
+    return (
+      <div className="layoutPage">
+        <div className="mr-auto text-primary">FLECHE RETOUR</div>
+        <div className="d-flex justify-content-center align-items-center">
+          <h1 className="text-primary text-center">
+            {team.title}
+          </h1>
+        </div>
+        <CoachCard coach={team.coach} />
+        <PlayersTable players={team.players} />
+      </div>
+    );
+  }
+  return (<Loading />);
 };
 
-export default TeamShow;
+export default TeamShowPage;
