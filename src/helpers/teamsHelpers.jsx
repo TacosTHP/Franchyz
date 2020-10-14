@@ -22,7 +22,10 @@ const unavailablePlayersOfTeam = ({ team }) => {
 };
 
 const extractFollowingEventFromTeam = ({ team }) => {
-  let followingEvent = null;
+  let followingEvent = {
+    id: 0,
+    title: 'No Following Event',
+  };
   const today = new Date().toISOString();
   let type = null;
   let nextDate = new Date(3000, 12).toISOString();

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
+import CoachDashboardNavbar from 'components/layouts/CoachDashboardNavbar';
 import SkeletonPage from 'components/SkeletonPage';
 import InvitationToCreateClub from 'components/InvitationToCreateClub';
 import TeamList from 'components/TeamList';
@@ -11,7 +12,7 @@ import ClubInformations from 'components/ClubInformations';
 import Calendar from 'components/Calendar';
 import { getClub } from 'redux/middlewares/clubsMiddlewares';
 
-import '../styles/form.scss';
+import 'styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
   const [resourceToDisplay, setResourceToDisplay] = useState(null);
@@ -44,27 +45,28 @@ const AdminCoachDashboardPage = () => {
   }
 
   return (
-    <div className="layoutPage">
+    <div className="layoutPage black-background">
+      <CoachDashboardNavbar club={currentClub} />
       <div id="dashboardContainer" className="container">
         <div className="row">
           <div id="tabsAdmin" className="col-8">
-            <h4> Main Dashboard </h4>
+            <h4 className="text-white"> Main Dashboard </h4>
             <Tabs defaultActiveKey="main">
-              <Tab eventKey="main" title="Main">
-                <div id="teamListContainer" className="container">
+              <Tab eventKey="main" title="Main" tabClassName="bg-dark">
+                <div id="teamListContainer" className="d-flex justify-content-center">
                   <TeamList teams={currentClub.teams} />
                 </div>
-                <div id="teamInfoContainer" className="container mt-3">
+                <div id="teamInfoContainer" className="mt-2">
                   <TeamInfo teams={currentClub.teams} team={currentTeam} />
                 </div>
               </Tab>
 
-              <Tab eventKey="clubInfo" title="Club Info">
+              <Tab eventKey="clubInfo" title="Club Info" tabClassName="bg-dark">
                 <ClubInformations club={currentClub} />
               </Tab>
 
-              <Tab eventKey="settings" title="Settings">
-                <p> soon... </p>
+              <Tab eventKey="settings" title="Settings" tabClassName="bg-dark">
+                <p className="text-primary"> soon... </p>
               </Tab>
             </Tabs>
           </div>
