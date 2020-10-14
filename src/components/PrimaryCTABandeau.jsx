@@ -20,7 +20,7 @@ const PrimaryCTABandeau = ({
               <h3 className="text-dark">
                 {title}
               </h3>
-              <p className="text-white">
+              <p className="text-white description-bandeau">
                 {description}
               </p>
             </div>
