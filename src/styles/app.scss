@@ -13,6 +13,15 @@ h1 {
 	color: red;
 }
 
+.loading-animation {
+	height: 100%;
+}
+
+.skeleton-page {
+	height: 100vh;
+	background-color: $black;
+}
+
 ul {
 	list-style-type: none;
 }
