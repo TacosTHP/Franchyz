@@ -2,13 +2,21 @@
 
 #primary-button {
   &:hover {
-    background-color: $grey !important;
-    border-color: $grey !important;
+    background-color: $primary !important;
+    border-color: $white !important;
+    box-shadow: 0 0 5px 5px $primary;
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
   }
 }
 
 #dark-button {
   &:hover {
+    background-color: $dark !important;
+    border-color: $white !important;
+    box-shadow: 0 0 5px 5px $dark;
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
   }
 }
 

@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
-import Loading from 'components/Loading';
 import CoachDashboardNavbar from 'components/layouts/CoachDashboardNavbar';
+import SkeletonPage from 'components/SkeletonPage';
 import InvitationToCreateClub from 'components/InvitationToCreateClub';
 import TeamList from 'components/TeamList';
 import TeamInfo from 'components/TeamInfo';
@@ -12,7 +12,7 @@ import ClubInformations from 'components/ClubInformations';
 import Calendar from 'components/Calendar';
 import { getClub } from 'redux/middlewares/clubsMiddlewares';
 
-import '../styles/form.scss';
+import 'styles/form.scss';
 
 const AdminCoachDashboardPage = () => {
   const [resourceToDisplay, setResourceToDisplay] = useState(null);
@@ -37,7 +37,7 @@ const AdminCoachDashboardPage = () => {
   }, [currentTeam, currentClub]);
 
   if (loading) {
-    return (<Loading />);
+    return (<SkeletonPage />);
   }
 
   if (currentClub === null) {
