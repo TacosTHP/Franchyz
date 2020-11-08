@@ -2,11 +2,14 @@ import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import Loading from 'components/Loading';
 import CoachCard from 'components/CoachCard';
 import CoachDashboardNavbar from 'components/layouts/CoachDashboardNavbar';
 import PlayersTable from 'components/PlayersTable';
 import LeftArrowIcon from 'components/Icons/LeftArrowIcon';
+import Calendar from 'components/Calendar';
 import { getTeam } from 'redux/middlewares/teamsMiddlewares';
 
 const TeamShowPage = () => {
@@ -30,7 +33,7 @@ const TeamShowPage = () => {
     return (<Loading />);
   }
 
-  if (currentTeam !== undefined) {
+  if (currentTeam !== null) {
     return (
       <div className="black-background">
         <CoachDashboardNavbar club />
@@ -41,20 +44,25 @@ const TeamShowPage = () => {
               {currentTeam.title}
             </h1>
           </div>
-          <div className="d-flex">
-            <div className="w-25 mr-2">
-              <h3 className="text-primary">
-                Team Coach
-              </h3>
-              <CoachCard coach={currentTeam.coach} />
-              <h3 className="text-white">
-                General Coach
-              </h3>
-              <CoachCard coach={currentTeam.coach} />
-            </div>
-            <div className="w-100">
-              <PlayersTable players={currentTeam.players} />
-            </div>
+          <div className="d-flex flex-column justify-content-center align-items-center text-primary">
+            <Tabs defaultActiveKey="personel" centered>
+              <Tab eventKey="personel" title="Personel" tabClassName="bg-dark text-primary">
+                <div className="d-flex">
+                  <div className="w-25 mr-2">
+                    <h3 className="text-primary">
+                      Team Coach
+                    </h3>
+                    <CoachCard coach={currentTeam.coach} />
+                  </div>
+                  <div className="w-100">
+                    <PlayersTable players={currentTeam.players} />
+                  </div>
+                </div>
+              </Tab>
+              <Tab eventKey="events" title="Events" tabClassName="bg-dark text-primary">
+                Calendar
+              </Tab>
+            </Tabs>
           </div>
         </div>
       </div>
