@@ -1,38 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
-import * as teamAPI from 'services/teamAPI';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Loading from 'components/Loading';
 import CoachCard from 'components/CoachCard';
 import CoachDashboardNavbar from 'components/layouts/CoachDashboardNavbar';
 import PlayersTable from 'components/PlayersTable';
 import LeftArrowIcon from 'components/Icons/LeftArrowIcon';
+import { getTeam } from 'redux/middlewares/teamsMiddlewares';
 
 const TeamShowPage = () => {
   const { clubId, teamId } = useParams();
-  const [team, setTeam] = useState();
   const history = useHistory();
+  const dispatch = useDispatch();
   const loading = useSelector((state) => state.authReducer.loading);
+  const currentTeam = useSelector((state) => state.resourcesReducer.currentTeam);
 
   const goToDashboard = () => {
     history.push('/dashboardAdmin');
   };
 
-  useEffect(() => {
-    const loadData = async () => {
-      const teamData = await teamAPI.getTeam(clubId, teamId);
-      setTeam(teamData);
-    };
-    loadData();
-  }, []);
+  const loadTeam = async () => {
+    await dispatch(getTeam({ clubId, teamId }));
+  };
+
+  useEffect(() => { loadTeam(); }, []);
 
   if (loading) {
     return (<Loading />);
   }
 
-  if (team !== undefined) {
+  if (currentTeam !== undefined) {
     return (
       <div className="black-background">
         <CoachDashboardNavbar club />
@@ -40,7 +38,7 @@ const TeamShowPage = () => {
           <div className="mr-auto text-primary" onClick={goToDashboard}><LeftArrowIcon size="2em" /></div>
           <div className="d-flex justify-content-center align-items-center">
             <h1 className="text-primary text-center">
-              {team.title}
+              {currentTeam.title}
             </h1>
           </div>
           <div className="d-flex">
@@ -48,14 +46,14 @@ const TeamShowPage = () => {
               <h3 className="text-primary">
                 Team Coach
               </h3>
-              <CoachCard coach={team.coach} />
+              <CoachCard coach={currentTeam.coach} />
               <h3 className="text-white">
                 General Coach
               </h3>
-              <CoachCard coach={team.coach} />
+              <CoachCard coach={currentTeam.coach} />
             </div>
             <div className="w-100">
-              <PlayersTable players={team.players} />
+              <PlayersTable players={currentTeam.players} />
             </div>
           </div>
         </div>

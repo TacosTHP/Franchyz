@@ -4,7 +4,25 @@ import {
   request, requestSuccess, requestFailure, connect,
 } from 'redux/actions/authActions';
 import { updateCurrentClub } from 'redux/actions/resourcesActions';
+import { updateCurrentTeam } from 'redux/actions/resourcesActions';
 import { setupErrorsMessage } from 'helpers/misc';
+
+const getTeam = ({ clubId, teamId }) => async (dispatch) => {
+  try {
+    dispatch(request());
+    const response = await teamAPI.getTeam(clubId, teamId);
+
+    if (typeof response !== 'object') {
+      throw new Error(`HTTP status ${response.status}`);
+    }
+
+    dispatch(updateCurrentTeam({ team: response }));
+    dispatch(requestSuccess({ successMessage: null }));
+  } catch (error) {
+    dispatch(requestFailure(setupErrorsMessage(error)));
+    dispatch(connect('/dashboardAdmin'));
+  }
+};
 
 const createTeam = (args) => async (dispatch) => {
   try {
@@ -31,4 +49,4 @@ const createTeam = (args) => async (dispatch) => {
   }
 };
 
-export { createTeam };
+export { createTeam, getTeam };
