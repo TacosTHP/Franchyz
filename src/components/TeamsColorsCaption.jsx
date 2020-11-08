@@ -89,7 +89,28 @@ const TeamsColorsCaption = ({ currentTeam }) => {
 export default TeamsColorsCaption;
 
 TeamsColorsCaption.propTypes = {
-  currentTeam: PropTypes.shape(
+  currentTeam: PropTypes.shape({
+    club_id: PropTypes.number,
+    coach: PropTypes.shape({
+      'admin?': PropTypes.bool,
+      arrival: PropTypes.string,
+      birthdate: PropTypes.string,
+      club_id: PropTypes.number,
+      created_at: PropTypes.string,
+      email: PropTypes.string,
+      first_name: PropTypes.string,
+      id: PropTypes.number,
+      last_name: PropTypes.string,
+      phone: PropTypes.string,
+      updated_at: PropTypes.string,
+    }),
+    creator_id: PropTypes.number,
+    id: PropTypes.number,
+    players: PropTypes.arrayOf(PropTypes.object),
+    title: PropTypes.string,
+  }),
+};
 
-  ).isRequired,
+TeamsColorsCaption.defaultProps = {
+  currentTeam: null,
 };
