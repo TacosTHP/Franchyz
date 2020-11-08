@@ -51,7 +51,7 @@ export default PrimaryButton;
 PrimaryButton.propTypes = {
   text: PropTypes.string.isRequired,
   url: PropTypes.string,
-  icon: PropTypes.elementType,
+  icon: PropTypes.element,
   onClick: PropTypes.func,
 };
 
