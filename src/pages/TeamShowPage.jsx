@@ -45,7 +45,7 @@ const TeamShowPage = () => {
             </h1>
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center px-2">
-            <Tabs defaultActiveKey="personel" centered>
+            <Tabs defaultActiveKey="personel" centered="true">
               <Tab eventKey="personel" title="Staff & Players" tabClassName="bg-dark">
                 <div className="d-flex">
                   <div className="w-25 mr-3">
