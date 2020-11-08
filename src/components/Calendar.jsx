@@ -116,5 +116,41 @@ const Calendar = ({ resourceToDisplay }) => {
 export default Calendar;
 
 Calendar.propTypes = {
-  attendances: PropTypes.arrayOf(PropTypes.object).isRequired,
+  resourceToDisplay: PropTypes.oneOfType([
+    PropTypes.shape({
+      address: PropTypes.string,
+      city: PropTypes.string,
+      conference: PropTypes.string,
+      country: PropTypes.string,
+      date_of_creation: PropTypes.string,
+      description: PropTypes.string,
+      id: PropTypes.number,
+      league: PropTypes.string,
+      logo_url: PropTypes.string,
+      name: PropTypes.string,
+      pool: PropTypes.string,
+      teams: PropTypes.arrayOf(PropTypes.object),
+      zip_code: PropTypes.string,
+    }),
+    PropTypes.shape({
+      club_id: PropTypes.number,
+      coach: PropTypes.shape({
+        'admin?': PropTypes.bool,
+        arrival: PropTypes.string,
+        birthdate: PropTypes.string,
+        club_id: PropTypes.number,
+        created_at: PropTypes.string,
+        email: PropTypes.string,
+        first_name: PropTypes.string,
+        id: PropTypes.number,
+        last_name: PropTypes.string,
+        phone: PropTypes.string,
+        updated_at: PropTypes.string,
+      }),
+      creator_id: PropTypes.number,
+      id: PropTypes.number,
+      players: PropTypes.arrayOf(PropTypes.object),
+      title: PropTypes.string,
+    }),
+  ]).isRequired,
 };
