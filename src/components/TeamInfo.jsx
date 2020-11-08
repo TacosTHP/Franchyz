@@ -23,8 +23,37 @@ const TeamInfo = ({ teams, team }) => {
 export default TeamInfo;
 
 TeamInfo.propTypes = {
+  teams: PropTypes.arrayOf(PropTypes.object),
+  team: PropTypes.shape({
+    club_id: PropTypes.number,
+    coach: PropTypes.shape({
+      'admin?': PropTypes.bool,
+      arrival: PropTypes.string,
+      birthdate: PropTypes.string,
+      club_id: PropTypes.number,
+      created_at: PropTypes.string,
+      email: PropTypes.string,
+      first_name: PropTypes.string,
+      id: PropTypes.number,
+      last_name: PropTypes.string,
+      phone: PropTypes.string,
+      updated_at: PropTypes.string,
+    }),
+    creator_id: PropTypes.number,
+    id: PropTypes.number,
+    players: PropTypes.arrayOf(PropTypes.object),
+    title: PropTypes.string,
+  }),
+};
+
+TeamInfo.defaultProps = {
   teams: PropTypes.shape({
-    length: PropTypes.number,
-  }).isRequired,
-  team: PropTypes.shape().isRequired,
+    club_id: '',
+    coach: {},
+    creator_id: '',
+    id: '',
+    players: [],
+    title: '',
+  }),
+  team: PropTypes.shape(),
 };
