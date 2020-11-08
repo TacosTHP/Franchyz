@@ -57,6 +57,6 @@ PrimaryButton.propTypes = {
 
 PrimaryButton.defaultProps = {
   url: '#',
-  icon: '',
+  icon: <></>,
   onClick: () => {},
 };
