@@ -14,12 +14,12 @@ const ClubInformations = ({ club }) => (
           <span className="fieldTitleClubInfo"> Founded in : </span>
           {club.date_of_creation}
         </p>
-        <p>
+        <div>
           <span className="fieldTitleClubInfo"> Description : </span>
           <div className="club-description">
             {club.description}
           </div>
-        </p>
+        </div>
       </div>
 
       <div className="col">

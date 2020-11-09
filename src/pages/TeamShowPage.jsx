@@ -44,11 +44,11 @@ const TeamShowPage = () => {
               {currentTeam.title}
             </h1>
           </div>
-          <div className="d-flex flex-column justify-content-center align-items-center text-primary">
-            <Tabs defaultActiveKey="personel" centered>
-              <Tab eventKey="personel" title="Personel" tabClassName="bg-dark text-primary">
+          <div className="d-flex flex-column justify-content-center align-items-center px-2">
+            <Tabs defaultActiveKey="personel" centered="true">
+              <Tab eventKey="personel" title="Staff & Players" tabClassName="bg-dark">
                 <div className="d-flex">
-                  <div className="w-25 mr-2">
+                  <div className="w-25 mr-3">
                     <h3 className="text-primary">
                       Team Coach
                     </h3>

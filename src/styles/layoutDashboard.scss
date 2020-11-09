@@ -12,15 +12,6 @@
   box-sizing: border-box;
   padding-top: 1%;
   padding-left: 2%;
-
-  .nav-tabs {
-    border-bottom: none;
-  }
-
-  .nav-link {
-    color: $primary;
-    border-color: $primary;
-  }
 }
 
 #tabsAdmin {
@@ -38,6 +29,18 @@
 #calendarContainer {
   height: 95vh;
 }
+
+.nav-item {
+  color: $primary !important;
+  border-color: $primary !important;
+  margin-right: 5px;
+}
+
+.nav-tabs {
+  margin-bottom: 5px;
+  border-bottom: none;
+}
+
 
 .club-informations-container {
 
