@@ -7,6 +7,7 @@ const prepareAttendancesFromPlayer = ({ player, teamColor }) => {
     player.attendances.games.forEach((game) => {
       preparedPlayerAttendances.push({
         type: 'game',
+        gameId: game.id,
         title: `GAME - ${game.title}`,
         start: game.starting_date_time,
         end: game.starting_date_time + game.duration,
@@ -20,6 +21,7 @@ const prepareAttendancesFromPlayer = ({ player, teamColor }) => {
     player.attendances.practices.forEach((practice) => {
       preparedPlayerAttendances.push({
         type: 'practice',
+        practiceId: practice.id,
         title: `PRACTICE - ${practice.title}`,
         start: practice.starting_date_time,
         end: practice.starting_date_time + practice.duration,

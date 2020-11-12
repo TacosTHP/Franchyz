@@ -49,10 +49,14 @@ const Calendar = ({ resourceToDisplay }) => {
 
   const goToEvent = ({ event }) => {
     if (event !== undefined) {
-      if (event.extendedProps.type === 'practice') {
-        history.push(`/practices/${event.extendedProps.practice_id}`);
-      } else if (event.extendedProps.type === 'game') {
-        history.push(`/games/${event.extendedProps.game_id}`);
+      switch (event.extendedProps.type) {
+        case 'practice':
+          history.push(`/practices/${event.extendedProps.practiceId}`);
+          break;
+        case 'game':
+          history.push(`/games/${event.extendedProps.gameId}`);
+          break;
+        default:
       }
     }
   };
