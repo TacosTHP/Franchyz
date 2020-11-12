@@ -3,27 +3,32 @@ import colors from 'styles/_scss-variables.scss';
 
 const prepareAttendancesFromPlayer = ({ player, teamColor }) => {
   const preparedPlayerAttendances = [];
-  player.attendances.games.forEach((game) => {
-    preparedPlayerAttendances.push({
-      type: 'game',
-      title: `GAME - ${game.title}`,
-      start: game.starting_date_time,
-      end: game.starting_date_time + game.duration,
-      backgroundColor: teamColor,
-      textColor: colors.whiteColor,
+  if (player.attendances.games !== undefined) {
+    player.attendances.games.forEach((game) => {
+      preparedPlayerAttendances.push({
+        type: 'game',
+        title: `GAME - ${game.title}`,
+        start: game.starting_date_time,
+        end: game.starting_date_time + game.duration,
+        backgroundColor: teamColor,
+        borderColor: teamColor,
+        textColor: colors.whiteColor,
+      });
     });
-  });
-
-  player.attendances.practices.forEach((practice) => {
-    preparedPlayerAttendances.push({
-      type: 'practice',
-      title: `PRACTICE - ${practice.title}`,
-      start: practice.starting_date_time,
-      end: practice.starting_date_time + practice.duration,
-      backgroundColor: colors.whiteColor,
-      textColor: teamColor,
+  }
+  if (player.attendances.practices !== undefined) {
+    player.attendances.practices.forEach((practice) => {
+      preparedPlayerAttendances.push({
+        type: 'practice',
+        title: `PRACTICE - ${practice.title}`,
+        start: practice.starting_date_time,
+        end: practice.starting_date_time + practice.duration,
+        backgroundColor: colors.whiteColor,
+        borderColor: teamColor,
+        textColor: teamColor,
+      });
     });
-  });
+  }
 
   return preparedPlayerAttendances;
 };
