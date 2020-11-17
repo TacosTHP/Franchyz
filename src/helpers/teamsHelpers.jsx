@@ -45,14 +45,15 @@ const extractFollowingEventFromTeam = ({ team }) => {
 };
 
 const initTeamsColors = ({ teams }) => {
-  if (Cookies.get('teamsColors') === undefined) {
+  const teamsColorsBuilder = () => {
     const colorKeys = Object.keys(colors);
     const teamsColors = {};
     teams.forEach((team, i) => {
       teamsColors[team.title] = colors[colorKeys[i]];
     });
-    Cookies.set('teamsColors', teamsColors);
-  }
+    return teamsColors;
+  };
+  Cookies.set('teamsColors', teamsColorsBuilder());
 };
 
 export {

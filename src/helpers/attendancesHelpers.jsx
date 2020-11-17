@@ -1,28 +1,36 @@
 import Cookies from 'js-cookie';
+import colors from 'styles/_scss-variables.scss';
 
-const prepareAttendancesFromPlayer = ({ player, backgroundColor = '#0000FF' }) => {
+const prepareAttendancesFromPlayer = ({ player, teamColor }) => {
   const preparedPlayerAttendances = [];
-  player.attendances.games.forEach((game) => {
-    preparedPlayerAttendances.push({
-      type: 'game',
-      title: `GAME - ${game.title}`,
-      start: game.starting_date_time,
-      end: game.starting_date_time + game.duration,
-      backgroundColor,
-      textColor: '#FFFFFF',
+  if (player.attendances.games !== undefined) {
+    player.attendances.games.forEach((game) => {
+      preparedPlayerAttendances.push({
+        type: 'game',
+        gameId: game.id,
+        title: `GAME - ${game.title}`,
+        start: game.starting_date_time,
+        end: game.starting_date_time + game.duration,
+        backgroundColor: teamColor,
+        borderColor: teamColor,
+        textColor: colors.whiteColor,
+      });
     });
-  });
-
-  player.attendances.practices.forEach((practice) => {
-    preparedPlayerAttendances.push({
-      type: 'practice',
-      title: `PRACTICE - ${practice.title}`,
-      start: practice.starting_date_time,
-      end: practice.starting_date_time + practice.duration,
-      backgroundColor,
-      textColor: '#FFFFFF',
+  }
+  if (player.attendances.practices !== undefined) {
+    player.attendances.practices.forEach((practice) => {
+      preparedPlayerAttendances.push({
+        type: 'practice',
+        practiceId: practice.id,
+        title: `PRACTICE - ${practice.title}`,
+        start: practice.starting_date_time,
+        end: practice.starting_date_time + practice.duration,
+        backgroundColor: colors.whiteColor,
+        borderColor: teamColor,
+        textColor: teamColor,
+      });
     });
-  });
+  }
 
   return preparedPlayerAttendances;
 };
@@ -32,7 +40,7 @@ const prepareAttendancesFromTeam = ({ team }) => {
   const teamColor = JSON.parse(Cookies.get('teamsColors'))[team.title];
   team.players.forEach((player) => {
     const preparedPlayerAttendances = prepareAttendancesFromPlayer(
-      { player, backgroundColor: teamColor },
+      { player, teamColor },
     );
     preparedTeamAttendances = preparedTeamAttendances.concat(preparedPlayerAttendances);
   });
