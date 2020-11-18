@@ -26,21 +26,23 @@ const extractFollowingEventFromTeam = ({ team }) => {
     id: 0,
     title: 'No Following Event',
   };
-  const today = new Date().toISOString();
   let type = null;
-  let nextDate = new Date(3000, 12).toISOString();
+  if (team !== undefined || team !== null) {
+    const today = new Date().toISOString();
+    let nextDate = new Date(3000, 12).toISOString();
 
-  team.players.forEach((player) => {
-    Object.keys(player.attendances).forEach((eventType) => {
-      player.attendances[eventType].forEach((event) => {
-        if (today < event.starting_date_time && event.starting_date_time < nextDate) {
-          followingEvent = event;
-          type = eventType;
-          nextDate = event.starting_date_time;
-        }
+    team.players.forEach((player) => {
+      Object.keys(player.attendances).forEach((eventType) => {
+        player.attendances[eventType].forEach((event) => {
+          if (today < event.starting_date_time && event.starting_date_time < nextDate) {
+            followingEvent = event;
+            type = eventType;
+            nextDate = event.starting_date_time;
+          }
+        });
       });
     });
-  });
+  }
   return { followingEvent, type };
 };
 
