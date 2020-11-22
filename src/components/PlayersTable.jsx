@@ -1,10 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Table, Tag } from 'antd';
 
 import 'styles/playersTable.scss';
 
-const PlayersTable = ({ players }) => {
+const PlayersTable = ({ players, club, team }) => {
+  const history = useHistory();
   const columns = [
     {
       title: 'Name',
@@ -57,6 +59,7 @@ const PlayersTable = ({ players }) => {
   ];
 
   const setupTable = (teamPlayers) => {
+    const playersData = [];
     const playerAge = (player) => {
       const today = new Date();
       const age = today - new Date(player.birthdate);
@@ -64,17 +67,17 @@ const PlayersTable = ({ players }) => {
     };
 
     const playerAvailiability = (player) => {
-      if (player['availability?'] === true) {
+      if (player['availability?']) {
         return 'Available';
       }
       return 'Unavailable';
     };
 
-    const data = [];
     teamPlayers.forEach((player, i) => {
-      data.push(
+      playersData.push(
         {
           key: i,
+          id: player.id,
           name: `${player.first_name} ${player.last_name}`,
           age: playerAge(player),
           position: player.position,
@@ -84,12 +87,18 @@ const PlayersTable = ({ players }) => {
         },
       );
     });
-    return data;
+    return playersData;
   };
 
   return (
     <>
-      <Table columns={columns} dataSource={setupTable(players)} />
+      <Table
+        columns={columns}
+        dataSource={setupTable(players)}
+        onRow={(record) => ({
+          onClick: () => { history.push(`/clubs/${club.id}/teams/${team.id}/players/${record.id}`); },
+        })}
+      />
     </>
   );
 };

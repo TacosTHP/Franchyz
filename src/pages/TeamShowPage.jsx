@@ -64,7 +64,11 @@ const TeamShowPage = () => {
                     <h3 className="text-white">
                       Roster
                     </h3>
-                    <PlayersTable players={currentTeam.players} />
+                    <PlayersTable
+                      players={currentTeam.players}
+                      club={currentTeam.club}
+                      team={currentTeam}
+                    />
                   </div>
                 </div>
               </Tab>
