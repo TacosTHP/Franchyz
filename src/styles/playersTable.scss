@@ -24,3 +24,15 @@
     }
   }
 }
+
+.ant-pagination {
+  color: $grey !important;
+
+  .ant-pagination-item-active {
+    border-color: $primary !important;
+    a {
+      color: $primary !important;
+      font-weight: bold;
+    }
+  }
+}
