@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Tag } from 'antd';
 
+import 'styles/playersTable.scss';
+
 const PlayersTable = ({ players }) => {
   const columns = [
     {

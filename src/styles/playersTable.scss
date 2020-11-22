@@ -1,0 +1,25 @@
+
+@import '_scss-variables';
+
+.ant-table {
+  background-color: $dark !important;
+  color: $white !important;
+
+  thead {
+    tr {
+      th {
+        background-color: $primary !important;
+        color: $white;
+        font-weight: bold;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      &:hover {
+        color: $primary !important;
+      }
+    }
+  }
+}
