@@ -17,6 +17,7 @@
 
   tbody {
     tr {
+      cursor: pointer;
       &:hover {
         color: $primary !important;
       }
