@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import NoEventCard from 'components/NoEventCard';
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, linkTo }) => {
   if (event === null || event === undefined) {
     return (
       <>
@@ -16,7 +16,7 @@ const EventCard = ({ event }) => {
   }
 
   return (
-    <div className="card d-flex justify-content-center align-items-center border bg-dark text-white py-2 mb-3">
+    <div className="card clickable d-flex justify-content-center align-items-center border bg-dark text-white py-2 mb-3" onClick={() => {linkTo(event)}}>
       <div>
         <img src="..." className="card-img" alt="..." />
       </div>

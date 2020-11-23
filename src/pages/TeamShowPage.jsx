@@ -29,6 +29,14 @@ const TeamShowPage = () => {
     history.push('/dashboardAdmin');
   };
 
+  const goToEvent = (event) => {
+    if (Object.keys(event).includes('home_team_score')) {
+      history.push(`/games/${event.id}`);
+    } else {
+      history.push(`/practices/${event.id}`);
+    }
+  };
+
   const loadTeam = async () => {
     await dispatch(getTeam({ clubId, teamId }));
   };
@@ -82,6 +90,7 @@ const TeamShowPage = () => {
                     </h3>
                     <EventCard
                       event={extractFollowingEventFromTeam({ team: currentTeam }).followingEvent}
+                      linkTo={goToEvent}
                     />
                   </div>
                   <div className="w-75">
