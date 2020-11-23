@@ -16,6 +16,8 @@ import { extractFollowingEventFromTeam } from 'helpers/teamsHelpers';
 
 import { getTeam } from 'redux/middlewares/teamsMiddlewares';
 
+import 'styles/teamShowPage.scss';
+
 const TeamShowPage = () => {
   const { clubId, teamId } = useParams();
   const history = useHistory();
@@ -60,7 +62,7 @@ const TeamShowPage = () => {
                     </h3>
                     <CoachCard coach={currentTeam.coach} />
                   </div>
-                  <div className="w-100">
+                  <div className="w-75">
                     <h3 className="text-white">
                       Roster
                     </h3>
@@ -82,7 +84,7 @@ const TeamShowPage = () => {
                       event={extractFollowingEventFromTeam({ team: currentTeam }).followingEvent}
                     />
                   </div>
-                  <div className="w-100">
+                  <div className="w-75">
                     <h3 className="text-white">
                       Calendar
                     </h3>
