@@ -30,20 +30,22 @@ const App = () => (
     <Router>
       <Alert />
       <Connect />
-      <Switch>
-        <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
-        <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
-        <PrivateRoute exact path="/newTeam" component={CreateTeam} />
-        <PrivateRoute exact path="/eventNewPage" component={EventNewPage} />
-        <PrivateRoute exact path="/newClub" component={ClubNewPage} />
-        <PrivateRoute exact path="/clubs/:clubId/teams/:teamId" component={TeamShowPage} />
-        <PrivateRoute exact path="/games/:gamesId" component={GameShowPage} />
-        <PrivateRoute exact path="/practices/:practicesId" component={PracticeShowPage} />
-        <Route path="/clubs/:clubId/teams/:teamId/players/:playerId" component={PlayerShowPage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/register" component={RegisterPage} />
-        <Route exact path="/" component={Home} />
-      </Switch>
+      <div className="black-background">
+        <Switch>
+          <PrivateRoute exact path="/dashboardAdmin" component={AdminCoachDashboardPage} />
+          <PrivateRoute exact path="/dashboardPlayer" component={PlayerDashboardPage} />
+          <PrivateRoute exact path="/newTeam" component={CreateTeam} />
+          <PrivateRoute exact path="/eventNewPage" component={EventNewPage} />
+          <PrivateRoute exact path="/newClub" component={ClubNewPage} />
+          <PrivateRoute exact path="/clubs/:clubId/teams/:teamId" component={TeamShowPage} />
+          <PrivateRoute exact path="/games/:gamesId" component={GameShowPage} />
+          <PrivateRoute exact path="/practices/:practicesId" component={PracticeShowPage} />
+          <Route path="/clubs/:clubId/teams/:teamId/players/:playerId" component={PlayerShowPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </div>
     </Router>
   </Provider>
 );
