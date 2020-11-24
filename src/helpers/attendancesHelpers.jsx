@@ -62,6 +62,9 @@ const prepareAttendancesFromClub = ({ club }) => {
 };
 
 const prepareAttendancesForFullCalendar = ({ attendancesOwners }) => {
+  if (attendancesOwners === null) {
+    return null;
+  }
   const ownersKeys = Object.keys(attendancesOwners);
 
   if (ownersKeys.includes('league')) {
