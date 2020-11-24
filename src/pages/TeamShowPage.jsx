@@ -54,10 +54,12 @@ const TeamShowPage = () => {
   }
 
   return (
-    <div className="black-background">
+    <>
       <CoachDashboardNavbar club />
       <div className="p-3">
-        <div className="mr-auto text-primary" onClick={goToDashboard}><LeftArrowIcon size="2em" /></div>
+        <div className="mr-auto text-primary" onClick={goToDashboard}>
+          <LeftArrowIcon size="2em" />
+        </div>
         <div className="d-flex justify-content-center align-items-center">
           <h1 className="text-primary text-center">
             {currentTeam.title}
@@ -109,7 +111,7 @@ const TeamShowPage = () => {
           </Tabs>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
