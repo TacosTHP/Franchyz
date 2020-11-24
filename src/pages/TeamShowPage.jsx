@@ -97,7 +97,9 @@ const TeamShowPage = () => {
                     <h3 className="text-white">
                       Calendar
                     </h3>
-                    <Calendar resourceToDisplay={currentTeam} />
+                    <div>
+                      <Calendar resourceToDisplay={currentTeam} />
+                    </div>
                   </div>
                 </div>
               </Tab>
