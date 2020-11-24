@@ -157,4 +157,9 @@ Calendar.propTypes = {
       title: PropTypes.string,
     }),
   ]).isRequired,
+  eventsSwitch: PropTypes.bool,
+};
+
+Calendar.defaultProps = {
+  eventsSwitch: false,
 };
