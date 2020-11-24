@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 const CoachCard = ({ coach }) => {
   if (coach === undefined) {
-    return 'd';
+    return (<></>);
   }
 
   return (
-    <div className="card d-flex justify-content-center align-items-center border bg-dark text-white d-flex py-2 mb-3">
+    <div className="card d-flex justify-content-center align-items-center border bg-dark text-white py-2 mb-3">
       <div>
         <img src="..." className="card-img" alt="..." />
       </div>
@@ -19,7 +19,6 @@ const CoachCard = ({ coach }) => {
           {' '}
           {coach.last_name}
         </h5>
-        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
         <p className="card-text">
           <small className="text-muted">
             Coaching since :

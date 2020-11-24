@@ -1,0 +1,38 @@
+
+@import '_scss-variables';
+
+.ant-table {
+  background-color: $dark !important;
+  color: $white !important;
+
+  thead {
+    tr {
+      th {
+        background-color: $primary !important;
+        color: $white;
+        font-weight: bold;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      cursor: pointer;
+      &:hover {
+        color: $primary !important;
+      }
+    }
+  }
+}
+
+.ant-pagination {
+  color: $grey !important;
+
+  .ant-pagination-item-active {
+    border-color: $primary !important;
+    a {
+      color: $primary !important;
+      font-weight: bold;
+    }
+  }
+}

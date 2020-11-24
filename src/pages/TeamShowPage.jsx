@@ -10,7 +10,13 @@ import CoachDashboardNavbar from 'components/layouts/CoachDashboardNavbar';
 import PlayersTable from 'components/PlayersTable';
 import LeftArrowIcon from 'components/Icons/LeftArrowIcon';
 import Calendar from 'components/Calendar';
+import EventCard from 'components/EventCard';
+
+import { extractFollowingEventFromTeam } from 'helpers/teamsHelpers';
+
 import { getTeam } from 'redux/middlewares/teamsMiddlewares';
+
+import 'styles/teamShowPage.scss';
 
 const TeamShowPage = () => {
   const { clubId, teamId } = useParams();
@@ -23,11 +29,21 @@ const TeamShowPage = () => {
     history.push('/dashboardAdmin');
   };
 
+  const goToEvent = (event) => {
+    if (Object.keys(event).includes('home_team_score')) {
+      history.push(`/games/${event.id}`);
+    } else {
+      history.push(`/practices/${event.id}`);
+    }
+  };
+
   const loadTeam = async () => {
     await dispatch(getTeam({ clubId, teamId }));
   };
 
-  useEffect(() => { loadTeam(); }, []);
+  useEffect(() => {
+    loadTeam();
+  }, []);
 
   if (loading) {
     return (<Loading />);
@@ -44,23 +60,46 @@ const TeamShowPage = () => {
               {currentTeam.title}
             </h1>
           </div>
-          <div className="d-flex flex-column justify-content-center align-items-center px-2">
+          <div className="d-flex flex-column justify-content-center align-items-center text-primary">
             <Tabs defaultActiveKey="personel" centered="true">
-              <Tab eventKey="personel" title="Staff & Players" tabClassName="bg-dark">
+              <Tab eventKey="personel" title="Staff & Players" tabClassName="bg-dark text-primary">
                 <div className="d-flex">
-                  <div className="w-25 mr-3">
-                    <h3 className="text-primary">
+                  <div className="w-25 mr-2">
+                    <h3 className="text-white">
                       Team Coach
                     </h3>
                     <CoachCard coach={currentTeam.coach} />
                   </div>
-                  <div className="w-100">
-                    <PlayersTable players={currentTeam.players} />
+                  <div className="w-75">
+                    <h3 className="text-white">
+                      Roster
+                    </h3>
+                    <PlayersTable
+                      players={currentTeam.players}
+                      club={currentTeam.club}
+                      team={currentTeam}
+                    />
                   </div>
                 </div>
               </Tab>
               <Tab eventKey="events" title="Events" tabClassName="bg-dark text-primary">
-                Calendar
+                <div className="d-flex">
+                  <div className="w-25 mr-2">
+                    <h3 className="text-white">
+                      Next Event
+                    </h3>
+                    <EventCard
+                      event={extractFollowingEventFromTeam({ team: currentTeam }).followingEvent}
+                      linkTo={goToEvent}
+                    />
+                  </div>
+                  <div className="w-75">
+                    <h3 className="text-white">
+                      Calendar
+                    </h3>
+                    <Calendar resourceToDisplay={currentTeam} />
+                  </div>
+                </div>
               </Tab>
             </Tabs>
           </div>
