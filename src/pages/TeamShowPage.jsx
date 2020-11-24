@@ -49,67 +49,68 @@ const TeamShowPage = () => {
     return (<Loading />);
   }
 
-  if (currentTeam !== null) {
-    return (
-      <div className="black-background">
-        <CoachDashboardNavbar club />
-        <div className="p-3">
-          <div className="mr-auto text-primary" onClick={goToDashboard}><LeftArrowIcon size="2em" /></div>
-          <div className="d-flex justify-content-center align-items-center">
-            <h1 className="text-primary text-center">
-              {currentTeam.title}
-            </h1>
-          </div>
-          <div className="d-flex flex-column justify-content-center align-items-center text-primary">
-            <Tabs defaultActiveKey="personel" centered="true">
-              <Tab eventKey="personel" title="Staff & Players" tabClassName="bg-dark text-primary">
-                <div className="d-flex">
-                  <div className="w-25 mr-2">
-                    <h3 className="text-white">
-                      Team Coach
-                    </h3>
-                    <CoachCard coach={currentTeam.coach} />
-                  </div>
-                  <div className="w-75">
-                    <h3 className="text-white">
-                      Roster
-                    </h3>
-                    <PlayersTable
-                      players={currentTeam.players}
-                      club={currentTeam.club}
-                      team={currentTeam}
-                    />
+  if (currentTeam === null) {
+    return (<h1>This team doesn&apost exist</h1>);
+  }
+
+  return (
+    <div className="black-background">
+      <CoachDashboardNavbar club />
+      <div className="p-3">
+        <div className="mr-auto text-primary" onClick={goToDashboard}><LeftArrowIcon size="2em" /></div>
+        <div className="d-flex justify-content-center align-items-center">
+          <h1 className="text-primary text-center">
+            {currentTeam.title}
+          </h1>
+        </div>
+        <div className="d-flex flex-column justify-content-center align-items-center text-primary">
+          <Tabs defaultActiveKey="personel" centered="true">
+            <Tab eventKey="personel" title="Staff & Players" tabClassName="bg-dark text-primary">
+              <div className="d-flex">
+                <div className="w-25 mr-2">
+                  <h3 className="text-white">
+                    Team Coach
+                  </h3>
+                  <CoachCard coach={currentTeam.coach} />
+                </div>
+                <div className="w-75">
+                  <h3 className="text-white">
+                    Roster
+                  </h3>
+                  <PlayersTable
+                    players={currentTeam.players}
+                    club={currentTeam.club}
+                    team={currentTeam}
+                  />
+                </div>
+              </div>
+            </Tab>
+            <Tab eventKey="events" title="Events" tabClassName="bg-dark text-primary">
+              <div className="d-flex">
+                <div className="w-25 mr-2">
+                  <h3 className="text-white">
+                    Next Event
+                  </h3>
+                  <EventCard
+                    event={extractFollowingEventFromTeam({ team: currentTeam }).followingEvent}
+                    linkTo={goToEvent}
+                  />
+                </div>
+                <div className="w-75">
+                  <h3 className="text-white">
+                    Calendar
+                  </h3>
+                  <div>
+                    <Calendar resourceToDisplay={currentTeam} />
                   </div>
                 </div>
-              </Tab>
-              <Tab eventKey="events" title="Events" tabClassName="bg-dark text-primary">
-                <div className="d-flex">
-                  <div className="w-25 mr-2">
-                    <h3 className="text-white">
-                      Next Event
-                    </h3>
-                    <EventCard
-                      event={extractFollowingEventFromTeam({ team: currentTeam }).followingEvent}
-                      linkTo={goToEvent}
-                    />
-                  </div>
-                  <div className="w-75">
-                    <h3 className="text-white">
-                      Calendar
-                    </h3>
-                    <div>
-                      <Calendar resourceToDisplay={currentTeam} />
-                    </div>
-                  </div>
-                </div>
-              </Tab>
-            </Tabs>
-          </div>
+              </div>
+            </Tab>
+          </Tabs>
         </div>
       </div>
-    );
-  }
-  return (<Loading />);
+    </div>
+  );
 };
 
 export default TeamShowPage;
