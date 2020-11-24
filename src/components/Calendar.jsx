@@ -18,7 +18,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import 'styles/calendar.scss';
 
-const Calendar = ({ resourceToDisplay }) => {
+const Calendar = ({ resourceToDisplay, eventsSwitch }) => {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.authReducer.userType);
   const currentTeam = useSelector((state) => state.resourcesReducer.currentTeam);
@@ -30,7 +30,7 @@ const Calendar = ({ resourceToDisplay }) => {
   };
 
   const setupAllEventsButton = () => {
-    if (currentTeam !== null) {
+    if (currentTeam !== null && eventsSwitch) {
       return (
         <PrimaryButton text="See all Events" onClick={allTeamsEvents} icon={<CalendarIcon />} />
       );

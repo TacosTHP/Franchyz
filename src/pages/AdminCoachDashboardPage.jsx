@@ -73,7 +73,7 @@ const AdminCoachDashboardPage = () => {
             </Tabs>
           </div>
           <div id="calendarContainer" className="col-4">
-            <Calendar resourceToDisplay={resourceToDisplay} />
+            <Calendar resourceToDisplay={resourceToDisplay} eventsSwitch />
           </div>
         </div>
       </div>
